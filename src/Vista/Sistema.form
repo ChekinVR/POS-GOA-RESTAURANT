@@ -220,15 +220,18 @@
           <Font name="Zilla Slab" size="48" style="3"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Img/titulo.png"/>
+          <Image iconType="3" name="/Img/logo.png"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Restaurante la Delicia"/>
+        <Property name="text" type="java.lang.String" value="Goa Restaurant"/>
         <Property name="focusable" type="boolean" value="false"/>
         <Property name="horizontalTextPosition" type="int" value="2"/>
       </Properties>
+      <AccessibilityProperties>
+        <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value=""/>
+      </AccessibilityProperties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="520" y="0" width="540" height="90"/>
+          <AbsoluteConstraints x="730" y="0" width="580" height="90"/>
         </Constraint>
       </Constraints>
     </Component>

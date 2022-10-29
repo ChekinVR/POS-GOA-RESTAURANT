@@ -341,11 +341,12 @@ public final class Sistema extends javax.swing.JFrame {
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 200, 720));
 
         jLabel38.setFont(new java.awt.Font("Zilla Slab", 3, 48)); // NOI18N
-        jLabel38.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/titulo.png"))); // NOI18N
-        jLabel38.setText("Restaurante la Delicia");
+        jLabel38.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/logo.png"))); // NOI18N
+        jLabel38.setText("Goa Restaurant");
         jLabel38.setFocusable(false);
         jLabel38.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        getContentPane().add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 0, 540, 90));
+        getContentPane().add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 0, 580, 90));
+        jLabel38.getAccessibleContext().setAccessibleDescription("");
 
         jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -1499,12 +1500,6 @@ public final class Sistema extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnIniciarActionPerformed
 
-    private void labelLogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelLogoMouseClicked
-        jTabbedPane1.setSelectedIndex(0);
-        PanelSalas.removeAll();
-        panelSalas();
-    }//GEN-LAST:event_labelLogoMouseClicked
-
     private void txtBuscarPlatoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarPlatoKeyReleased
         LimpiarTable();
         ListarPlatos(tblTemPlatos);
@@ -1672,6 +1667,12 @@ public final class Sistema extends javax.swing.JFrame {
         txtNombrePlato.setText(TablePlatos.getValueAt(fila, 1).toString());
         txtPrecioPlato.setText(TablePlatos.getValueAt(fila, 2).toString());
     }//GEN-LAST:event_TablePlatosMouseClicked
+
+    private void labelLogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelLogoMouseClicked
+        jTabbedPane1.setSelectedIndex(0);
+        PanelSalas.removeAll();
+        panelSalas();
+    }//GEN-LAST:event_labelLogoMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
