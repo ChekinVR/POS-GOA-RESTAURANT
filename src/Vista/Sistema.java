@@ -380,7 +380,15 @@ public final class Sistema extends javax.swing.JFrame {
             new String [] {
                 "ID", "NOMBRE", "Mesas"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tableSala.setRowHeight(23);
         tableSala.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
