@@ -382,7 +382,7 @@ public final class Sistema extends javax.swing.JFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, true
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -1043,7 +1043,15 @@ public final class Sistema extends javax.swing.JFrame {
             new String [] {
                 "Id", "Nombre", "Correo", "Rol"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         TableUsuarios.setRowHeight(23);
         jScrollPane6.setViewportView(TableUsuarios);
         if (TableUsuarios.getColumnModel().getColumnCount() > 0) {
@@ -1285,7 +1293,15 @@ public final class Sistema extends javax.swing.JFrame {
             new String [] {
                 "ID", "DESCRIPCIÓN", "PRECIO"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         TablePlatos.setRowHeight(23);
         TablePlatos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
