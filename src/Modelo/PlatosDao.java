@@ -11,13 +11,16 @@ public class PlatosDao {
 
     Connection con;
     Conexion cn = new Conexion();
-    PreparedStatement ps;
+    PreparedStatement ps,ps2;
     ResultSet rs;
 
     public boolean Registrar(Platos pla) {
         String sql = "INSERT INTO platos (nombre, precio, fecha) VALUES (?,?,?)";
+        String sql2 = "ALTER TABLE platos AUTO_INCREMENT = 0";
         try {
             con = cn.getConnection();
+            ps2 = con.prepareStatement(sql2);
+            ps2.execute();
             ps = con.prepareStatement(sql);
             ps.setString(1, pla.getNombre());
             ps.setDouble(2, pla.getPrecio());
