@@ -29,7 +29,7 @@ import javax.swing.filechooser.FileSystemView;
 public class PedidosDao {
     Connection con;
     Conexion cn = new Conexion();
-    PreparedStatement ps;
+    PreparedStatement ps, ps2;
     ResultSet rs;
     int r;
     
@@ -69,9 +69,12 @@ public class PedidosDao {
     }
     
     public int RegistrarPedido(Pedidos ped){
+        String sql2 = "ALTER TABLE pedidos AUTO_INCREMENT = 0";
         String sql = "INSERT INTO pedidos (id_sala, num_mesa, total, usuario) VALUES (?,?,?,?)";
         try {
             con = cn.getConnection();
+            ps2 = con.prepareStatement(sql2);
+            ps2.execute();
             ps = con.prepareStatement(sql);
             ps.setInt(1, ped.getId_sala());
             ps.setInt(2, ped.getNum_mesa());
@@ -88,6 +91,24 @@ public class PedidosDao {
             }
         }
         return r;
+    }
+    public boolean Eliminar(int id) {
+        String sql = "DELETE FROM pedidos WHERE id = ?";
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.execute();
+            return true;
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+            return false;
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println(ex.toString());
+            }
+        }
     }
     
     public int RegistrarDetalle(DetallePedido det){
@@ -222,7 +243,7 @@ public class PedidosDao {
                 rs = ps.executeQuery();
                 if (rs.next()) {
                     mensaje = rs.getString("mensaje");
-                    Encabezado.addCell("Ruc:    " + rs.getString("ruc") 
+                    Encabezado.addCell("RFC:    " + rs.getString("ruc") 
                             + "\nNombre: " + rs.getString("nombre") 
                             + "\nTeléfono: " + rs.getString("telefono") 
                             + "\nDirección: " + rs.getString("direccion")
