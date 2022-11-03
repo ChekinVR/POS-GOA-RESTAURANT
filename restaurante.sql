@@ -1,8 +1,8 @@
--- MariaDB dump 10.19  Distrib 10.4.24-MariaDB, for Win64 (AMD64)
+-- MariaDB dump 10.19  Distrib 10.4.25-MariaDB, for Win64 (AMD64)
 --
--- Host: localhost    Database: restaurante
+-- Host: localhost    Database: lloro
 -- ------------------------------------------------------
--- Server version	10.4.24-MariaDB
+-- Server version	10.4.25-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -44,6 +44,33 @@ INSERT INTO `config` VALUES (1,'65479877','Restaurante la Delicia','957847894','
 UNLOCK TABLES;
 
 --
+-- Table structure for table `confped`
+--
+
+DROP TABLE IF EXISTS `confped`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `confped` (
+  `id` int(11) DEFAULT NULL,
+  `id_sala` int(11) DEFAULT NULL,
+  `num_mesa` int(11) DEFAULT NULL,
+  `fecha` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `total` decimal(10,2) DEFAULT NULL,
+  `estado` enum('PENDIENTE','FINALIZADO') DEFAULT NULL,
+  `usuario` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `confped`
+--
+
+LOCK TABLES `confped` WRITE;
+/*!40000 ALTER TABLE `confped` DISABLE KEYS */;
+/*!40000 ALTER TABLE `confped` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `detalle_pedidos`
 --
 
@@ -59,8 +86,8 @@ CREATE TABLE `detalle_pedidos` (
   `id_pedido` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_pedido` (`id_pedido`),
-  CONSTRAINT `detalle_pedidos_ibfk_1` FOREIGN KEY (`id_pedido`) REFERENCES `pedidos` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  CONSTRAINT `detalle_pedidos_ibfk_1` FOREIGN KEY (`id_pedido`) REFERENCES `pedidos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -69,7 +96,7 @@ CREATE TABLE `detalle_pedidos` (
 
 LOCK TABLES `detalle_pedidos` WRITE;
 /*!40000 ALTER TABLE `detalle_pedidos` DISABLE KEYS */;
-INSERT INTO `detalle_pedidos` VALUES (1,'CHAUFA',20.00,1,'',1),(2,'ARROZ CON POLLO',10.00,5,'ARTO MAYONESA',1),(3,'GASEOSA COCA COLA 1.5 LITROS',8.00,1,'',1),(4,'ARROZ CON POLLO',10.00,1,'',2),(5,'CHAUFA',20.00,1,'',2),(6,'GASEOSA COCA COLA 1.5 LITROS',8.00,1,'',3),(7,'CHAUFA',20.00,1,'',3),(8,'ARROZ CON POLLO',10.00,2,'',4);
+INSERT INTO `detalle_pedidos` VALUES (30,'Pollo con rajas',100.00,2,'Sin Pollo, porque soy alergico, y sin mucha verdudra porfavor solo un platillo',1),(31,'pito al horno',100.00,1,'',2);
 /*!40000 ALTER TABLE `detalle_pedidos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -90,8 +117,8 @@ CREATE TABLE `pedidos` (
   `usuario` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_sala` (`id_sala`),
-  CONSTRAINT `pedidos_ibfk_1` FOREIGN KEY (`id_sala`) REFERENCES `salas` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  CONSTRAINT `pedidos_ibfk_1` FOREIGN KEY (`id_sala`) REFERENCES `salas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -100,7 +127,7 @@ CREATE TABLE `pedidos` (
 
 LOCK TABLES `pedidos` WRITE;
 /*!40000 ALTER TABLE `pedidos` DISABLE KEYS */;
-INSERT INTO `pedidos` VALUES (1,1,2,'2022-05-18 00:31:52',78.00,'FINALIZADO','ANGEL SIFUENTES'),(2,2,8,'2022-05-18 00:32:20',30.00,'PENDIENTE','ANGEL SIFUENTES'),(3,1,9,'2022-05-18 00:32:29',28.00,'PENDIENTE','ANGEL SIFUENTES'),(4,1,11,'2022-05-18 01:04:47',20.00,'PENDIENTE','ANGEL SIFUENTES');
+INSERT INTO `pedidos` VALUES (1,1,1,'2022-11-01 18:12:07',200.00,'PENDIENTE','ANGEL SIFUENTES'),(2,1,2,'2022-11-03 02:19:09',100.00,'PENDIENTE','ANGEL SIFUENTES');
 /*!40000 ALTER TABLE `pedidos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -117,7 +144,7 @@ CREATE TABLE `platos` (
   `precio` decimal(10,2) NOT NULL,
   `fecha` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -126,7 +153,7 @@ CREATE TABLE `platos` (
 
 LOCK TABLES `platos` WRITE;
 /*!40000 ALTER TABLE `platos` DISABLE KEYS */;
-INSERT INTO `platos` VALUES (1,'ARROZ CON POLLO',10.00,'2022-05-17'),(2,'CHAUFA',20.00,'2022-05-17'),(3,'GASEOSA COCA COLA 1.5 LITROS',8.00,'2022-05-17');
+INSERT INTO `platos` VALUES (1,'PITOBIGDICK',25.00,'2022-10-29'),(2,'PITOBIGDICK',25.00,'2022-10-29'),(3,'PITOBIGDICK',25.00,'2022-10-29'),(4,'PITOBIGDICK',25.00,'2022-10-29'),(5,'PITOBIGDICK',25.00,'2022-10-29'),(6,'PITOBIGDICK',25.00,'2022-10-29'),(7,'PITOBIGDICK',25.00,'2022-10-29'),(8,'PITOBIGDICK',25.00,'2022-10-29'),(9,'PITOBIGDICK',25.00,'2022-10-29'),(10,'PITOBIGDICK',25.00,'2022-10-29'),(11,'Carne en su jugo',25.00,'2022-10-31'),(12,'Pollo con rajas',100.00,'2022-11-01'),(13,'Mole con carne',100.00,'2022-11-01');
 /*!40000 ALTER TABLE `platos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -142,7 +169,7 @@ CREATE TABLE `salas` (
   `nombre` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
   `mesas` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -151,7 +178,7 @@ CREATE TABLE `salas` (
 
 LOCK TABLES `salas` WRITE;
 /*!40000 ALTER TABLE `salas` DISABLE KEYS */;
-INSERT INTO `salas` VALUES (1,'SALA PRINCIPAL',15),(2,'SEGUNDO PISO',10);
+INSERT INTO `salas` VALUES (1,'Terraza',10);
 /*!40000 ALTER TABLE `salas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -169,7 +196,7 @@ CREATE TABLE `usuarios` (
   `pass` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `rol` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -178,7 +205,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (1,'ANGEL SIFUENTES','info@angelsifuentes.com','admin','Administrador');
+INSERT INTO `usuarios` VALUES (1,'ANGEL SIFUENTES','info@angelsifuentes.com','admin','Administrador'),(3,'MESERO 1','MESERO','pass','Asistente'),(4,'sdfs','asdasd','s2342342','Administrador'),(5,'ADMINISTRADOR','ADMIN','admin','Administrador');
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -191,4 +218,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-17 20:08:47
+-- Dump completed on 2022-11-02 23:43:30
