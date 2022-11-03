@@ -238,7 +238,7 @@ public final class Sistema extends javax.swing.JFrame {
         });
 
         btnSala.setBackground(new java.awt.Color(0, 0, 0));
-        btnSala.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnSala.setFont(new java.awt.Font("Script MT Bold", 0, 24)); // NOI18N
         btnSala.setForeground(new java.awt.Color(255, 255, 255));
         btnSala.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/sala.png"))); // NOI18N
         btnSala.setText("Salas");
@@ -251,7 +251,7 @@ public final class Sistema extends javax.swing.JFrame {
         });
 
         btnVentas.setBackground(new java.awt.Color(0, 0, 0));
-        btnVentas.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnVentas.setFont(new java.awt.Font("Script MT Bold", 0, 24)); // NOI18N
         btnVentas.setForeground(new java.awt.Color(255, 255, 255));
         btnVentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/pedidos.png"))); // NOI18N
         btnVentas.setText("Pedidos");
@@ -264,7 +264,7 @@ public final class Sistema extends javax.swing.JFrame {
         });
 
         btnConfig.setBackground(new java.awt.Color(0, 0, 0));
-        btnConfig.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnConfig.setFont(new java.awt.Font("Script MT Bold", 0, 24)); // NOI18N
         btnConfig.setForeground(new java.awt.Color(255, 255, 255));
         btnConfig.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/config.png"))); // NOI18N
         btnConfig.setText("Config");
@@ -283,7 +283,7 @@ public final class Sistema extends javax.swing.JFrame {
         tipo.setForeground(new java.awt.Color(255, 255, 255));
 
         btnUsuarios.setBackground(new java.awt.Color(0, 0, 0));
-        btnUsuarios.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnUsuarios.setFont(new java.awt.Font("Script MT Bold", 0, 24)); // NOI18N
         btnUsuarios.setForeground(new java.awt.Color(255, 255, 255));
         btnUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/usuarios.png"))); // NOI18N
         btnUsuarios.setText("Usuarios");
@@ -296,7 +296,7 @@ public final class Sistema extends javax.swing.JFrame {
         });
 
         btnPlatos.setBackground(new java.awt.Color(0, 0, 0));
-        btnPlatos.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnPlatos.setFont(new java.awt.Font("Script MT Bold", 0, 24)); // NOI18N
         btnPlatos.setForeground(new java.awt.Color(255, 255, 255));
         btnPlatos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/platos.png"))); // NOI18N
         btnPlatos.setText("Platos");
