@@ -10,7 +10,7 @@ public class Conexion {
     // Hola
     public Connection getConnection(){
         try {
-            String myBD = "jdbc:mysql://localhost:3306/LLORO";
+            String myBD = "jdbc:mysql://localhost:3306/restaurant_goa";
             con = DriverManager.getConnection(myBD, "root", "");
             return con;
         } catch (SQLException e) {

@@ -86,7 +86,11 @@ public class PlatosDao {
 
     public boolean Modificar(Platos pla) {
         String sql = "UPDATE platos SET nombre=?, precio=? WHERE id=?";
+        String sql2 = "ALTER TABLE platos AUTO_INCREMENT = 0";
         try {
+            con = cn.getConnection();
+            ps2 = con.prepareStatement(sql2);
+            ps2.execute();
             ps = con.prepareStatement(sql);
             ps.setString(1, pla.getNombre());
             ps.setDouble(2, pla.getPrecio());

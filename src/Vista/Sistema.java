@@ -76,6 +76,7 @@ public final class Sistema extends javax.swing.JFrame {
         } else {
             LabelVendedor.setText(priv.getNombre());
         }
+        LabelConection.setText("jdbc:mysql://localhost:3306/restaurant_goa");
         txtIdConfig.setVisible(false);
         txtIdHistorialPedido.setVisible(false);
         txtIdPedido.setVisible(false);
@@ -100,6 +101,7 @@ public final class Sistema extends javax.swing.JFrame {
         tipo = new javax.swing.JLabel();
         btnUsuarios = new javax.swing.JButton();
         btnPlatos = new javax.swing.JButton();
+        LabelConection = new javax.swing.JLabel();
         jLabel38 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel9 = new javax.swing.JPanel();
@@ -309,6 +311,9 @@ public final class Sistema extends javax.swing.JFrame {
             }
         });
 
+        LabelConection.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        LabelConection.setFocusable(false);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -324,9 +329,13 @@ public final class Sistema extends javax.swing.JFrame {
                 .addComponent(tipo)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(135, Short.MAX_VALUE)
                 .addComponent(labelLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(135, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(LabelConection, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -346,7 +355,9 @@ public final class Sistema extends javax.swing.JFrame {
                 .addComponent(btnConfig, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 216, Short.MAX_VALUE)
+                .addComponent(LabelConection, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(47, 47, 47))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 470, 1080));
@@ -749,7 +760,7 @@ public final class Sistema extends javax.swing.JFrame {
         jPanel8.add(btnActualizarConfig, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 405, 220, 50));
 
         jLabel27.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
-        jLabel27.setText("Ruc");
+        jLabel27.setText("RFC");
         jPanel8.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, -1));
 
         txtRucConfig.setBackground(new java.awt.Color(204, 204, 204));
@@ -1021,7 +1032,7 @@ public final class Sistema extends javax.swing.JFrame {
                 txtNombrePlatoActionPerformed(evt);
             }
         });
-        jPanel11.add(txtNombrePlato, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, 170, 30));
+        jPanel11.add(txtNombrePlato, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, 170, 70));
 
         jLabel25.setFont(new java.awt.Font("Tahoma", 3, 12)); // NOI18N
         jLabel25.setText("Precio:");
@@ -1039,7 +1050,7 @@ public final class Sistema extends javax.swing.JFrame {
                 txtPrecioPlatoKeyTyped(evt);
             }
         });
-        jPanel11.add(txtPrecioPlato, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 160, 170, 30));
+        jPanel11.add(txtPrecioPlato, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, 170, 60));
 
         btnGuardarPlato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/GuardarTodo.png"))); // NOI18N
         btnGuardarPlato.addActionListener(new java.awt.event.ActionListener() {
@@ -1740,6 +1751,7 @@ public final class Sistema extends javax.swing.JFrame {
     }//GEN-LAST:event_TablePlatosMouseClicked
 
     private void labelLogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelLogoMouseClicked
+        jTabbedPane1.setSelectedIndex(1);
         jTabbedPane1.setSelectedIndex(0);
         PanelSalas.removeAll();
         panelSalas();
@@ -1803,6 +1815,7 @@ public final class Sistema extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel LabelConection;
     private javax.swing.JLabel LabelVendedor;
     private javax.swing.JPanel PanelMesas;
     private javax.swing.JPanel PanelSalas;
