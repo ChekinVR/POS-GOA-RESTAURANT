@@ -1662,7 +1662,7 @@ public final class Sistema extends javax.swing.JFrame {
     }//GEN-LAST:event_btnFinalizarActionPerformed
 
     private void btnPlatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlatosActionPerformed
-        jTabbedPane1.setSelectedIndex(8);
+        jTabbedPane1.setSelectedIndex(7);
         LimpiarTable();
         ListarPlatos(TablePlatos);
     }//GEN-LAST:event_btnPlatosActionPerformed
