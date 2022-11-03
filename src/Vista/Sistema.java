@@ -238,6 +238,7 @@ public final class Sistema extends javax.swing.JFrame {
         });
 
         btnSala.setBackground(new java.awt.Color(0, 0, 0));
+        btnSala.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnSala.setForeground(new java.awt.Color(255, 255, 255));
         btnSala.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/sala.png"))); // NOI18N
         btnSala.setText("Salas");
@@ -250,6 +251,7 @@ public final class Sistema extends javax.swing.JFrame {
         });
 
         btnVentas.setBackground(new java.awt.Color(0, 0, 0));
+        btnVentas.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnVentas.setForeground(new java.awt.Color(255, 255, 255));
         btnVentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/pedidos.png"))); // NOI18N
         btnVentas.setText("Pedidos");
@@ -262,6 +264,7 @@ public final class Sistema extends javax.swing.JFrame {
         });
 
         btnConfig.setBackground(new java.awt.Color(0, 0, 0));
+        btnConfig.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnConfig.setForeground(new java.awt.Color(255, 255, 255));
         btnConfig.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/config.png"))); // NOI18N
         btnConfig.setText("Config");
@@ -280,6 +283,7 @@ public final class Sistema extends javax.swing.JFrame {
         tipo.setForeground(new java.awt.Color(255, 255, 255));
 
         btnUsuarios.setBackground(new java.awt.Color(0, 0, 0));
+        btnUsuarios.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnUsuarios.setForeground(new java.awt.Color(255, 255, 255));
         btnUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/usuarios.png"))); // NOI18N
         btnUsuarios.setText("Usuarios");
@@ -292,6 +296,7 @@ public final class Sistema extends javax.swing.JFrame {
         });
 
         btnPlatos.setBackground(new java.awt.Color(0, 0, 0));
+        btnPlatos.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnPlatos.setForeground(new java.awt.Color(255, 255, 255));
         btnPlatos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/platos.png"))); // NOI18N
         btnPlatos.setText("Platos");
@@ -554,17 +559,17 @@ public final class Sistema extends javax.swing.JFrame {
                 btnFinalizarActionPerformed(evt);
             }
         });
-        jPanel25.add(btnFinalizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1260, 440, 110, 40));
+        jPanel25.add(btnFinalizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 590, 130, 60));
 
         totalFinalizar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         totalFinalizar.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         totalFinalizar.setText("00.00");
-        jPanel25.add(totalFinalizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1250, 390, 120, -1));
+        jPanel25.add(totalFinalizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1230, 530, 120, -1));
 
         jLabel17.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/money.png"))); // NOI18N
         jLabel17.setText("Total a Pagar");
-        jPanel25.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(1240, 340, -1, -1));
+        jPanel25.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 480, -1, -1));
 
         tableFinalizar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -596,29 +601,29 @@ public final class Sistema extends javax.swing.JFrame {
             tableFinalizar.getColumnModel().getColumn(4).setPreferredWidth(60);
         }
 
-        jPanel25.add(jScrollPane13, new org.netbeans.lib.awtextra.AbsoluteConstraints(39, 13, 1330, 316));
-        jPanel25.add(txtIdPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 380, 50, -1));
+        jPanel25.add(jScrollPane13, new org.netbeans.lib.awtextra.AbsoluteConstraints(39, 13, 1330, 460));
+        jPanel25.add(txtIdPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 550, 50, -1));
 
         jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel7.setText("Fecha y Hora:");
-        jPanel25.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, -1, -1));
+        jPanel25.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 520, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel8.setText("Sala:");
-        jPanel25.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 400, -1, -1));
+        jPanel25.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 570, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel9.setText("N° Mesa:");
-        jPanel25.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 450, -1, -1));
+        jPanel25.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 620, -1, -1));
 
         txtFechaHora.setEditable(false);
-        jPanel25.add(txtFechaHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 350, 240, 30));
+        jPanel25.add(txtFechaHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 520, 240, 30));
 
         txtSalaFinalizar.setEditable(false);
-        jPanel25.add(txtSalaFinalizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 400, 240, 30));
+        jPanel25.add(txtSalaFinalizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 570, 240, 30));
 
         txtNumMesaFinalizar.setEditable(false);
-        jPanel25.add(txtNumMesaFinalizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 450, 240, 30));
+        jPanel25.add(txtNumMesaFinalizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 620, 240, 30));
 
         btnPdfPedido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/pdf.png"))); // NOI18N
         btnPdfPedido.addActionListener(new java.awt.event.ActionListener() {
@@ -626,8 +631,8 @@ public final class Sistema extends javax.swing.JFrame {
                 btnPdfPedidoActionPerformed(evt);
             }
         });
-        jPanel25.add(btnPdfPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 440, 110, 40));
-        jPanel25.add(txtIdHistorialPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 450, 50, -1));
+        jPanel25.add(btnPdfPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 590, 130, 60));
+        jPanel25.add(txtIdHistorialPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 620, 50, -1));
 
         jTabbedPane1.addTab("Finalizar Pedido", jPanel25);
 
