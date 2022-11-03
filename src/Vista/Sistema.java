@@ -273,6 +273,7 @@ public final class Sistema extends javax.swing.JFrame {
             }
         });
 
+        LabelVendedor.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         LabelVendedor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LabelVendedor.setText("Administrador");
 
@@ -328,7 +329,7 @@ public final class Sistema extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(tipo)
                 .addGap(18, 18, 18)
-                .addComponent(LabelVendedor)
+                .addComponent(LabelVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
                 .addComponent(btnPlatos, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
@@ -344,12 +345,12 @@ public final class Sistema extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 470, 1080));
 
-        jLabel38.setFont(new java.awt.Font("Zilla Slab", 3, 48)); // NOI18N
+        jLabel38.setFont(new java.awt.Font("Script MT Bold", 1, 48)); // NOI18N
         jLabel38.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/logo.png"))); // NOI18N
         jLabel38.setText("Goa Restaurant");
         jLabel38.setFocusable(false);
         jLabel38.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        getContentPane().add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(1450, 0, 470, 90));
+        getContentPane().add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(1490, 10, 430, 90));
         jLabel38.getAccessibleContext().setAccessibleDescription("");
 
         jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
@@ -370,7 +371,8 @@ public final class Sistema extends javax.swing.JFrame {
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 529, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(390, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Panel", jPanel9);
@@ -411,18 +413,23 @@ public final class Sistema extends javax.swing.JFrame {
             tableSala.getColumnModel().getColumn(2).setMaxWidth(150);
         }
 
-        jPanel4.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 80, 490, 470));
+        jPanel4.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 80, 860, 490));
 
         jPanel10.setBackground(new java.awt.Color(204, 204, 204));
         jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel18.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
         jLabel18.setText("Nombre:");
-        jPanel10.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
+        jPanel10.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
 
         txtNombreSala.setBackground(new java.awt.Color(204, 204, 204));
         txtNombreSala.setBorder(null);
-        jPanel10.add(txtNombreSala, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, 190, 30));
+        txtNombreSala.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNombreSalaActionPerformed(evt);
+            }
+        });
+        jPanel10.add(txtNombreSala, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, 220, 30));
 
         btnRegistrarSala.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/GuardarTodo.png"))); // NOI18N
         btnRegistrarSala.addActionListener(new java.awt.event.ActionListener() {
@@ -430,7 +437,7 @@ public final class Sistema extends javax.swing.JFrame {
                 btnRegistrarSalaActionPerformed(evt);
             }
         });
-        jPanel10.add(btnRegistrarSala, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 100, 40));
+        jPanel10.add(btnRegistrarSala, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 140, 80));
 
         btnActualizarSala.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Actualizar (2).png"))); // NOI18N
         btnActualizarSala.addActionListener(new java.awt.event.ActionListener() {
@@ -438,7 +445,7 @@ public final class Sistema extends javax.swing.JFrame {
                 btnActualizarSalaActionPerformed(evt);
             }
         });
-        jPanel10.add(btnActualizarSala, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 230, 100, 40));
+        jPanel10.add(btnActualizarSala, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 260, 140, 80));
 
         btnNuevoSala.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/nuevo.png"))); // NOI18N
         btnNuevoSala.addActionListener(new java.awt.event.ActionListener() {
@@ -446,7 +453,7 @@ public final class Sistema extends javax.swing.JFrame {
                 btnNuevoSalaActionPerformed(evt);
             }
         });
-        jPanel10.add(btnNuevoSala, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 300, 100, 40));
+        jPanel10.add(btnNuevoSala, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 360, 140, 80));
 
         btnEliminarSala.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/eliminar.png"))); // NOI18N
         btnEliminarSala.addActionListener(new java.awt.event.ActionListener() {
@@ -454,7 +461,13 @@ public final class Sistema extends javax.swing.JFrame {
                 btnEliminarSalaActionPerformed(evt);
             }
         });
-        jPanel10.add(btnEliminarSala, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 100, 40));
+        jPanel10.add(btnEliminarSala, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, 140, 80));
+
+        txtIdSala.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIdSalaActionPerformed(evt);
+            }
+        });
         jPanel10.add(txtIdSala, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 24, -1));
 
         jPanel35.setBackground(new java.awt.Color(0, 0, 0));
@@ -463,14 +476,14 @@ public final class Sistema extends javax.swing.JFrame {
         jPanel35.setLayout(jPanel35Layout);
         jPanel35Layout.setHorizontalGroup(
             jPanel35Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 190, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jPanel35Layout.setVerticalGroup(
             jPanel35Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 2, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        jPanel10.add(jPanel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 190, 2));
+        jPanel10.add(jPanel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 210, 2));
 
         jPanel38.setBackground(new java.awt.Color(0, 0, 0));
         jPanel38.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -479,9 +492,9 @@ public final class Sistema extends javax.swing.JFrame {
         jLabel33.setForeground(new java.awt.Color(255, 255, 255));
         jLabel33.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel33.setText("Nuevo Sala");
-        jPanel38.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 310, 30));
+        jPanel38.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 370, 40));
 
-        jPanel10.add(jPanel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 310, 35));
+        jPanel10.add(jPanel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 370, 40));
 
         jPanel36.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -489,24 +502,24 @@ public final class Sistema extends javax.swing.JFrame {
         jPanel36.setLayout(jPanel36Layout);
         jPanel36Layout.setHorizontalGroup(
             jPanel36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 190, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jPanel36Layout.setVerticalGroup(
             jPanel36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 2, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        jPanel10.add(jPanel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 190, 2));
+        jPanel10.add(jPanel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 162, 210, 2));
 
         txtMesas.setBackground(new java.awt.Color(204, 204, 204));
         txtMesas.setBorder(null);
-        jPanel10.add(txtMesas, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, 190, 30));
+        jPanel10.add(txtMesas, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 130, 220, 30));
 
         jLabel19.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
         jLabel19.setText("Mesas:");
-        jPanel10.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, -1));
+        jPanel10.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
 
-        jPanel4.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, 310, 370));
+        jPanel4.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 80, 370, 480));
 
         jTabbedPane1.addTab("Salas", jPanel4);
 
@@ -526,7 +539,7 @@ public final class Sistema extends javax.swing.JFrame {
             jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel22Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 647, Short.MAX_VALUE)
+                .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 937, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -720,7 +733,7 @@ public final class Sistema extends javax.swing.JFrame {
         jPanel23Layout.setVerticalGroup(
             jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel23Layout.createSequentialGroup()
-                .addContainerGap(72, Short.MAX_VALUE)
+                .addContainerGap(216, Short.MAX_VALUE)
                 .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel23Layout.createSequentialGroup()
                         .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -748,7 +761,7 @@ public final class Sistema extends javax.swing.JFrame {
                                     .addComponent(btnGenerarPedido1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(39, 39, 39))
                     .addComponent(jPanel24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addContainerGap(198, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Platos", jPanel23);
@@ -761,17 +774,17 @@ public final class Sistema extends javax.swing.JFrame {
                 btnFinalizarActionPerformed(evt);
             }
         });
-        jPanel25.add(btnFinalizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 440, 110, 40));
+        jPanel25.add(btnFinalizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1260, 440, 110, 40));
 
         totalFinalizar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         totalFinalizar.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         totalFinalizar.setText("00.00");
-        jPanel25.add(totalFinalizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 390, 120, -1));
+        jPanel25.add(totalFinalizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1250, 390, 120, -1));
 
         jLabel17.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/money.png"))); // NOI18N
         jLabel17.setText("Total a Pagar");
-        jPanel25.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 340, -1, -1));
+        jPanel25.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(1240, 340, -1, -1));
 
         tableFinalizar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -803,8 +816,8 @@ public final class Sistema extends javax.swing.JFrame {
             tableFinalizar.getColumnModel().getColumn(4).setPreferredWidth(60);
         }
 
-        jPanel25.add(jScrollPane13, new org.netbeans.lib.awtextra.AbsoluteConstraints(39, 13, 1030, 316));
-        jPanel25.add(txtIdPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 380, 50, -1));
+        jPanel25.add(jScrollPane13, new org.netbeans.lib.awtextra.AbsoluteConstraints(39, 13, 1330, 316));
+        jPanel25.add(txtIdPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 380, 50, -1));
 
         jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel7.setText("Fecha y Hora:");
@@ -833,8 +846,8 @@ public final class Sistema extends javax.swing.JFrame {
                 btnPdfPedidoActionPerformed(evt);
             }
         });
-        jPanel25.add(btnPdfPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 440, 110, 40));
-        jPanel25.add(txtIdHistorialPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 450, 50, -1));
+        jPanel25.add(btnPdfPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 440, 110, 40));
+        jPanel25.add(txtIdHistorialPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 450, 50, -1));
 
         jTabbedPane1.addTab("Finalizar Pedido", jPanel25);
 
@@ -976,7 +989,7 @@ public final class Sistema extends javax.swing.JFrame {
         );
         jPanel41Layout.setVerticalGroup(
             jPanel41Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 2, Short.MAX_VALUE)
         );
 
         jPanel8.add(jPanel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 147, 2));
@@ -991,7 +1004,7 @@ public final class Sistema extends javax.swing.JFrame {
         );
         jPanel42Layout.setVerticalGroup(
             jPanel42Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 2, Short.MAX_VALUE)
         );
 
         jPanel8.add(jPanel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 147, 2));
@@ -1006,7 +1019,7 @@ public final class Sistema extends javax.swing.JFrame {
         );
         jPanel43Layout.setVerticalGroup(
             jPanel43Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 2, Short.MAX_VALUE)
         );
 
         jPanel8.add(jPanel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, 400, 2));
@@ -1021,7 +1034,7 @@ public final class Sistema extends javax.swing.JFrame {
         );
         jPanel44Layout.setVerticalGroup(
             jPanel44Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 2, Short.MAX_VALUE)
         );
 
         jPanel8.add(jPanel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 90, 220, 2));
@@ -1036,7 +1049,7 @@ public final class Sistema extends javax.swing.JFrame {
         );
         jPanel45Layout.setVerticalGroup(
             jPanel45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 2, Short.MAX_VALUE)
         );
 
         jPanel8.add(jPanel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 220, 220, 2));
@@ -1045,7 +1058,7 @@ public final class Sistema extends javax.swing.JFrame {
 
         jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/portada.png"))); // NOI18N
-        jPanel7.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 100, 620, 470));
+        jPanel7.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 100, 620, 470));
 
         javax.swing.GroupLayout jPanel40Layout = new javax.swing.GroupLayout(jPanel40);
         jPanel40.setLayout(jPanel40Layout);
@@ -1369,12 +1382,12 @@ public final class Sistema extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane4)
                     .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, 543, Short.MAX_VALUE))
-                .addContainerGap(91, Short.MAX_VALUE))
+                .addContainerGap(381, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Platos", jPanel2);
 
-        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 100, 1450, 690));
+        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 100, 1450, 980));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -1737,6 +1750,14 @@ public final class Sistema extends javax.swing.JFrame {
         btnFinalizar.setEnabled(false);
         txtIdHistorialPedido.setText(""+id_pedido);
     }//GEN-LAST:event_btnGenerarPedido1ActionPerformed
+
+    private void txtIdSalaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdSalaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIdSalaActionPerformed
+
+    private void txtNombreSalaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreSalaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombreSalaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
