@@ -1427,7 +1427,7 @@ public final class Sistema extends javax.swing.JFrame {
 
     private void btnConfigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfigActionPerformed
         // TODO add your handling code here:
-        jTabbedPane1.setSelectedIndex(6);
+        jTabbedPane1.setSelectedIndex(5);
         ListarConfig();
     }//GEN-LAST:event_btnConfigActionPerformed
 
@@ -1435,14 +1435,14 @@ public final class Sistema extends javax.swing.JFrame {
         // TODO add your handling code here:
         LimpiarTable();
         ListarPedidos();
-        jTabbedPane1.setSelectedIndex(5);
+        jTabbedPane1.setSelectedIndex(4);
     }//GEN-LAST:event_btnVentasActionPerformed
 
     private void btnUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuariosActionPerformed
         // TODO add your handling code here:
         LimpiarTable();
         ListarUsuarios();
-        jTabbedPane1.setSelectedIndex(7);
+        jTabbedPane1.setSelectedIndex(6);
     }//GEN-LAST:event_btnUsuariosActionPerformed
 
     private void btnActualizarConfigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarConfigActionPerformed
@@ -1479,7 +1479,7 @@ public final class Sistema extends javax.swing.JFrame {
         LimpiarTable();
         verPedido(id_pedido);
         verPedidoDetalle(id_pedido);
-        jTabbedPane1.setSelectedIndex(4);
+        jTabbedPane1.setSelectedIndex(3);
         btnFinalizar.setEnabled(false);
         txtIdHistorialPedido.setText(""+id_pedido);
     }//GEN-LAST:event_TablePedidosMouseClicked
@@ -2108,11 +2108,11 @@ public final class Sistema extends javax.swing.JFrame {
                     verPedidoDetalle(verificar);
                     btnFinalizar.setEnabled(true);
                     btnPdfPedido.setEnabled(false);
-                    jTabbedPane1.setSelectedIndex(4);
+                    jTabbedPane1.setSelectedIndex(3);
                 } else {
                     LimpiarTable();
                     ListarPlatos(tblTemPlatos);
-                    jTabbedPane1.setSelectedIndex(3);
+                    jTabbedPane1.setSelectedIndex(8);
                     txtTempIdSala.setText("" + id_sala);
                     txtTempNumMesa.setText("" + num_mesa);
                 }
