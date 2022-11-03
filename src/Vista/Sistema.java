@@ -186,23 +186,6 @@ public final class Sistema extends javax.swing.JFrame {
         jPanel45 = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
         jPanel40 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel11 = new javax.swing.JPanel();
-        jLabel23 = new javax.swing.JLabel();
-        txtNombrePlato = new javax.swing.JTextField();
-        jLabel25 = new javax.swing.JLabel();
-        txtPrecioPlato = new javax.swing.JTextField();
-        btnGuardarPlato = new javax.swing.JButton();
-        btnEditarPlato = new javax.swing.JButton();
-        btnEliminarPlato = new javax.swing.JButton();
-        btnNuevoPlato = new javax.swing.JButton();
-        jPanel31 = new javax.swing.JPanel();
-        jPanel33 = new javax.swing.JPanel();
-        jPanel39 = new javax.swing.JPanel();
-        jLabel40 = new javax.swing.JLabel();
-        txtIdPlato = new javax.swing.JTextField();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        TablePlatos = new javax.swing.JTable();
         jPanel12 = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         TableUsuarios = new javax.swing.JTable();
@@ -221,6 +204,23 @@ public final class Sistema extends javax.swing.JFrame {
         jPanel18 = new javax.swing.JPanel();
         jPanel21 = new javax.swing.JPanel();
         jLabel39 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel11 = new javax.swing.JPanel();
+        jLabel23 = new javax.swing.JLabel();
+        txtNombrePlato = new javax.swing.JTextField();
+        jLabel25 = new javax.swing.JLabel();
+        txtPrecioPlato = new javax.swing.JTextField();
+        btnGuardarPlato = new javax.swing.JButton();
+        btnEditarPlato = new javax.swing.JButton();
+        btnEliminarPlato = new javax.swing.JButton();
+        btnNuevoPlato = new javax.swing.JButton();
+        jPanel31 = new javax.swing.JPanel();
+        jPanel33 = new javax.swing.JPanel();
+        jPanel39 = new javax.swing.JPanel();
+        jLabel40 = new javax.swing.JLabel();
+        txtIdPlato = new javax.swing.JTextField();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        TablePlatos = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Panel de Adminstración");
@@ -310,15 +310,16 @@ public final class Sistema extends javax.swing.JFrame {
             .addComponent(btnVentas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnConfig, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(LabelVendedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnUsuarios, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+            .addComponent(btnUsuarios, javax.swing.GroupLayout.DEFAULT_SIZE, 470, Short.MAX_VALUE)
+            .addComponent(btnPlatos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(74, 74, 74)
                 .addComponent(tipo)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(btnPlatos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(labelLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(labelLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -329,19 +330,19 @@ public final class Sistema extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(LabelVendedor)
                 .addGap(28, 28, 28)
-                .addComponent(btnPlatos, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
-                .addComponent(btnSala, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
-                .addComponent(btnVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
-                .addComponent(btnConfig, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
-                .addComponent(btnUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(449, Short.MAX_VALUE))
+                .addComponent(btnPlatos, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addComponent(btnSala, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35)
+                .addComponent(btnVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35)
+                .addComponent(btnConfig, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35)
+                .addComponent(btnUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(385, 385, 385))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 200, 1080));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 470, 1080));
 
         jLabel38.setFont(new java.awt.Font("Zilla Slab", 3, 48)); // NOI18N
         jLabel38.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/logo.png"))); // NOI18N
@@ -518,14 +519,14 @@ public final class Sistema extends javax.swing.JFrame {
             jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel22Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 1708, Short.MAX_VALUE)
+                .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 1438, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel22Layout.setVerticalGroup(
             jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel22Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 937, Short.MAX_VALUE)
+                .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 647, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -694,14 +695,14 @@ public final class Sistema extends javax.swing.JFrame {
                             .addComponent(btnEliminarTempPlato, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel23Layout.createSequentialGroup()
-                        .addGap(0, 353, Short.MAX_VALUE)
+                        .addGap(0, 218, Short.MAX_VALUE)
                         .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 570, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel23Layout.createSequentialGroup()
                                 .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtTempIdSala)
                                     .addComponent(txtTempNumMesa, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 583, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 448, Short.MAX_VALUE)
                                 .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jLabel11)
@@ -719,7 +720,7 @@ public final class Sistema extends javax.swing.JFrame {
         jPanel23Layout.setVerticalGroup(
             jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel23Layout.createSequentialGroup()
-                .addContainerGap(217, Short.MAX_VALUE)
+                .addContainerGap(72, Short.MAX_VALUE)
                 .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel23Layout.createSequentialGroup()
                         .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -747,7 +748,7 @@ public final class Sistema extends javax.swing.JFrame {
                                     .addComponent(btnGenerarPedido1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(39, 39, 39))
                     .addComponent(jPanel24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(197, Short.MAX_VALUE))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Platos", jPanel23);
@@ -1061,6 +1062,153 @@ public final class Sistema extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Datos de la Empresa", jPanel7);
 
+        jPanel12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        TableUsuarios.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Id", "Nombre", "Correo", "Rol"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        TableUsuarios.setRowHeight(23);
+        jScrollPane6.setViewportView(TableUsuarios);
+        if (TableUsuarios.getColumnModel().getColumnCount() > 0) {
+            TableUsuarios.getColumnModel().getColumn(0).setMinWidth(50);
+            TableUsuarios.getColumnModel().getColumn(0).setPreferredWidth(50);
+            TableUsuarios.getColumnModel().getColumn(0).setMaxWidth(80);
+            TableUsuarios.getColumnModel().getColumn(3).setMinWidth(150);
+            TableUsuarios.getColumnModel().getColumn(3).setPreferredWidth(150);
+            TableUsuarios.getColumnModel().getColumn(3).setMaxWidth(200);
+        }
+
+        jPanel12.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 40, 660, 520));
+
+        jPanel15.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel15.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel34.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
+        jLabel34.setText("Correo Electrónico");
+        jPanel15.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 102, -1, -1));
+
+        jLabel35.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
+        jLabel35.setText("Password");
+        jPanel15.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 130, -1));
+
+        txtCorreo.setBackground(new java.awt.Color(204, 204, 204));
+        txtCorreo.setBorder(null);
+        txtCorreo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCorreoActionPerformed(evt);
+            }
+        });
+        jPanel15.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 126, 300, 30));
+
+        txtPass.setBackground(new java.awt.Color(204, 204, 204));
+        txtPass.setBorder(null);
+        jPanel15.add(txtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, 300, 30));
+
+        btnIniciar.setBackground(new java.awt.Color(0, 0, 0));
+        btnIniciar.setFont(new java.awt.Font("Times New Roman", 1, 13)); // NOI18N
+        btnIniciar.setForeground(new java.awt.Color(255, 255, 255));
+        btnIniciar.setText("Registrar");
+        btnIniciar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnIniciar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIniciarActionPerformed(evt);
+            }
+        });
+        jPanel15.add(btnIniciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 440, 300, 50));
+
+        jLabel36.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
+        jLabel36.setText("Nombre:");
+        jPanel15.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, -1, -1));
+
+        txtNombre.setBackground(new java.awt.Color(204, 204, 204));
+        txtNombre.setBorder(null);
+        jPanel15.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 300, 30));
+
+        jLabel37.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
+        jLabel37.setText("Rol:");
+        jPanel15.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, 90, -1));
+
+        cbxRol.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Mesero" }));
+        cbxRol.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxRolActionPerformed(evt);
+            }
+        });
+        jPanel15.add(cbxRol, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 380, 300, 30));
+
+        jPanel16.setBackground(new java.awt.Color(0, 0, 0));
+
+        javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
+        jPanel16.setLayout(jPanel16Layout);
+        jPanel16Layout.setHorizontalGroup(
+            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+        jPanel16Layout.setVerticalGroup(
+            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2, Short.MAX_VALUE)
+        );
+
+        jPanel15.add(jPanel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 156, 300, 2));
+
+        jPanel17.setBackground(new java.awt.Color(0, 0, 0));
+
+        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
+        jPanel17.setLayout(jPanel17Layout);
+        jPanel17Layout.setHorizontalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+        jPanel17Layout.setVerticalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2, Short.MAX_VALUE)
+        );
+
+        jPanel15.add(jPanel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 300, 2));
+
+        jPanel18.setBackground(new java.awt.Color(0, 0, 0));
+
+        javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
+        jPanel18.setLayout(jPanel18Layout);
+        jPanel18Layout.setHorizontalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+        jPanel18Layout.setVerticalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2, Short.MAX_VALUE)
+        );
+
+        jPanel15.add(jPanel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, 300, 2));
+
+        jPanel21.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel21.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel39.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jLabel39.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel39.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel39.setText("Nuevo Usuario");
+        jPanel21.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 310, 35));
+
+        jPanel15.add(jPanel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 360, 35));
+
+        jPanel12.add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 360, 520));
+
+        jTabbedPane1.addTab("Usuarios", jPanel12);
+
         jPanel11.setBackground(new java.awt.Color(204, 204, 204));
         jPanel11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -1211,7 +1359,7 @@ public final class Sistema extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 1369, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 1099, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -1221,159 +1369,12 @@ public final class Sistema extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane4)
                     .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, 543, Short.MAX_VALUE))
-                .addContainerGap(381, Short.MAX_VALUE))
+                .addContainerGap(91, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Platos", jPanel2);
 
-        jPanel12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        TableUsuarios.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Id", "Nombre", "Correo", "Rol"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        TableUsuarios.setRowHeight(23);
-        jScrollPane6.setViewportView(TableUsuarios);
-        if (TableUsuarios.getColumnModel().getColumnCount() > 0) {
-            TableUsuarios.getColumnModel().getColumn(0).setMinWidth(50);
-            TableUsuarios.getColumnModel().getColumn(0).setPreferredWidth(50);
-            TableUsuarios.getColumnModel().getColumn(0).setMaxWidth(80);
-            TableUsuarios.getColumnModel().getColumn(3).setMinWidth(150);
-            TableUsuarios.getColumnModel().getColumn(3).setPreferredWidth(150);
-            TableUsuarios.getColumnModel().getColumn(3).setMaxWidth(200);
-        }
-
-        jPanel12.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 40, 660, 520));
-
-        jPanel15.setBackground(new java.awt.Color(204, 204, 204));
-        jPanel15.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel34.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
-        jLabel34.setText("Correo Electrónico");
-        jPanel15.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 102, -1, -1));
-
-        jLabel35.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
-        jLabel35.setText("Password");
-        jPanel15.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 130, -1));
-
-        txtCorreo.setBackground(new java.awt.Color(204, 204, 204));
-        txtCorreo.setBorder(null);
-        txtCorreo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCorreoActionPerformed(evt);
-            }
-        });
-        jPanel15.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 126, 300, 30));
-
-        txtPass.setBackground(new java.awt.Color(204, 204, 204));
-        txtPass.setBorder(null);
-        jPanel15.add(txtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, 300, 30));
-
-        btnIniciar.setBackground(new java.awt.Color(0, 0, 0));
-        btnIniciar.setFont(new java.awt.Font("Times New Roman", 1, 13)); // NOI18N
-        btnIniciar.setForeground(new java.awt.Color(255, 255, 255));
-        btnIniciar.setText("Registrar");
-        btnIniciar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnIniciar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnIniciarActionPerformed(evt);
-            }
-        });
-        jPanel15.add(btnIniciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 440, 300, 50));
-
-        jLabel36.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
-        jLabel36.setText("Nombre:");
-        jPanel15.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, -1, -1));
-
-        txtNombre.setBackground(new java.awt.Color(204, 204, 204));
-        txtNombre.setBorder(null);
-        jPanel15.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 300, 30));
-
-        jLabel37.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
-        jLabel37.setText("Rol:");
-        jPanel15.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, 90, -1));
-
-        cbxRol.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Mesero" }));
-        cbxRol.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbxRolActionPerformed(evt);
-            }
-        });
-        jPanel15.add(cbxRol, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 380, 300, 30));
-
-        jPanel16.setBackground(new java.awt.Color(0, 0, 0));
-
-        javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
-        jPanel16.setLayout(jPanel16Layout);
-        jPanel16Layout.setHorizontalGroup(
-            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
-        jPanel16Layout.setVerticalGroup(
-            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 2, Short.MAX_VALUE)
-        );
-
-        jPanel15.add(jPanel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 156, 300, 2));
-
-        jPanel17.setBackground(new java.awt.Color(0, 0, 0));
-
-        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
-        jPanel17.setLayout(jPanel17Layout);
-        jPanel17Layout.setHorizontalGroup(
-            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
-        jPanel17Layout.setVerticalGroup(
-            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 2, Short.MAX_VALUE)
-        );
-
-        jPanel15.add(jPanel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 300, 2));
-
-        jPanel18.setBackground(new java.awt.Color(0, 0, 0));
-
-        javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
-        jPanel18.setLayout(jPanel18Layout);
-        jPanel18Layout.setHorizontalGroup(
-            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
-        jPanel18Layout.setVerticalGroup(
-            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 2, Short.MAX_VALUE)
-        );
-
-        jPanel15.add(jPanel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, 300, 2));
-
-        jPanel21.setBackground(new java.awt.Color(0, 0, 0));
-        jPanel21.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel39.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jLabel39.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel39.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel39.setText("Nuevo Usuario");
-        jPanel21.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 310, 35));
-
-        jPanel15.add(jPanel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 360, 35));
-
-        jPanel12.add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 360, 520));
-
-        jTabbedPane1.addTab("Usuarios", jPanel12);
-
-        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 95, 1720, 980));
+        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 100, 1450, 690));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
