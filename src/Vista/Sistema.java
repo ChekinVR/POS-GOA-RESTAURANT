@@ -237,10 +237,10 @@ public final class Sistema extends javax.swing.JFrame {
             }
         });
 
-        btnSala.setBackground(new java.awt.Color(0, 0, 0));
+        btnSala.setBackground(new java.awt.Color(212, 212, 209));
         btnSala.setFont(new java.awt.Font("Script MT Bold", 0, 24)); // NOI18N
-        btnSala.setForeground(new java.awt.Color(255, 255, 255));
-        btnSala.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/sala.png"))); // NOI18N
+        btnSala.setForeground(new java.awt.Color(0, 0, 0));
+        btnSala.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/51882.png"))); // NOI18N
         btnSala.setText("Salas");
         btnSala.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnSala.setFocusable(false);
@@ -250,10 +250,10 @@ public final class Sistema extends javax.swing.JFrame {
             }
         });
 
-        btnVentas.setBackground(new java.awt.Color(0, 0, 0));
+        btnVentas.setBackground(new java.awt.Color(212, 212, 209));
         btnVentas.setFont(new java.awt.Font("Script MT Bold", 0, 24)); // NOI18N
-        btnVentas.setForeground(new java.awt.Color(255, 255, 255));
-        btnVentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/pedidos.png"))); // NOI18N
+        btnVentas.setForeground(new java.awt.Color(0, 0, 0));
+        btnVentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/ordenar-comida.png"))); // NOI18N
         btnVentas.setText("Pedidos");
         btnVentas.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnVentas.setFocusable(false);
@@ -263,10 +263,10 @@ public final class Sistema extends javax.swing.JFrame {
             }
         });
 
-        btnConfig.setBackground(new java.awt.Color(0, 0, 0));
+        btnConfig.setBackground(new java.awt.Color(212, 212, 209));
         btnConfig.setFont(new java.awt.Font("Script MT Bold", 0, 24)); // NOI18N
-        btnConfig.setForeground(new java.awt.Color(255, 255, 255));
-        btnConfig.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/config.png"))); // NOI18N
+        btnConfig.setForeground(new java.awt.Color(0, 0, 0));
+        btnConfig.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/engranajes-de-configuracion.png"))); // NOI18N
         btnConfig.setText("Config");
         btnConfig.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnConfig.setFocusable(false);
@@ -282,10 +282,10 @@ public final class Sistema extends javax.swing.JFrame {
 
         tipo.setForeground(new java.awt.Color(255, 255, 255));
 
-        btnUsuarios.setBackground(new java.awt.Color(0, 0, 0));
+        btnUsuarios.setBackground(new java.awt.Color(212, 212, 209));
         btnUsuarios.setFont(new java.awt.Font("Script MT Bold", 0, 24)); // NOI18N
-        btnUsuarios.setForeground(new java.awt.Color(255, 255, 255));
-        btnUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/usuarios.png"))); // NOI18N
+        btnUsuarios.setForeground(new java.awt.Color(0, 0, 0));
+        btnUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/group.png"))); // NOI18N
         btnUsuarios.setText("Usuarios");
         btnUsuarios.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnUsuarios.setFocusable(false);
@@ -295,10 +295,10 @@ public final class Sistema extends javax.swing.JFrame {
             }
         });
 
-        btnPlatos.setBackground(new java.awt.Color(0, 0, 0));
+        btnPlatos.setBackground(new java.awt.Color(212, 212, 209));
         btnPlatos.setFont(new java.awt.Font("Script MT Bold", 0, 24)); // NOI18N
-        btnPlatos.setForeground(new java.awt.Color(255, 255, 255));
-        btnPlatos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/platos.png"))); // NOI18N
+        btnPlatos.setForeground(new java.awt.Color(0, 0, 0));
+        btnPlatos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/indian.png"))); // NOI18N
         btnPlatos.setText("Platos");
         btnPlatos.setAutoscrolls(true);
         btnPlatos.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -317,7 +317,7 @@ public final class Sistema extends javax.swing.JFrame {
             .addComponent(btnVentas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnConfig, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(LabelVendedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnUsuarios, javax.swing.GroupLayout.DEFAULT_SIZE, 470, Short.MAX_VALUE)
+            .addComponent(btnUsuarios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnPlatos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(74, 74, 74)
