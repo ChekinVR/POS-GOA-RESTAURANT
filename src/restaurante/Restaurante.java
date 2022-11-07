@@ -1,11 +1,11 @@
 package restaurante;
 
-import Vista.FrmLogin;
+import Login.Login;
 
 public class Restaurante {
 
     public static void main(String[] args) {
-        FrmLogin iniciar = new FrmLogin();
+        Login iniciar = new Login();
         iniciar.setVisible(true);
     }
     

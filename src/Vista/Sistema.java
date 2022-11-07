@@ -65,7 +65,8 @@ public final class Sistema extends javax.swing.JFrame {
         Image igmEscalada = img.getImage().getScaledInstance(labelLogo.getWidth(), labelLogo.getHeight(), Image.SCALE_SMOOTH);
         Icon icono = new ImageIcon(igmEscalada);
         labelLogo.setIcon(icono);
-        this.setIconImage(img.getImage());
+        ImageIcon img2 = new ImageIcon(getClass().getResource("/Img/logo.png"));
+        this.setIconImage(img2.getImage());
         this.setLocationRelativeTo(null);
         txtIdHistorialPedido.setVisible(false);
         txtIdConfig.setVisible(false);
@@ -226,7 +227,7 @@ public final class Sistema extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Panel de Adminstración");
-        setResizable(false);
+        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
