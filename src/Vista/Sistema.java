@@ -60,6 +60,7 @@ public final class Sistema extends javax.swing.JFrame {
 
     public Sistema(login priv) {
         initComponents();
+        this.setExtendedState(MAXIMIZED_BOTH);
         ImageIcon img = new ImageIcon(getClass().getResource("/Img/Home.png"));
         Image igmEscalada = img.getImage().getScaledInstance(labelLogo.getWidth(), labelLogo.getHeight(), Image.SCALE_SMOOTH);
         Icon icono = new ImageIcon(igmEscalada);
@@ -68,13 +69,14 @@ public final class Sistema extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         txtIdHistorialPedido.setVisible(false);
         txtIdConfig.setVisible(false);
-        if (priv.getRol().equals("Asistente")) {
+        if (priv.getRol().equals("Mesero")) {
             btnSala.setEnabled(false);
             btnConfig.setEnabled(false);
             LabelVendedor.setText(priv.getNombre());
         } else {
             LabelVendedor.setText(priv.getNombre());
         }
+        LabelConection.setText("jdbc:mysql://localhost:3306/restaurant_goa");
         txtIdConfig.setVisible(false);
         txtIdHistorialPedido.setVisible(false);
         txtIdPedido.setVisible(false);
@@ -99,6 +101,7 @@ public final class Sistema extends javax.swing.JFrame {
         tipo = new javax.swing.JLabel();
         btnUsuarios = new javax.swing.JButton();
         btnPlatos = new javax.swing.JButton();
+        LabelConection = new javax.swing.JLabel();
         jLabel38 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel9 = new javax.swing.JPanel();
@@ -124,24 +127,6 @@ public final class Sistema extends javax.swing.JFrame {
         jPanel22 = new javax.swing.JPanel();
         jScrollPane9 = new javax.swing.JScrollPane();
         PanelMesas = new javax.swing.JPanel();
-        jPanel23 = new javax.swing.JPanel();
-        jPanel24 = new javax.swing.JPanel();
-        txtBuscarPlato = new javax.swing.JTextField();
-        jScrollPane10 = new javax.swing.JScrollPane();
-        tblTemPlatos = new javax.swing.JTable();
-        btnAddPlato = new javax.swing.JButton();
-        jScrollPane11 = new javax.swing.JScrollPane();
-        tableMenu = new javax.swing.JTable();
-        jLabel6 = new javax.swing.JLabel();
-        jScrollPane12 = new javax.swing.JScrollPane();
-        txtComentario = new javax.swing.JTextPane();
-        jLabel11 = new javax.swing.JLabel();
-        totalMenu = new javax.swing.JLabel();
-        btnGenerarPedido = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        btnEliminarTempPlato = new javax.swing.JButton();
-        txtTempIdSala = new javax.swing.JTextField();
-        txtTempNumMesa = new javax.swing.JTextField();
         jPanel25 = new javax.swing.JPanel();
         btnFinalizar = new javax.swing.JButton();
         totalFinalizar = new javax.swing.JLabel();
@@ -161,6 +146,7 @@ public final class Sistema extends javax.swing.JFrame {
         jScrollPane5 = new javax.swing.JScrollPane();
         TablePedidos = new javax.swing.JTable();
         jLabel16 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
         jLabel32 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
@@ -218,6 +204,25 @@ public final class Sistema extends javax.swing.JFrame {
         txtIdPlato = new javax.swing.JTextField();
         jScrollPane4 = new javax.swing.JScrollPane();
         TablePlatos = new javax.swing.JTable();
+        jPanel23 = new javax.swing.JPanel();
+        jPanel24 = new javax.swing.JPanel();
+        txtBuscarPlato = new javax.swing.JTextField();
+        jScrollPane10 = new javax.swing.JScrollPane();
+        tblTemPlatos = new javax.swing.JTable();
+        btnAddPlato = new javax.swing.JButton();
+        jScrollPane11 = new javax.swing.JScrollPane();
+        tableMenu = new javax.swing.JTable();
+        jLabel6 = new javax.swing.JLabel();
+        jScrollPane12 = new javax.swing.JScrollPane();
+        txtComentario = new javax.swing.JTextPane();
+        jLabel11 = new javax.swing.JLabel();
+        totalMenu = new javax.swing.JLabel();
+        btnGenerarPedido = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        btnEliminarTempPlato = new javax.swing.JButton();
+        txtTempIdSala = new javax.swing.JTextField();
+        txtTempNumMesa = new javax.swing.JTextField();
+        btnGenerarPedido1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Panel de Adminstración");
@@ -234,9 +239,10 @@ public final class Sistema extends javax.swing.JFrame {
             }
         });
 
-        btnSala.setBackground(new java.awt.Color(0, 0, 0));
-        btnSala.setForeground(new java.awt.Color(255, 255, 255));
-        btnSala.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/sala.png"))); // NOI18N
+        btnSala.setBackground(new java.awt.Color(212, 212, 209));
+        btnSala.setFont(new java.awt.Font("Script MT Bold", 0, 24)); // NOI18N
+        btnSala.setForeground(new java.awt.Color(0, 0, 0));
+        btnSala.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/51882.png"))); // NOI18N
         btnSala.setText("Salas");
         btnSala.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnSala.setFocusable(false);
@@ -246,9 +252,10 @@ public final class Sistema extends javax.swing.JFrame {
             }
         });
 
-        btnVentas.setBackground(new java.awt.Color(0, 0, 0));
-        btnVentas.setForeground(new java.awt.Color(255, 255, 255));
-        btnVentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/pedidos.png"))); // NOI18N
+        btnVentas.setBackground(new java.awt.Color(212, 212, 209));
+        btnVentas.setFont(new java.awt.Font("Script MT Bold", 0, 24)); // NOI18N
+        btnVentas.setForeground(new java.awt.Color(0, 0, 0));
+        btnVentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/ordenar-comida.png"))); // NOI18N
         btnVentas.setText("Pedidos");
         btnVentas.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnVentas.setFocusable(false);
@@ -258,9 +265,10 @@ public final class Sistema extends javax.swing.JFrame {
             }
         });
 
-        btnConfig.setBackground(new java.awt.Color(0, 0, 0));
-        btnConfig.setForeground(new java.awt.Color(255, 255, 255));
-        btnConfig.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/config.png"))); // NOI18N
+        btnConfig.setBackground(new java.awt.Color(212, 212, 209));
+        btnConfig.setFont(new java.awt.Font("Script MT Bold", 0, 24)); // NOI18N
+        btnConfig.setForeground(new java.awt.Color(0, 0, 0));
+        btnConfig.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/engranajes-de-configuracion.png"))); // NOI18N
         btnConfig.setText("Config");
         btnConfig.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnConfig.setFocusable(false);
@@ -270,14 +278,16 @@ public final class Sistema extends javax.swing.JFrame {
             }
         });
 
+        LabelVendedor.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         LabelVendedor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LabelVendedor.setText("Administrador");
 
         tipo.setForeground(new java.awt.Color(255, 255, 255));
 
-        btnUsuarios.setBackground(new java.awt.Color(0, 0, 0));
-        btnUsuarios.setForeground(new java.awt.Color(255, 255, 255));
-        btnUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/usuarios.png"))); // NOI18N
+        btnUsuarios.setBackground(new java.awt.Color(212, 212, 209));
+        btnUsuarios.setFont(new java.awt.Font("Script MT Bold", 0, 24)); // NOI18N
+        btnUsuarios.setForeground(new java.awt.Color(0, 0, 0));
+        btnUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/group.png"))); // NOI18N
         btnUsuarios.setText("Usuarios");
         btnUsuarios.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnUsuarios.setFocusable(false);
@@ -287,10 +297,12 @@ public final class Sistema extends javax.swing.JFrame {
             }
         });
 
-        btnPlatos.setBackground(new java.awt.Color(0, 0, 0));
-        btnPlatos.setForeground(new java.awt.Color(255, 255, 255));
-        btnPlatos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/platos.png"))); // NOI18N
+        btnPlatos.setBackground(new java.awt.Color(212, 212, 209));
+        btnPlatos.setFont(new java.awt.Font("Script MT Bold", 0, 24)); // NOI18N
+        btnPlatos.setForeground(new java.awt.Color(0, 0, 0));
+        btnPlatos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/indian.png"))); // NOI18N
         btnPlatos.setText("Platos");
+        btnPlatos.setAutoscrolls(true);
         btnPlatos.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnPlatos.setFocusable(false);
         btnPlatos.addActionListener(new java.awt.event.ActionListener() {
@@ -298,6 +310,9 @@ public final class Sistema extends javax.swing.JFrame {
                 btnPlatosActionPerformed(evt);
             }
         });
+
+        LabelConection.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        LabelConection.setFocusable(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -307,15 +322,20 @@ public final class Sistema extends javax.swing.JFrame {
             .addComponent(btnVentas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnConfig, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(LabelVendedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnUsuarios, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+            .addComponent(btnUsuarios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnPlatos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(74, 74, 74)
                 .addComponent(tipo)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(btnPlatos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(135, Short.MAX_VALUE)
+                .addComponent(labelLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(135, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(labelLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(LabelConection, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -324,28 +344,31 @@ public final class Sistema extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(tipo)
                 .addGap(18, 18, 18)
-                .addComponent(LabelVendedor)
+                .addComponent(LabelVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
-                .addComponent(btnPlatos, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
-                .addComponent(btnSala, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
-                .addComponent(btnVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
-                .addComponent(btnConfig, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
-                .addComponent(btnUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(89, Short.MAX_VALUE))
+                .addComponent(btnPlatos, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnSala, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnConfig, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 216, Short.MAX_VALUE)
+                .addComponent(LabelConection, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(47, 47, 47))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 200, 720));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 470, 1080));
 
-        jLabel38.setFont(new java.awt.Font("Zilla Slab", 3, 48)); // NOI18N
-        jLabel38.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/titulo.png"))); // NOI18N
-        jLabel38.setText("Restaurante la Delicia");
+        jLabel38.setFont(new java.awt.Font("Script MT Bold", 1, 48)); // NOI18N
+        jLabel38.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/logo.png"))); // NOI18N
+        jLabel38.setText("Goa Restaurant");
         jLabel38.setFocusable(false);
         jLabel38.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        getContentPane().add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 0, 540, 90));
+        getContentPane().add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(1490, 10, 430, 90));
+        jLabel38.getAccessibleContext().setAccessibleDescription("");
 
         jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -365,7 +388,8 @@ public final class Sistema extends javax.swing.JFrame {
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 604, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(315, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Panel", jPanel9);
@@ -380,7 +404,15 @@ public final class Sistema extends javax.swing.JFrame {
             new String [] {
                 "ID", "NOMBRE", "Mesas"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tableSala.setRowHeight(23);
         tableSala.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -398,18 +430,23 @@ public final class Sistema extends javax.swing.JFrame {
             tableSala.getColumnModel().getColumn(2).setMaxWidth(150);
         }
 
-        jPanel4.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 80, 490, 470));
+        jPanel4.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 80, 860, 490));
 
         jPanel10.setBackground(new java.awt.Color(204, 204, 204));
         jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel18.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
         jLabel18.setText("Nombre:");
-        jPanel10.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
+        jPanel10.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
 
         txtNombreSala.setBackground(new java.awt.Color(204, 204, 204));
         txtNombreSala.setBorder(null);
-        jPanel10.add(txtNombreSala, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, 190, 30));
+        txtNombreSala.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNombreSalaActionPerformed(evt);
+            }
+        });
+        jPanel10.add(txtNombreSala, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, 220, 30));
 
         btnRegistrarSala.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/GuardarTodo.png"))); // NOI18N
         btnRegistrarSala.addActionListener(new java.awt.event.ActionListener() {
@@ -417,7 +454,7 @@ public final class Sistema extends javax.swing.JFrame {
                 btnRegistrarSalaActionPerformed(evt);
             }
         });
-        jPanel10.add(btnRegistrarSala, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 100, 40));
+        jPanel10.add(btnRegistrarSala, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 140, 80));
 
         btnActualizarSala.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Actualizar (2).png"))); // NOI18N
         btnActualizarSala.addActionListener(new java.awt.event.ActionListener() {
@@ -425,7 +462,7 @@ public final class Sistema extends javax.swing.JFrame {
                 btnActualizarSalaActionPerformed(evt);
             }
         });
-        jPanel10.add(btnActualizarSala, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 230, 100, 40));
+        jPanel10.add(btnActualizarSala, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 260, 140, 80));
 
         btnNuevoSala.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/nuevo.png"))); // NOI18N
         btnNuevoSala.addActionListener(new java.awt.event.ActionListener() {
@@ -433,7 +470,7 @@ public final class Sistema extends javax.swing.JFrame {
                 btnNuevoSalaActionPerformed(evt);
             }
         });
-        jPanel10.add(btnNuevoSala, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 300, 100, 40));
+        jPanel10.add(btnNuevoSala, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 360, 140, 80));
 
         btnEliminarSala.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/eliminar.png"))); // NOI18N
         btnEliminarSala.addActionListener(new java.awt.event.ActionListener() {
@@ -441,7 +478,13 @@ public final class Sistema extends javax.swing.JFrame {
                 btnEliminarSalaActionPerformed(evt);
             }
         });
-        jPanel10.add(btnEliminarSala, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 100, 40));
+        jPanel10.add(btnEliminarSala, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, 140, 80));
+
+        txtIdSala.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIdSalaActionPerformed(evt);
+            }
+        });
         jPanel10.add(txtIdSala, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 24, -1));
 
         jPanel35.setBackground(new java.awt.Color(0, 0, 0));
@@ -450,14 +493,14 @@ public final class Sistema extends javax.swing.JFrame {
         jPanel35.setLayout(jPanel35Layout);
         jPanel35Layout.setHorizontalGroup(
             jPanel35Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 190, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jPanel35Layout.setVerticalGroup(
             jPanel35Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 2, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        jPanel10.add(jPanel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 190, 2));
+        jPanel10.add(jPanel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 210, 2));
 
         jPanel38.setBackground(new java.awt.Color(0, 0, 0));
         jPanel38.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -466,9 +509,9 @@ public final class Sistema extends javax.swing.JFrame {
         jLabel33.setForeground(new java.awt.Color(255, 255, 255));
         jLabel33.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel33.setText("Nuevo Sala");
-        jPanel38.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 310, 30));
+        jPanel38.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 370, 40));
 
-        jPanel10.add(jPanel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 310, 35));
+        jPanel10.add(jPanel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 370, 40));
 
         jPanel36.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -476,24 +519,24 @@ public final class Sistema extends javax.swing.JFrame {
         jPanel36.setLayout(jPanel36Layout);
         jPanel36Layout.setHorizontalGroup(
             jPanel36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 190, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jPanel36Layout.setVerticalGroup(
             jPanel36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 2, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        jPanel10.add(jPanel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 190, 2));
+        jPanel10.add(jPanel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 162, 210, 2));
 
         txtMesas.setBackground(new java.awt.Color(204, 204, 204));
         txtMesas.setBorder(null);
-        jPanel10.add(txtMesas, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, 190, 30));
+        jPanel10.add(txtMesas, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 130, 220, 30));
 
         jLabel19.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
         jLabel19.setText("Mesas:");
-        jPanel10.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, -1));
+        jPanel10.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
 
-        jPanel4.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, 310, 370));
+        jPanel4.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 80, 370, 480));
 
         jTabbedPane1.addTab("Salas", jPanel4);
 
@@ -506,226 +549,18 @@ public final class Sistema extends javax.swing.JFrame {
             jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel22Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 1051, Short.MAX_VALUE)
+                .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 1438, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel22Layout.setVerticalGroup(
             jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel22Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 564, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 674, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(269, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Mesas", jPanel22);
-
-        jPanel24.setBorder(javax.swing.BorderFactory.createTitledBorder("Platos del Dia"));
-
-        txtBuscarPlato.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtBuscarPlatoKeyReleased(evt);
-            }
-        });
-
-        tblTemPlatos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "", "Nombre", "Precio"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        tblTemPlatos.setRowHeight(23);
-        jScrollPane10.setViewportView(tblTemPlatos);
-        if (tblTemPlatos.getColumnModel().getColumnCount() > 0) {
-            tblTemPlatos.getColumnModel().getColumn(0).setMinWidth(30);
-            tblTemPlatos.getColumnModel().getColumn(0).setPreferredWidth(30);
-            tblTemPlatos.getColumnModel().getColumn(0).setMaxWidth(50);
-            tblTemPlatos.getColumnModel().getColumn(2).setMinWidth(150);
-            tblTemPlatos.getColumnModel().getColumn(2).setPreferredWidth(150);
-            tblTemPlatos.getColumnModel().getColumn(2).setMaxWidth(200);
-        }
-
-        btnAddPlato.setBackground(new java.awt.Color(0, 0, 0));
-        btnAddPlato.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
-        btnAddPlato.setForeground(new java.awt.Color(255, 255, 255));
-        btnAddPlato.setText("+");
-        btnAddPlato.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnAddPlato.setFocusable(false);
-        btnAddPlato.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnAddPlato.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddPlatoActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel24Layout = new javax.swing.GroupLayout(jPanel24);
-        jPanel24.setLayout(jPanel24Layout);
-        jPanel24Layout.setHorizontalGroup(
-            jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel24Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addGroup(jPanel24Layout.createSequentialGroup()
-                        .addComponent(txtBuscarPlato, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                        .addComponent(btnAddPlato)))
-                .addContainerGap())
-        );
-        jPanel24Layout.setVerticalGroup(
-            jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel24Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtBuscarPlato, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
-                    .addComponent(btnAddPlato, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        tableMenu.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "", "Plato", "Cant", "Precio", "SubTotal", "Comentario"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, true
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        tableMenu.setRowHeight(23);
-        jScrollPane11.setViewportView(tableMenu);
-        if (tableMenu.getColumnModel().getColumnCount() > 0) {
-            tableMenu.getColumnModel().getColumn(0).setMinWidth(30);
-            tableMenu.getColumnModel().getColumn(0).setPreferredWidth(30);
-            tableMenu.getColumnModel().getColumn(0).setMaxWidth(50);
-            tableMenu.getColumnModel().getColumn(1).setPreferredWidth(100);
-            tableMenu.getColumnModel().getColumn(2).setMinWidth(40);
-            tableMenu.getColumnModel().getColumn(2).setPreferredWidth(40);
-            tableMenu.getColumnModel().getColumn(2).setMaxWidth(50);
-            tableMenu.getColumnModel().getColumn(3).setPreferredWidth(50);
-            tableMenu.getColumnModel().getColumn(4).setPreferredWidth(60);
-        }
-
-        jLabel6.setText("Comentario:");
-
-        jScrollPane12.setViewportView(txtComentario);
-
-        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/money.png"))); // NOI18N
-        jLabel11.setText("Total a Pagar");
-
-        totalMenu.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        totalMenu.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        totalMenu.setText("00.00");
-
-        btnGenerarPedido.setText("Realizar Pedido");
-        btnGenerarPedido.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGenerarPedidoActionPerformed(evt);
-            }
-        });
-
-        jButton2.setText("Agregar");
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
-        btnEliminarTempPlato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/eliminar.png"))); // NOI18N
-        btnEliminarTempPlato.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnEliminarTempPlato.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarTempPlatoActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel23Layout = new javax.swing.GroupLayout(jPanel23);
-        jPanel23.setLayout(jPanel23Layout);
-        jPanel23Layout.setHorizontalGroup(
-            jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel23Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel23Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnEliminarTempPlato, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel23Layout.createSequentialGroup()
-                        .addGap(0, 3, Short.MAX_VALUE)
-                        .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 570, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel23Layout.createSequentialGroup()
-                                .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtTempIdSala)
-                                    .addComponent(txtTempNumMesa, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 323, Short.MAX_VALUE)
-                                .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel11)
-                                        .addGroup(jPanel23Layout.createSequentialGroup()
-                                            .addGap(10, 10, 10)
-                                            .addComponent(totalMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addComponent(btnGenerarPedido, javax.swing.GroupLayout.Alignment.TRAILING))))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        jPanel23Layout.setVerticalGroup(
-            jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel23Layout.createSequentialGroup()
-                .addContainerGap(27, Short.MAX_VALUE)
-                .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel23Layout.createSequentialGroup()
-                        .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addGroup(jPanel23Layout.createSequentialGroup()
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnEliminarTempPlato, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel23Layout.createSequentialGroup()
-                                .addComponent(txtTempIdSala, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(14, 14, 14)
-                                .addComponent(txtTempNumMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel23Layout.createSequentialGroup()
-                                .addComponent(jLabel11)
-                                .addGap(14, 14, 14)
-                                .addComponent(totalMenu)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnGenerarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(39, 39, 39))
-                    .addComponent(jPanel24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jTabbedPane1.addTab("Platos", jPanel23);
 
         jPanel25.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -735,17 +570,17 @@ public final class Sistema extends javax.swing.JFrame {
                 btnFinalizarActionPerformed(evt);
             }
         });
-        jPanel25.add(btnFinalizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 440, 110, 40));
+        jPanel25.add(btnFinalizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 590, 130, 60));
 
         totalFinalizar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         totalFinalizar.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         totalFinalizar.setText("00.00");
-        jPanel25.add(totalFinalizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 390, 120, -1));
+        jPanel25.add(totalFinalizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1230, 530, 120, -1));
 
         jLabel17.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/money.png"))); // NOI18N
         jLabel17.setText("Total a Pagar");
-        jPanel25.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 340, -1, -1));
+        jPanel25.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 480, -1, -1));
 
         tableFinalizar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -777,29 +612,29 @@ public final class Sistema extends javax.swing.JFrame {
             tableFinalizar.getColumnModel().getColumn(4).setPreferredWidth(60);
         }
 
-        jPanel25.add(jScrollPane13, new org.netbeans.lib.awtextra.AbsoluteConstraints(39, 13, 1030, 316));
-        jPanel25.add(txtIdPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 380, 50, -1));
+        jPanel25.add(jScrollPane13, new org.netbeans.lib.awtextra.AbsoluteConstraints(39, 13, 1330, 460));
+        jPanel25.add(txtIdPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 550, 50, -1));
 
         jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel7.setText("Fecha y Hora:");
-        jPanel25.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, -1, -1));
+        jPanel25.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 520, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel8.setText("Sala:");
-        jPanel25.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 400, -1, -1));
+        jPanel25.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 570, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel9.setText("N° Mesa:");
-        jPanel25.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 450, -1, -1));
+        jPanel25.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 620, -1, -1));
 
         txtFechaHora.setEditable(false);
-        jPanel25.add(txtFechaHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 350, 240, 30));
+        jPanel25.add(txtFechaHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 520, 240, 30));
 
         txtSalaFinalizar.setEditable(false);
-        jPanel25.add(txtSalaFinalizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 400, 240, 30));
+        jPanel25.add(txtSalaFinalizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 570, 240, 30));
 
         txtNumMesaFinalizar.setEditable(false);
-        jPanel25.add(txtNumMesaFinalizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 450, 240, 30));
+        jPanel25.add(txtNumMesaFinalizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 620, 240, 30));
 
         btnPdfPedido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/pdf.png"))); // NOI18N
         btnPdfPedido.addActionListener(new java.awt.event.ActionListener() {
@@ -807,8 +642,8 @@ public final class Sistema extends javax.swing.JFrame {
                 btnPdfPedidoActionPerformed(evt);
             }
         });
-        jPanel25.add(btnPdfPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 440, 110, 40));
-        jPanel25.add(txtIdHistorialPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 450, 50, -1));
+        jPanel25.add(btnPdfPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 590, 130, 60));
+        jPanel25.add(txtIdHistorialPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 620, 50, -1));
 
         jTabbedPane1.addTab("Finalizar Pedido", jPanel25);
 
@@ -831,6 +666,7 @@ public final class Sistema extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        TablePedidos.setColumnSelectionAllowed(true);
         TablePedidos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         TablePedidos.setRowHeight(23);
         TablePedidos.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -850,12 +686,21 @@ public final class Sistema extends javax.swing.JFrame {
             TablePedidos.getColumnModel().getColumn(4).setPreferredWidth(60);
         }
 
-        jPanel6.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 1020, 480));
+        jPanel6.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 1380, 480));
 
         jLabel16.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel16.setText("Historial Pedidos");
-        jPanel6.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 50, 280, -1));
+        jPanel6.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 10, 280, -1));
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/eliminar.png"))); // NOI18N
+        jButton1.setText("ELIMINAR PEDIDO");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnElimPedDao(evt);
+            }
+        });
+        jPanel6.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1230, 540, 180, 70));
 
         jTabbedPane1.addTab("Historial Pedidos", jPanel6);
 
@@ -863,7 +708,7 @@ public final class Sistema extends javax.swing.JFrame {
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel32.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jLabel32.setText("DATOS DE LA EMPRESA");
+        jLabel32.setText("DATOS DEL RESTAURANTE");
         jPanel7.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 40, -1, -1));
 
         jPanel8.setBackground(new java.awt.Color(204, 204, 204));
@@ -915,7 +760,7 @@ public final class Sistema extends javax.swing.JFrame {
         jPanel8.add(btnActualizarConfig, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 405, 220, 50));
 
         jLabel27.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
-        jLabel27.setText("Ruc");
+        jLabel27.setText("RFC");
         jPanel8.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, -1));
 
         txtRucConfig.setBackground(new java.awt.Color(204, 204, 204));
@@ -936,11 +781,11 @@ public final class Sistema extends javax.swing.JFrame {
         jPanel41.setLayout(jPanel41Layout);
         jPanel41Layout.setHorizontalGroup(
             jPanel41Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 147, Short.MAX_VALUE)
         );
         jPanel41Layout.setVerticalGroup(
             jPanel41Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 2, Short.MAX_VALUE)
         );
 
         jPanel8.add(jPanel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 147, 2));
@@ -951,11 +796,11 @@ public final class Sistema extends javax.swing.JFrame {
         jPanel42.setLayout(jPanel42Layout);
         jPanel42Layout.setHorizontalGroup(
             jPanel42Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 147, Short.MAX_VALUE)
         );
         jPanel42Layout.setVerticalGroup(
             jPanel42Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 2, Short.MAX_VALUE)
         );
 
         jPanel8.add(jPanel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 147, 2));
@@ -966,11 +811,11 @@ public final class Sistema extends javax.swing.JFrame {
         jPanel43.setLayout(jPanel43Layout);
         jPanel43Layout.setHorizontalGroup(
             jPanel43Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 400, Short.MAX_VALUE)
         );
         jPanel43Layout.setVerticalGroup(
             jPanel43Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 2, Short.MAX_VALUE)
         );
 
         jPanel8.add(jPanel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, 400, 2));
@@ -981,11 +826,11 @@ public final class Sistema extends javax.swing.JFrame {
         jPanel44.setLayout(jPanel44Layout);
         jPanel44Layout.setHorizontalGroup(
             jPanel44Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 220, Short.MAX_VALUE)
         );
         jPanel44Layout.setVerticalGroup(
             jPanel44Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 2, Short.MAX_VALUE)
         );
 
         jPanel8.add(jPanel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 90, 220, 2));
@@ -996,11 +841,11 @@ public final class Sistema extends javax.swing.JFrame {
         jPanel45.setLayout(jPanel45Layout);
         jPanel45Layout.setHorizontalGroup(
             jPanel45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 220, Short.MAX_VALUE)
         );
         jPanel45Layout.setVerticalGroup(
             jPanel45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 2, Short.MAX_VALUE)
         );
 
         jPanel8.add(jPanel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 220, 220, 2));
@@ -1009,7 +854,7 @@ public final class Sistema extends javax.swing.JFrame {
 
         jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/portada.png"))); // NOI18N
-        jPanel7.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 100, 620, 470));
+        jPanel7.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 100, 620, 470));
 
         javax.swing.GroupLayout jPanel40Layout = new javax.swing.GroupLayout(jPanel40);
         jPanel40.setLayout(jPanel40Layout);
@@ -1024,7 +869,7 @@ public final class Sistema extends javax.swing.JFrame {
 
         jPanel7.add(jPanel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, 10));
 
-        jTabbedPane1.addTab("Datos de la Empresa", jPanel7);
+        jTabbedPane1.addTab("Datos del restaurante", jPanel7);
 
         jPanel12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -1035,7 +880,15 @@ public final class Sistema extends javax.swing.JFrame {
             new String [] {
                 "Id", "Nombre", "Correo", "Rol"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         TableUsuarios.setRowHeight(23);
         jScrollPane6.setViewportView(TableUsuarios);
         if (TableUsuarios.getColumnModel().getColumnCount() > 0) {
@@ -1047,7 +900,7 @@ public final class Sistema extends javax.swing.JFrame {
             TableUsuarios.getColumnModel().getColumn(3).setMaxWidth(200);
         }
 
-        jPanel12.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 40, 660, 520));
+        jPanel12.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 40, 960, 520));
 
         jPanel15.setBackground(new java.awt.Color(204, 204, 204));
         jPanel15.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1097,7 +950,12 @@ public final class Sistema extends javax.swing.JFrame {
         jLabel37.setText("Rol:");
         jPanel15.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, 90, -1));
 
-        cbxRol.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Asistente" }));
+        cbxRol.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Mesero" }));
+        cbxRol.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxRolActionPerformed(evt);
+            }
+        });
         jPanel15.add(cbxRol, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 380, 300, 30));
 
         jPanel16.setBackground(new java.awt.Color(0, 0, 0));
@@ -1169,7 +1027,12 @@ public final class Sistema extends javax.swing.JFrame {
 
         txtNombrePlato.setBackground(new java.awt.Color(204, 204, 204));
         txtNombrePlato.setBorder(null);
-        jPanel11.add(txtNombrePlato, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 170, 30));
+        txtNombrePlato.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNombrePlatoActionPerformed(evt);
+            }
+        });
+        jPanel11.add(txtNombrePlato, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, 170, 70));
 
         jLabel25.setFont(new java.awt.Font("Tahoma", 3, 12)); // NOI18N
         jLabel25.setText("Precio:");
@@ -1177,12 +1040,17 @@ public final class Sistema extends javax.swing.JFrame {
 
         txtPrecioPlato.setBackground(new java.awt.Color(204, 204, 204));
         txtPrecioPlato.setBorder(null);
+        txtPrecioPlato.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPrecioPlatoActionPerformed(evt);
+            }
+        });
         txtPrecioPlato.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtPrecioPlatoKeyTyped(evt);
             }
         });
-        jPanel11.add(txtPrecioPlato, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 170, 30));
+        jPanel11.add(txtPrecioPlato, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, 170, 60));
 
         btnGuardarPlato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/GuardarTodo.png"))); // NOI18N
         btnGuardarPlato.addActionListener(new java.awt.event.ActionListener() {
@@ -1190,7 +1058,7 @@ public final class Sistema extends javax.swing.JFrame {
                 btnGuardarPlatoActionPerformed(evt);
             }
         });
-        jPanel11.add(btnGuardarPlato, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 110, 50));
+        jPanel11.add(btnGuardarPlato, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, 140, 70));
 
         btnEditarPlato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Actualizar (2).png"))); // NOI18N
         btnEditarPlato.addActionListener(new java.awt.event.ActionListener() {
@@ -1198,7 +1066,7 @@ public final class Sistema extends javax.swing.JFrame {
                 btnEditarPlatoActionPerformed(evt);
             }
         });
-        jPanel11.add(btnEditarPlato, new org.netbeans.lib.awtextra.AbsoluteConstraints(167, 270, 100, 50));
+        jPanel11.add(btnEditarPlato, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 260, 140, 70));
 
         btnEliminarPlato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/eliminar.png"))); // NOI18N
         btnEliminarPlato.addActionListener(new java.awt.event.ActionListener() {
@@ -1206,7 +1074,7 @@ public final class Sistema extends javax.swing.JFrame {
                 btnEliminarPlatoActionPerformed(evt);
             }
         });
-        jPanel11.add(btnEliminarPlato, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 110, 50));
+        jPanel11.add(btnEliminarPlato, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 350, 140, 70));
 
         btnNuevoPlato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/nuevo.png"))); // NOI18N
         btnNuevoPlato.addActionListener(new java.awt.event.ActionListener() {
@@ -1214,7 +1082,7 @@ public final class Sistema extends javax.swing.JFrame {
                 btnNuevoPlatoActionPerformed(evt);
             }
         });
-        jPanel11.add(btnNuevoPlato, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 370, 100, 50));
+        jPanel11.add(btnNuevoPlato, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 350, 140, 70));
 
         jPanel31.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -1222,7 +1090,7 @@ public final class Sistema extends javax.swing.JFrame {
         jPanel31.setLayout(jPanel31Layout);
         jPanel31Layout.setHorizontalGroup(
             jPanel31Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 170, Short.MAX_VALUE)
         );
         jPanel31Layout.setVerticalGroup(
             jPanel31Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1237,7 +1105,7 @@ public final class Sistema extends javax.swing.JFrame {
         jPanel33.setLayout(jPanel33Layout);
         jPanel33Layout.setHorizontalGroup(
             jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 170, Short.MAX_VALUE)
         );
         jPanel33Layout.setVerticalGroup(
             jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1257,7 +1125,7 @@ public final class Sistema extends javax.swing.JFrame {
         jPanel39.setLayout(jPanel39Layout);
         jPanel39Layout.setHorizontalGroup(
             jPanel39Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel40, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
+            .addComponent(jLabel40, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
         );
         jPanel39Layout.setVerticalGroup(
             jPanel39Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1267,8 +1135,8 @@ public final class Sistema extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel11.add(jPanel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 50));
-        jPanel11.add(txtIdPlato, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 470, 80, -1));
+        jPanel11.add(jPanel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 50));
+        jPanel11.add(txtIdPlato, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 470, 80, -1));
 
         TablePlatos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1277,7 +1145,15 @@ public final class Sistema extends javax.swing.JFrame {
             new String [] {
                 "ID", "DESCRIPCIÓN", "PRECIO"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         TablePlatos.setRowHeight(23);
         TablePlatos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1299,10 +1175,10 @@ public final class Sistema extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 718, Short.MAX_VALUE)
+                .addContainerGap(26, Short.MAX_VALUE)
+                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 996, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -1312,12 +1188,243 @@ public final class Sistema extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane4)
                     .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, 543, Short.MAX_VALUE))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(381, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Platos", jPanel2);
 
-        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 95, 1080, 620));
+        jPanel24.setBorder(javax.swing.BorderFactory.createTitledBorder("Platos del Dia"));
+
+        txtBuscarPlato.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscarPlatoKeyReleased(evt);
+            }
+        });
+
+        tblTemPlatos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "", "Nombre", "Precio"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblTemPlatos.setColumnSelectionAllowed(true);
+        tblTemPlatos.setRowHeight(23);
+        jScrollPane10.setViewportView(tblTemPlatos);
+        if (tblTemPlatos.getColumnModel().getColumnCount() > 0) {
+            tblTemPlatos.getColumnModel().getColumn(0).setMinWidth(30);
+            tblTemPlatos.getColumnModel().getColumn(0).setPreferredWidth(30);
+            tblTemPlatos.getColumnModel().getColumn(0).setMaxWidth(50);
+            tblTemPlatos.getColumnModel().getColumn(2).setMinWidth(150);
+            tblTemPlatos.getColumnModel().getColumn(2).setPreferredWidth(150);
+            tblTemPlatos.getColumnModel().getColumn(2).setMaxWidth(200);
+        }
+
+        btnAddPlato.setBackground(new java.awt.Color(0, 0, 0));
+        btnAddPlato.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        btnAddPlato.setForeground(new java.awt.Color(255, 255, 255));
+        btnAddPlato.setText("+");
+        btnAddPlato.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAddPlato.setFocusable(false);
+        btnAddPlato.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnAddPlato.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddPlatoActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel24Layout = new javax.swing.GroupLayout(jPanel24);
+        jPanel24.setLayout(jPanel24Layout);
+        jPanel24Layout.setHorizontalGroup(
+            jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel24Layout.createSequentialGroup()
+                .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel24Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(txtBuscarPlato)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnAddPlato, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 501, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel24Layout.setVerticalGroup(
+            jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel24Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtBuscarPlato, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                    .addComponent(btnAddPlato, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE))
+        );
+
+        tableMenu.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "", "Plato", "Cant", "Precio", "SubTotal", "Comentario"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tableMenu.setRowHeight(23);
+        jScrollPane11.setViewportView(tableMenu);
+        if (tableMenu.getColumnModel().getColumnCount() > 0) {
+            tableMenu.getColumnModel().getColumn(0).setMinWidth(30);
+            tableMenu.getColumnModel().getColumn(0).setPreferredWidth(30);
+            tableMenu.getColumnModel().getColumn(0).setMaxWidth(50);
+            tableMenu.getColumnModel().getColumn(1).setPreferredWidth(100);
+            tableMenu.getColumnModel().getColumn(2).setMinWidth(40);
+            tableMenu.getColumnModel().getColumn(2).setPreferredWidth(40);
+            tableMenu.getColumnModel().getColumn(2).setMaxWidth(50);
+            tableMenu.getColumnModel().getColumn(3).setPreferredWidth(50);
+            tableMenu.getColumnModel().getColumn(4).setPreferredWidth(60);
+        }
+
+        jLabel6.setText("Comentario:");
+
+        jScrollPane12.setViewportView(txtComentario);
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/money.png"))); // NOI18N
+        jLabel11.setText("Total a Pagar");
+
+        totalMenu.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        totalMenu.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        totalMenu.setText("00.00");
+
+        btnGenerarPedido.setText("Realizar Pedido");
+        btnGenerarPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGenerarPedidoActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Agregar");
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        btnEliminarTempPlato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/eliminar.png"))); // NOI18N
+        btnEliminarTempPlato.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEliminarTempPlato.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarTempPlatoActionPerformed(evt);
+            }
+        });
+
+        txtTempIdSala.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTempIdSalaActionPerformed(evt);
+            }
+        });
+
+        txtTempNumMesa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTempNumMesaActionPerformed(evt);
+            }
+        });
+
+        btnGenerarPedido1.setText("Pagar");
+        btnGenerarPedido1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGenerarPedido1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel23Layout = new javax.swing.GroupLayout(jPanel23);
+        jPanel23.setLayout(jPanel23Layout);
+        jPanel23Layout.setHorizontalGroup(
+            jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel23Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel23Layout.createSequentialGroup()
+                        .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtTempIdSala)
+                            .addComponent(txtTempNumMesa, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 540, Short.MAX_VALUE)
+                        .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel11)
+                            .addGroup(jPanel23Layout.createSequentialGroup()
+                                .addComponent(btnGenerarPedido1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(btnGenerarPedido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(totalMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)))))
+                    .addGroup(jPanel23Layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane12)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
+                            .addComponent(btnEliminarTempPlato, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 915, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel23Layout.setVerticalGroup(
+            jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel23Layout.createSequentialGroup()
+                .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jPanel23Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel6)
+                            .addGroup(jPanel23Layout.createSequentialGroup()
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnEliminarTempPlato, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane12))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel23Layout.createSequentialGroup()
+                                .addComponent(txtTempIdSala, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jPanel23Layout.createSequentialGroup()
+                                .addGap(8, 8, 8)
+                                .addComponent(jLabel11)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(totalMenu)
+                                .addGap(4, 4, 4)
+                                .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnGenerarPedido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(jPanel23Layout.createSequentialGroup()
+                                        .addComponent(txtTempNumMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(btnGenerarPedido1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel23Layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(jPanel24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(397, 397, 397))
+        );
+
+        jTabbedPane1.addTab("Platos", jPanel23);
+
+        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 100, 1450, 980));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -1331,7 +1438,7 @@ public final class Sistema extends javax.swing.JFrame {
 
     private void btnConfigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfigActionPerformed
         // TODO add your handling code here:
-        jTabbedPane1.setSelectedIndex(6);
+        jTabbedPane1.setSelectedIndex(5);
         ListarConfig();
     }//GEN-LAST:event_btnConfigActionPerformed
 
@@ -1339,14 +1446,14 @@ public final class Sistema extends javax.swing.JFrame {
         // TODO add your handling code here:
         LimpiarTable();
         ListarPedidos();
-        jTabbedPane1.setSelectedIndex(5);
+        jTabbedPane1.setSelectedIndex(4);
     }//GEN-LAST:event_btnVentasActionPerformed
 
     private void btnUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuariosActionPerformed
         // TODO add your handling code here:
         LimpiarTable();
         ListarUsuarios();
-        jTabbedPane1.setSelectedIndex(7);
+        jTabbedPane1.setSelectedIndex(6);
     }//GEN-LAST:event_btnUsuariosActionPerformed
 
     private void btnActualizarConfigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarConfigActionPerformed
@@ -1383,7 +1490,7 @@ public final class Sistema extends javax.swing.JFrame {
         LimpiarTable();
         verPedido(id_pedido);
         verPedidoDetalle(id_pedido);
-        jTabbedPane1.setSelectedIndex(4);
+        jTabbedPane1.setSelectedIndex(3);
         btnFinalizar.setEnabled(false);
         txtIdHistorialPedido.setText(""+id_pedido);
     }//GEN-LAST:event_TablePedidosMouseClicked
@@ -1475,12 +1582,6 @@ public final class Sistema extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnIniciarActionPerformed
 
-    private void labelLogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelLogoMouseClicked
-        jTabbedPane1.setSelectedIndex(0);
-        PanelSalas.removeAll();
-        panelSalas();
-    }//GEN-LAST:event_labelLogoMouseClicked
-
     private void txtBuscarPlatoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarPlatoKeyReleased
         LimpiarTable();
         ListarPlatos(tblTemPlatos);
@@ -1494,17 +1595,6 @@ public final class Sistema extends javax.swing.JFrame {
             double total = 1 * precio;
             item = item + 1;
             tmp = (DefaultTableModel) tableMenu.getModel();
-            for (int i = 0; i < tableMenu.getRowCount(); i++) {
-                if (tableMenu.getValueAt(i, 0).equals(id)) {
-                    int cantActual = Integer.parseInt(tableMenu.getValueAt(i, 2).toString());
-                    int nuevoCantidad = cantActual + 1;
-                    double nuevoSub = precio * nuevoCantidad;
-                    tmp.setValueAt(nuevoCantidad, i, 2);
-                    tmp.setValueAt(nuevoSub, i, 4);
-                    TotalPagar(tableMenu, totalMenu);
-                    return;
-                }
-            }
             ArrayList lista = new ArrayList();
             lista.add(item);
             lista.add(id);
@@ -1572,7 +1662,7 @@ public final class Sistema extends javax.swing.JFrame {
     }//GEN-LAST:event_btnFinalizarActionPerformed
 
     private void btnPlatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlatosActionPerformed
-        jTabbedPane1.setSelectedIndex(8);
+        jTabbedPane1.setSelectedIndex(7);
         LimpiarTable();
         ListarPlatos(TablePlatos);
     }//GEN-LAST:event_btnPlatosActionPerformed
@@ -1649,8 +1739,72 @@ public final class Sistema extends javax.swing.JFrame {
         txtPrecioPlato.setText(TablePlatos.getValueAt(fila, 2).toString());
     }//GEN-LAST:event_TablePlatosMouseClicked
 
+    private void labelLogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelLogoMouseClicked
+        jTabbedPane1.setSelectedIndex(1);
+        jTabbedPane1.setSelectedIndex(0);
+        PanelSalas.removeAll();
+        panelSalas();
+    }//GEN-LAST:event_labelLogoMouseClicked
+
+    private void btnElimPedDao(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnElimPedDao
+        // TODO add your handling code here:
+       if (!"".equals(txtIdPedido.getText())) {
+            int pregunta = JOptionPane.showConfirmDialog(null, "Esta seguro de eliminar");
+            if (pregunta == 0) {
+                int id = Integer.parseInt(txtIdPedido.getText());
+                pedDao.Eliminar(id);
+                LimpiarTable();
+                ListarPedidos();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecciona una fila");
+        }
+    }//GEN-LAST:event_btnElimPedDao
+
+    private void cbxRolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxRolActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxRolActionPerformed
+
+    private void btnGenerarPedido1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarPedido1ActionPerformed
+        // TODO add your handling code here:
+        //int fila = TablePedidos.rowAtPoint(evt.getPoint());
+        //int id_pedido = Integer.parseInt(TablePedidos.getValueAt(fila, 0).toString());
+        int id_pedido = 14;
+        LimpiarTable();
+        verPedido(id_pedido);
+        verPedidoDetalle(id_pedido);
+        jTabbedPane1.setSelectedIndex(4);
+        btnFinalizar.setEnabled(false);
+        txtIdHistorialPedido.setText(""+id_pedido);
+    }//GEN-LAST:event_btnGenerarPedido1ActionPerformed
+
+    private void txtIdSalaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdSalaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIdSalaActionPerformed
+
+    private void txtNombreSalaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreSalaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombreSalaActionPerformed
+
+    private void txtPrecioPlatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecioPlatoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPrecioPlatoActionPerformed
+
+    private void txtNombrePlatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombrePlatoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombrePlatoActionPerformed
+
+    private void txtTempNumMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTempNumMesaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTempNumMesaActionPerformed
+
+    private void txtTempIdSalaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTempIdSalaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTempIdSalaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel LabelConection;
     private javax.swing.JLabel LabelVendedor;
     private javax.swing.JPanel PanelMesas;
     private javax.swing.JPanel PanelSalas;
@@ -1667,6 +1821,7 @@ public final class Sistema extends javax.swing.JFrame {
     private javax.swing.JButton btnEliminarTempPlato;
     private javax.swing.JButton btnFinalizar;
     private javax.swing.JButton btnGenerarPedido;
+    private javax.swing.JButton btnGenerarPedido1;
     private javax.swing.JButton btnGuardarPlato;
     private javax.swing.JButton btnIniciar;
     private javax.swing.JButton btnNuevoPlato;
@@ -1678,6 +1833,7 @@ public final class Sistema extends javax.swing.JFrame {
     private javax.swing.JButton btnUsuarios;
     private javax.swing.JButton btnVentas;
     private javax.swing.JComboBox<String> cbxRol;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel16;
@@ -1904,6 +2060,32 @@ public final class Sistema extends javax.swing.JFrame {
     }
 
     //crear mesas
+    /*private void panelMesas(int id_sala, int cant) {
+        for (int i = 1; i <= cant; i++) {
+            int num_mesa = i;
+            //verificar estado
+            JButton boton = new JButton("MESA N°: " + i, new ImageIcon(getClass().getResource("/Img/mesa.png")));
+            boton.setHorizontalTextPosition(JButton.CENTER);
+            boton.setVerticalTextPosition(JButton.BOTTOM);
+            int verificar = pedDao.verificarStado(num_mesa, id_sala);
+            if (verificar > 0) {
+                boton.setBackground(new Color(255, 51, 51));
+            } else {
+                boton.setBackground(new Color(0, 102, 102));
+            }
+            boton.setForeground(Color.WHITE);
+            boton.setFocusable(false);
+            boton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            PanelMesas.add(boton);
+            boton.addActionListener((ActionEvent e) -> {
+                    LimpiarTable();
+                    ListarPlatos(tblTemPlatos);
+                    jTabbedPane1.setSelectedIndex(3);
+                    txtTempIdSala.setText("" + id_sala);
+                    txtTempNumMesa.setText("" + num_mesa);
+            });
+        }
+    }*/
     private void panelMesas(int id_sala, int cant) {
         for (int i = 1; i <= cant; i++) {
             int num_mesa = i;
@@ -1928,11 +2110,11 @@ public final class Sistema extends javax.swing.JFrame {
                     verPedidoDetalle(verificar);
                     btnFinalizar.setEnabled(true);
                     btnPdfPedido.setEnabled(false);
-                    jTabbedPane1.setSelectedIndex(4);
+                    jTabbedPane1.setSelectedIndex(3);
                 } else {
                     LimpiarTable();
                     ListarPlatos(tblTemPlatos);
-                    jTabbedPane1.setSelectedIndex(3);
+                    jTabbedPane1.setSelectedIndex(8);
                     txtTempIdSala.setText("" + id_sala);
                     txtTempNumMesa.setText("" + num_mesa);
                 }

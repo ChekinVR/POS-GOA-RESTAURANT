@@ -11,12 +11,15 @@ import java.util.List;
 public class SalasDao {
     Connection con;
     Conexion cn = new Conexion();
-    PreparedStatement ps;
+    PreparedStatement ps, ps2;
     ResultSet rs;
     public boolean RegistrarSala(Salas sl){
         String sql = "INSERT INTO salas(nombre, mesas) VALUES (?,?)";
+        String sql2 = "ALTER TABLE salas AUTO_INCREMENT = 0";
         try {
            con = cn.getConnection();
+           ps2 = con.prepareStatement(sql2);
+           ps2.execute();
            ps = con.prepareStatement(sql);
            ps.setString(1, sl.getNombre());
            ps.setInt(2, sl.getMesas());
