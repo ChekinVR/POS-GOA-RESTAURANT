@@ -1595,17 +1595,6 @@ public final class Sistema extends javax.swing.JFrame {
             double total = 1 * precio;
             item = item + 1;
             tmp = (DefaultTableModel) tableMenu.getModel();
-            for (int i = 0; i < tableMenu.getRowCount(); i++) {
-                if (tableMenu.getValueAt(i, 0).equals(id)) {
-                    int cantActual = Integer.parseInt(tableMenu.getValueAt(i, 2).toString());
-                    int nuevoCantidad = cantActual + 1;
-                    double nuevoSub = precio * nuevoCantidad;
-                    tmp.setValueAt(nuevoCantidad, i, 2);
-                    tmp.setValueAt(nuevoSub, i, 4);
-                    TotalPagar(tableMenu, totalMenu);
-                    return;
-                }
-            }
             ArrayList lista = new ArrayList();
             lista.add(item);
             lista.add(id);
