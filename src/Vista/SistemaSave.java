@@ -5,6 +5,7 @@
  */
 package Vista;
 
+import Login.Login;
 import Modelo.Config;
 import Modelo.DetallePedido;
 import Modelo.Eventos;
@@ -1830,7 +1831,12 @@ public final class SistemaSave extends javax.swing.JFrame {
     }//GEN-LAST:event_txtTempIdSalaActionPerformed
 
     private void btnUsuarios1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuarios1ActionPerformed
-        System.exit(0);
+        int pregunta = JOptionPane.showConfirmDialog(null, "Esta seguro de cerrar la sesión actual");
+        if (pregunta == 0) {
+            Login log = new Login();
+            log.setVisible(true);
+            dispose();
+        }
     }//GEN-LAST:event_btnUsuarios1ActionPerformed
 
 
@@ -2076,7 +2082,7 @@ public final class SistemaSave extends javax.swing.JFrame {
         for (int i = 0; i < Listar.size(); i++) {
             int id = Listar.get(i).getId();
             int cantidad = Listar.get(i).getMesas();
-            JButton boton = new JButton(Listar.get(i).getNombre(), new ImageIcon(getClass().getResource("/Img/salas.png")));
+            JButton boton = new JButton(Listar.get(i).getNombre(), new ImageIcon(getClass().getResource("/Img/Salas_icon.png")));
             boton.setCursor(new Cursor(Cursor.HAND_CURSOR));
             boton.setHorizontalTextPosition(JButton.CENTER);
             boton.setVerticalTextPosition(JButton.BOTTOM);
