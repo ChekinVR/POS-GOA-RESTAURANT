@@ -61,7 +61,7 @@ public final class Sistema extends javax.swing.JFrame {
     public Sistema(login priv) {
         initComponents();
         this.setExtendedState(MAXIMIZED_BOTH);
-        ImageIcon img = new ImageIcon(getClass().getResource("/Img/Home.png"));
+        ImageIcon img = new ImageIcon(getClass().getResource("/Img/Home2.png"));
         Image igmEscalada = img.getImage().getScaledInstance(labelLogo.getWidth(), labelLogo.getHeight(), Image.SCALE_SMOOTH);
         Icon icono = new ImageIcon(igmEscalada);
         labelLogo.setIcon(icono);
@@ -244,7 +244,8 @@ public final class Sistema extends javax.swing.JFrame {
         btnSala.setFont(new java.awt.Font("Script MT Bold", 0, 24)); // NOI18N
         btnSala.setForeground(new java.awt.Color(0, 0, 0));
         btnSala.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/51882.png"))); // NOI18N
-        btnSala.setText("Salas");
+        btnSala.setText("Espacios");
+        btnSala.setToolTipText("");
         btnSala.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnSala.setFocusable(false);
         btnSala.addActionListener(new java.awt.event.ActionListener() {
@@ -372,6 +373,7 @@ public final class Sistema extends javax.swing.JFrame {
         jLabel38.getAccessibleContext().setAccessibleDescription("");
 
         jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
+        jTabbedPane1.setOpaque(true);
 
         PanelSalas.setBackground(new java.awt.Color(255, 255, 255));
         PanelSalas.setLayout(new java.awt.GridLayout(0, 5));
@@ -509,7 +511,7 @@ public final class Sistema extends javax.swing.JFrame {
         jLabel33.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel33.setForeground(new java.awt.Color(255, 255, 255));
         jLabel33.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel33.setText("Nuevo Sala");
+        jLabel33.setText("Nuevo Espacio");
         jPanel38.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 370, 40));
 
         jPanel10.add(jPanel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 370, 40));

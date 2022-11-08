@@ -7,6 +7,7 @@ package Login;
 import Modelo.LoginDao;
 import Modelo.login;
 import Vista.Sistema;
+import Vista.SistemaSave;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -40,7 +41,7 @@ public class Login extends javax.swing.JFrame {
             if (contador == 100) {
                 tiempo.stop();
                 if (barra.getValue() == 100) {
-                    Sistema sis = new Sistema(lg);
+                    SistemaSave sis = new SistemaSave(lg);
                     sis.setVisible(true);
                     dispose();
                 }
@@ -85,6 +86,7 @@ public class Login extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setLocation(new java.awt.Point(50, 50));
         setLocationByPlatform(true);
         setUndecorated(true);
         setResizable(false);
@@ -112,6 +114,11 @@ public class Login extends javax.swing.JFrame {
         txtCorreo.setForeground(new java.awt.Color(204, 204, 204));
         txtCorreo.setText("Ingrese el nombre de usuario");
         txtCorreo.setBorder(null);
+        txtCorreo.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtCorreoFocusGained(evt);
+            }
+        });
         txtCorreo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 txtCorreoMousePressed(evt);
@@ -137,6 +144,11 @@ public class Login extends javax.swing.JFrame {
         txtPass.setForeground(new java.awt.Color(204, 204, 204));
         txtPass.setText("*********");
         txtPass.setBorder(null);
+        txtPass.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtPassFocusGained(evt);
+            }
+        });
         txtPass.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 txtPassMousePressed(evt);
@@ -250,6 +262,7 @@ public class Login extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCorreoActionPerformed
@@ -297,6 +310,28 @@ public class Login extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtPassMousePressed
 
+    private void txtCorreoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCorreoFocusGained
+        if (txtCorreo.getText().equals("Ingrese el nombre de usuario"))
+        {
+            txtCorreo.setText("");
+        }
+        if (String.valueOf(txtPass.getPassword()).isEmpty())
+        {
+            txtPass.setText("*********");
+        }
+    }//GEN-LAST:event_txtCorreoFocusGained
+
+    private void txtPassFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPassFocusGained
+        if (String.valueOf(txtPass.getPassword()).equals("*********"))
+        {
+            txtPass.setText("");
+        }
+        if (txtCorreo.getText().isEmpty())
+        {
+            txtCorreo.setText("Ingrese el nombre de usuario");
+        }
+    }//GEN-LAST:event_txtPassFocusGained
+
     /**
      * @param args the command line arguments
      */
@@ -342,10 +377,8 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JButton loginBTN2;
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JPasswordField txtPass;
