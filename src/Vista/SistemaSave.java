@@ -398,7 +398,6 @@ public final class SistemaSave extends javax.swing.JFrame {
         jLabel38.getAccessibleContext().setAccessibleDescription("");
 
         jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
-        jTabbedPane1.setOpaque(true);
 
         PanelSalas.setBackground(new java.awt.Color(255, 255, 255));
         PanelSalas.setLayout(new java.awt.GridLayout(0, 5));
@@ -2098,7 +2097,7 @@ public final class SistemaSave extends javax.swing.JFrame {
     }
 
     //crear mesas
-    /*private void panelMesas(int id_sala, int cant) {
+    private void panelMesas(int id_sala, int cant) {
         for (int i = 1; i <= cant; i++) {
             int num_mesa = i;
             //verificar estado
@@ -2116,15 +2115,15 @@ public final class SistemaSave extends javax.swing.JFrame {
             boton.setCursor(new Cursor(Cursor.HAND_CURSOR));
             PanelMesas.add(boton);
             boton.addActionListener((ActionEvent e) -> {
-                    LimpiarTable();
-                    ListarPlatos(tblTemPlatos);
-                    jTabbedPane1.setSelectedIndex(3);
-                    txtTempIdSala.setText("" + id_sala);
-                    txtTempNumMesa.setText("" + num_mesa);
+            LimpiarTable();
+            ListarPlatos(tblTemPlatos);
+            jTabbedPane1.setSelectedIndex(8);
+            txtTempIdSala.setText("" + id_sala);
+            txtTempNumMesa.setText("" + num_mesa);
             });
         }
-    }*/
-    private void panelMesas(int id_sala, int cant) {
+    }
+    /*private void panelMesas(int id_sala, int cant) {
         for (int i = 1; i <= cant; i++) {
             int num_mesa = i;
             //verificar estado
@@ -2158,7 +2157,7 @@ public final class SistemaSave extends javax.swing.JFrame {
                 }
             });
         }
-    }
+    }*/
 
     // platos
     private void ListarPlatos(JTable tabla) {
