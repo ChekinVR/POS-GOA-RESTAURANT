@@ -338,11 +338,38 @@ public class PedidosDao {
         }
     }
     
-    public void ticketPedido (String printerName){
-        PrintService printService = PrinterOutputStream.getPrintServiceByName(printerName);
+    public void ticketPedido (int id_pedido){
+        int x = 0;
+        String[ ] printerName = {"María", "Gerson"};
+        String fechaPedido = null, usuario = null, total = null,sala = null, num_mesa = null;
+        PrintService printService = PrinterOutputStream.getPrintServiceByName(printerName[x]);
         EscPos escpos;
         try {
-            
+            escpos = new EscPos(new PrinterOutputStream(printService));
+            String informacion = "SELECT p.*, s.nombre FROM pedidos p INNER JOIN salas s ON p.id_sala = s.id WHERE p.id = ?";
+            try {
+                ps = con.prepareStatement(informacion);
+                ps.setInt(1, id_pedido);
+                rs = ps.executeQuery();
+                if (rs.next()) {
+                    num_mesa = rs.getString("num_mesa");
+                    sala = rs.getString("nombre");
+                    fechaPedido = rs.getString("fecha");
+                    usuario = rs.getString("usuario");
+                    total = rs.getString("total");
+                }
+
+            } catch (SQLException e) {
+                System.out.println(e.toString());
+            }
+        } catch (IOException e) {
+            System.out.println(e.toString());
+        }finally{
+            try {
+                con.close();
+            } catch (SQLException e) {
+                System.out.println(e.toString());
+            }
         }
         
     }
