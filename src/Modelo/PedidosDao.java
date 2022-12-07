@@ -133,9 +133,12 @@ public class PedidosDao {
     }
     
     public int RegistrarDetalle(DetallePedido det){
+        String sql2 = "ALTER TABLE detalle_pedidos AUTO_INCREMENT = 0";
        String sql = "INSERT INTO detalle_pedidos (nombre, precio, cantidad, comentario, id_pedido) VALUES (?,?,?,?,?)";
         try {
             con = cn.getConnection();
+            ps2 = con.prepareStatement(sql2);
+            ps2.execute();
             ps = con.prepareStatement(sql);
             ps.setString(1, det.getNombre());
             ps.setDouble(2, det.getPrecio());
