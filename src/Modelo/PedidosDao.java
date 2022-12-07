@@ -2,6 +2,8 @@
 package Modelo;
 
 import com.github.anastaciocintra.escpos.EscPos;
+import com.github.anastaciocintra.escpos.EscPosConst;
+import com.github.anastaciocintra.escpos.Style;
 import com.github.anastaciocintra.output.PrinterOutputStream;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
@@ -417,6 +419,15 @@ public class PedidosDao {
             } catch (SQLException e) {
                 System.out.println(e.toString());
             }
+            Style title = new Style()
+                    .setFontSize(Style.FontSize._4, Style.FontSize._3)
+                    .setJustification(EscPosConst.Justification.Center);
+
+            Style subtitle = new Style(escpos.getStyle())
+                    .setBold(true)
+                    .setUnderline(Style.Underline.OneDotThick);
+            Style bold = new Style(escpos.getStyle())
+                    .setBold(true);
         } catch (IOException e) {
             System.out.println(e.toString());
         }finally{
