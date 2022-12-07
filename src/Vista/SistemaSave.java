@@ -1384,6 +1384,8 @@ public final class SistemaSave extends javax.swing.JFrame {
         txtTempIDPed.setEditable(false);
         txtTempIDPed.setBorder(null);
         txtTempIDPed.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        txtTempIDPed.setEnabled(false);
+        txtTempIDPed.setFocusable(false);
         txtTempIDPed.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTempIDPedActionPerformed(evt);
@@ -1529,14 +1531,20 @@ public final class SistemaSave extends javax.swing.JFrame {
 
     private void TablePedidosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablePedidosMouseClicked
         // TODO add your handling code here:
-        int fila = TablePedidos.rowAtPoint(evt.getPoint());
-        int id_pedido = Integer.parseInt(TablePedidos.getValueAt(fila, 0).toString());
-        LimpiarTable();
-        verPedido(id_pedido);
-        verPedidoDetalle(id_pedido);
-        jTabbedPane1.setSelectedIndex(3);
-        btnFinalizar.setEnabled(false);
-        txtIdHistorialPedido.setText(""+id_pedido);
+        int mouseclicked = 1;
+        if (mouseclicked >= 2){
+            int fila = TablePedidos.rowAtPoint(evt.getPoint());
+            int id_pedido = Integer.parseInt(TablePedidos.getValueAt(fila, 0).toString());
+            LimpiarTable();
+            verPedido(id_pedido);
+            verPedidoDetalle(id_pedido);
+            jTabbedPane1.setSelectedIndex(3);
+            btnFinalizar.setEnabled(false);
+            txtIdHistorialPedido.setText(""+id_pedido);
+            mouseclicked = 0;
+        }else {
+            mouseclicked = 1;
+        }
     }//GEN-LAST:event_TablePedidosMouseClicked
 
     private void tableSalaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableSalaMouseClicked
