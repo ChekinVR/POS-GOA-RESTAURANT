@@ -152,7 +152,9 @@ public final class SistemaSave extends javax.swing.JFrame {
         jScrollPane5 = new javax.swing.JScrollPane();
         TablePedidos = new javax.swing.JTable();
         jLabel16 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        VerPedido = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        txtHId = new javax.swing.JTextField();
         jPanel7 = new javax.swing.JPanel();
         jLabel32 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
@@ -717,21 +719,37 @@ public final class SistemaSave extends javax.swing.JFrame {
             TablePedidos.getColumnModel().getColumn(4).setPreferredWidth(60);
         }
 
-        jPanel6.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 1380, 480));
+        jPanel6.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 1380, 480));
 
         jLabel16.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel16.setText("Historial Pedidos");
         jPanel6.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 10, 280, -1));
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/eliminar.png"))); // NOI18N
-        jButton1.setText("ELIMINAR PEDIDO");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        VerPedido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/eliminar.png"))); // NOI18N
+        VerPedido.setText("ELIMINAR PEDIDO");
+        VerPedido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnElimPedDao(evt);
             }
         });
-        jPanel6.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1230, 540, 180, 70));
+        jPanel6.add(VerPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(1230, 540, 180, 70));
+
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/sala.png"))); // NOI18N
+        jButton3.setText("VER PEDIDO");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerPedido(evt);
+            }
+        });
+        jPanel6.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 540, 180, 70));
+
+        txtHId.setEditable(false);
+        txtHId.setEnabled(false);
+        txtHId.setFocusable(false);
+        txtHId.setRequestFocusEnabled(false);
+        txtHId.setVerifyInputWhenFocusTarget(false);
+        jPanel6.add(txtHId, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 550, -1, -1));
 
         jTabbedPane1.addTab("Historial Pedidos", jPanel6);
 
@@ -1248,7 +1266,7 @@ public final class SistemaSave extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tblTemPlatos.setRowHeight(23);
+        tblTemPlatos.setRowHeight(50);
         jScrollPane10.setViewportView(tblTemPlatos);
         if (tblTemPlatos.getColumnModel().getColumnCount() > 0) {
             tblTemPlatos.getColumnModel().getColumn(0).setMinWidth(30);
@@ -1491,6 +1509,7 @@ public final class SistemaSave extends javax.swing.JFrame {
     private void btnVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentasActionPerformed
         // TODO add your handling code here:
         LimpiarTable();
+        txtHId.setVisible(false);
         ListarPedidos();
         jTabbedPane1.setSelectedIndex(4);
     }//GEN-LAST:event_btnVentasActionPerformed
@@ -1531,20 +1550,19 @@ public final class SistemaSave extends javax.swing.JFrame {
 
     private void TablePedidosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablePedidosMouseClicked
         // TODO add your handling code here:
-        int mouseclicked = 1;
-        if (mouseclicked >= 2){
-            int fila = TablePedidos.rowAtPoint(evt.getPoint());
-            int id_pedido = Integer.parseInt(TablePedidos.getValueAt(fila, 0).toString());
-            LimpiarTable();
-            verPedido(id_pedido);
-            verPedidoDetalle(id_pedido);
-            jTabbedPane1.setSelectedIndex(3);
-            btnFinalizar.setEnabled(false);
-            txtIdHistorialPedido.setText(""+id_pedido);
-            mouseclicked = 0;
-        }else {
-            mouseclicked = 1;
-        }
+        int fila = TablePedidos.rowAtPoint(evt.getPoint());
+        String filatxt = Integer.toString(fila);
+        txtHId.setText(filatxt);
+        int id_pedido = Integer.parseInt(TablePedidos.getValueAt(fila, 0).toString());
+        txtIdPedido.setText(""+id_pedido);
+        txtIdHistorialPedido.setText(""+id_pedido);
+        /*int id_pedido = Integer.parseInt(TablePedidos.getValueAt(fila, 0).toString());
+        LimpiarTable();
+        verPedido(id_pedido);
+        verPedidoDetalle(id_pedido);
+        jTabbedPane1.setSelectedIndex(3);
+        btnFinalizar.setEnabled(false);
+        txtIdHistorialPedido.setText(""+id_pedido);*/
     }//GEN-LAST:event_TablePedidosMouseClicked
 
     private void tableSalaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableSalaMouseClicked
@@ -1869,6 +1887,18 @@ public final class SistemaSave extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTempIDPedActionPerformed
 
+    private void btnVerPedido(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerPedido
+        // TODO add your handling code here:
+        int fila = Integer.parseInt(txtHId.getText());
+        int id_pedido = Integer.parseInt(TablePedidos.getValueAt(fila, 0).toString());
+        LimpiarTable();
+        verPedido(id_pedido);
+        verPedidoDetalle(id_pedido);
+        jTabbedPane1.setSelectedIndex(3);
+        btnFinalizar.setEnabled(false);
+        txtIdHistorialPedido.setText(""+id_pedido);
+    }//GEN-LAST:event_btnVerPedido
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LabelConection;
@@ -1878,6 +1908,7 @@ public final class SistemaSave extends javax.swing.JFrame {
     private javax.swing.JTable TablePedidos;
     private javax.swing.JTable TablePlatos;
     public javax.swing.JTable TableUsuarios;
+    private javax.swing.JButton VerPedido;
     private javax.swing.JButton btnActualizarConfig;
     private javax.swing.JButton btnActualizarSala;
     private javax.swing.JButton btnAddPlato;
@@ -1901,8 +1932,8 @@ public final class SistemaSave extends javax.swing.JFrame {
     private javax.swing.JButton btnUsuarios1;
     private javax.swing.JButton btnVentas;
     private javax.swing.JComboBox<String> cbxRol;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
@@ -1984,6 +2015,7 @@ public final class SistemaSave extends javax.swing.JFrame {
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtDireccionConfig;
     private javax.swing.JTextField txtFechaHora;
+    private javax.swing.JTextField txtHId;
     private javax.swing.JTextField txtIdConfig;
     private javax.swing.JTextField txtIdHistorialPedido;
     private javax.swing.JTextField txtIdPedido;
