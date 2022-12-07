@@ -27,6 +27,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -211,6 +212,7 @@ public final class SistemaSave extends javax.swing.JFrame {
         jPanel39 = new javax.swing.JPanel();
         jLabel40 = new javax.swing.JLabel();
         txtIdPlato = new javax.swing.JTextField();
+        cbxCategoria = new javax.swing.JComboBox<>();
         jScrollPane4 = new javax.swing.JScrollPane();
         TablePlatos = new javax.swing.JTable();
         jPanel23 = new javax.swing.JPanel();
@@ -1108,7 +1110,7 @@ public final class SistemaSave extends javax.swing.JFrame {
                 btnGuardarPlatoActionPerformed(evt);
             }
         });
-        jPanel11.add(btnGuardarPlato, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, 140, 70));
+        jPanel11.add(btnGuardarPlato, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, 140, 70));
 
         btnEditarPlato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Actualizar (2).png"))); // NOI18N
         btnEditarPlato.addActionListener(new java.awt.event.ActionListener() {
@@ -1116,7 +1118,7 @@ public final class SistemaSave extends javax.swing.JFrame {
                 btnEditarPlatoActionPerformed(evt);
             }
         });
-        jPanel11.add(btnEditarPlato, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 260, 140, 70));
+        jPanel11.add(btnEditarPlato, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 300, 140, 70));
 
         btnEliminarPlato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/eliminar.png"))); // NOI18N
         btnEliminarPlato.addActionListener(new java.awt.event.ActionListener() {
@@ -1124,7 +1126,7 @@ public final class SistemaSave extends javax.swing.JFrame {
                 btnEliminarPlatoActionPerformed(evt);
             }
         });
-        jPanel11.add(btnEliminarPlato, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 350, 140, 70));
+        jPanel11.add(btnEliminarPlato, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 390, 140, 70));
 
         btnNuevoPlato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/nuevo.png"))); // NOI18N
         btnNuevoPlato.addActionListener(new java.awt.event.ActionListener() {
@@ -1132,7 +1134,7 @@ public final class SistemaSave extends javax.swing.JFrame {
                 btnNuevoPlatoActionPerformed(evt);
             }
         });
-        jPanel11.add(btnNuevoPlato, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 350, 140, 70));
+        jPanel11.add(btnNuevoPlato, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 390, 140, 70));
 
         jPanel31.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -1187,6 +1189,9 @@ public final class SistemaSave extends javax.swing.JFrame {
 
         jPanel11.add(jPanel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 50));
         jPanel11.add(txtIdPlato, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 470, 80, -1));
+
+        cbxCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Entradas", "Ensaladas Frias", "Especialidades", "Extras", "Postres", " " }));
+        jPanel11.add(cbxCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 230, 170, 50));
 
         TablePlatos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1256,11 +1261,11 @@ public final class SistemaSave extends javax.swing.JFrame {
 
             },
             new String [] {
-                "", "Nombre", "Precio"
+                "", "Nombre", "Precio", "Categoria"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -1751,6 +1756,7 @@ public final class SistemaSave extends javax.swing.JFrame {
             pla.setNombre(txtNombrePlato.getText());
             pla.setPrecio(Double.parseDouble(txtPrecioPlato.getText()));
             pla.setFecha(fechaFormato);
+            pla.setCategoria(cbxCategoria.getSelectedItem().toString());
             if (plaDao.Registrar(pla)) {
                 JOptionPane.showMessageDialog(null, "Plato Registrado");
                 LimpiarTable();
@@ -1932,6 +1938,7 @@ public final class SistemaSave extends javax.swing.JFrame {
     private javax.swing.JButton btnUsuarios;
     private javax.swing.JButton btnUsuarios1;
     private javax.swing.JButton btnVentas;
+    private javax.swing.JComboBox<String> cbxCategoria;
     private javax.swing.JComboBox<String> cbxRol;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -2239,11 +2246,12 @@ public final class SistemaSave extends javax.swing.JFrame {
     private void ListarPlatos(JTable tabla) {
         List<Platos> Listar = plaDao.Listar(txtBuscarPlato.getText(), fechaFormato);
         modelo = (DefaultTableModel) tabla.getModel();
-        Object[] ob = new Object[3];
+        Object[] ob = new Object[4];
         for (int i = 0; i < Listar.size(); i++) {
             ob[0] = Listar.get(i).getId();
             ob[1] = Listar.get(i).getNombre();
             ob[2] = Listar.get(i).getPrecio();
+            ob[3] = Listar.get(i).getCategoria();
             modelo.addRow(ob);
         }
         colorHeader(tabla);

@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class PlatosDao {
 
@@ -15,7 +16,7 @@ public class PlatosDao {
     ResultSet rs;
 
     public boolean Registrar(Platos pla) {
-        String sql = "INSERT INTO platos (nombre, precio, fecha) VALUES (?,?,?)";
+        String sql = "INSERT INTO platos (nombre, precio, fecha, categoria) VALUES (?,?,?,?)";
         String sql2 = "ALTER TABLE platos AUTO_INCREMENT = 0";
         try {
             con = cn.getConnection();
@@ -25,6 +26,7 @@ public class PlatosDao {
             ps.setString(1, pla.getNombre());
             ps.setDouble(2, pla.getPrecio());
             ps.setString(3, pla.getFecha());
+            ps.setString(4, pla.getCategoria());
             ps.execute();
             return true;
         } catch (SQLException e) {
@@ -56,6 +58,8 @@ public class PlatosDao {
                 pl.setId(rs.getInt("id"));
                 pl.setNombre(rs.getString("nombre"));
                 pl.setPrecio(rs.getDouble("precio"));
+                pl.setCategoria(rs.getString("categoria"));
+                
                 Lista.add(pl);
             }
         } catch (SQLException e) {

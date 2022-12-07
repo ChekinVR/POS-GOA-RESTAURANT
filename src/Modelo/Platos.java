@@ -5,17 +5,20 @@ public class Platos {
     private String nombre;
     private double precio;
     private String fecha;
+    private String categoria;
 
     public Platos() {
     }
 
-    public Platos(int id, String nombre, double precio, String fecha) {
+    public Platos(int id, String nombre, double precio, String fecha, String categoria) {
         this.id = id;
         this.nombre = nombre;
         this.precio = precio;
         this.fecha = fecha;
+        this.categoria = categoria;
     }
-
+    
+    
     public int getId() {
         return id;
     }
@@ -46,6 +49,13 @@ public class Platos {
 
     public void setFecha(String fecha) {
         this.fecha = fecha;
+    }
+    public String getCategoria(){
+        return categoria;
+    }
+    
+    public void setCategoria(String categoria){
+        this.categoria = categoria;
     }
 
     
