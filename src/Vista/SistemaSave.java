@@ -18,6 +18,7 @@ import Modelo.Salas;
 import Modelo.SalasDao;
 import Modelo.Tables;
 import Modelo.login;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Image;
@@ -29,8 +30,10 @@ import java.util.List;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
@@ -225,7 +228,8 @@ public final class SistemaSave extends javax.swing.JFrame {
         btnEliminarTempPlato = new javax.swing.JButton();
         txtTempIdSala = new javax.swing.JTextField();
         txtTempNumMesa = new javax.swing.JTextField();
-        btnGenerarPedido1 = new javax.swing.JButton();
+        btnAgregarPedido = new javax.swing.JButton();
+        txtTempIDPed = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Panel de Adminstración");
@@ -1244,7 +1248,6 @@ public final class SistemaSave extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tblTemPlatos.setColumnSelectionAllowed(true);
         tblTemPlatos.setRowHeight(23);
         jScrollPane10.setViewportView(tblTemPlatos);
         if (tblTemPlatos.getColumnModel().getColumnCount() > 0) {
@@ -1371,10 +1374,19 @@ public final class SistemaSave extends javax.swing.JFrame {
             }
         });
 
-        btnGenerarPedido1.setText("Pagar");
-        btnGenerarPedido1.addActionListener(new java.awt.event.ActionListener() {
+        btnAgregarPedido.setText("Editar Pedido");
+        btnAgregarPedido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGenerarPedido1ActionPerformed(evt);
+                btnAgregarPedidoActionPerformed(evt);
+            }
+        });
+
+        txtTempIDPed.setEditable(false);
+        txtTempIDPed.setBorder(null);
+        txtTempIDPed.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        txtTempIDPed.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTempIDPedActionPerformed(evt);
             }
         });
 
@@ -1389,11 +1401,14 @@ public final class SistemaSave extends javax.swing.JFrame {
                         .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtTempIdSala)
                             .addComponent(txtTempNumMesa, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 540, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel11)
                             .addGroup(jPanel23Layout.createSequentialGroup()
-                                .addComponent(btnGenerarPedido1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtTempIDPed, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
+                                .addGap(544, 544, 544)
+                                .addComponent(jLabel11))
+                            .addGroup(jPanel23Layout.createSequentialGroup()
+                                .addComponent(btnAgregarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(btnGenerarPedido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1406,7 +1421,7 @@ public final class SistemaSave extends javax.swing.JFrame {
                         .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
                             .addComponent(btnEliminarTempPlato, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 915, Short.MAX_VALUE))
+                    .addComponent(jScrollPane11))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -1429,7 +1444,9 @@ public final class SistemaSave extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel23Layout.createSequentialGroup()
-                                .addComponent(txtTempIdSala, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txtTempIdSala, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtTempIDPed, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(jPanel23Layout.createSequentialGroup()
                                 .addGap(8, 8, 8)
@@ -1442,7 +1459,7 @@ public final class SistemaSave extends javax.swing.JFrame {
                                     .addGroup(jPanel23Layout.createSequentialGroup()
                                         .addComponent(txtTempNumMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(0, 0, Short.MAX_VALUE))
-                                    .addComponent(btnGenerarPedido1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                    .addComponent(btnAgregarPedido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel23Layout.createSequentialGroup()
                         .addGap(17, 17, 17)
                         .addComponent(jPanel24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -1613,35 +1630,37 @@ public final class SistemaSave extends javax.swing.JFrame {
         LimpiarTable();
         ListarPlatos(tblTemPlatos);
     }//GEN-LAST:event_txtBuscarPlatoKeyReleased
+    
 
     private void btnAddPlatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddPlatoActionPerformed
+        
         if (tblTemPlatos.getSelectedRow() >= 0) {
-            int id = Integer.parseInt(tblTemPlatos.getValueAt(tblTemPlatos.getSelectedRow(), 0).toString());
-            String descripcion = tblTemPlatos.getValueAt(tblTemPlatos.getSelectedRow(), 1).toString();
-            double precio = Double.parseDouble(tblTemPlatos.getValueAt(tblTemPlatos.getSelectedRow(), 2).toString());
-            double total = 1 * precio;
-            item = item + 1;
-            tmp = (DefaultTableModel) tableMenu.getModel();
-            ArrayList lista = new ArrayList();
-            lista.add(item);
-            lista.add(id);
-            lista.add(descripcion);
-            lista.add(1);
-            lista.add(precio);
-            lista.add(total);
-            Object[] O = new Object[6];
-            O[0] = lista.get(1);
-            O[1] = lista.get(2);
-            O[2] = lista.get(3);
-            O[3] = lista.get(4);
-            O[4] = lista.get(5);
-            O[5] = "";
-            tmp.addRow(O);
-            tableMenu.setModel(tmp);
-            TotalPagar(tableMenu, totalMenu);
-        } else {
-            JOptionPane.showMessageDialog(null, "SELECCIONA UNA FILA");
-        }
+                    int id = Integer.parseInt(tblTemPlatos.getValueAt(tblTemPlatos.getSelectedRow(), 0).toString());
+                    String descripcion = tblTemPlatos.getValueAt(tblTemPlatos.getSelectedRow(), 1).toString();
+                    double precio = Double.parseDouble(tblTemPlatos.getValueAt(tblTemPlatos.getSelectedRow(), 2).toString());
+                    double total = 1 * precio;
+                    item = item + 1;
+                    tmp = (DefaultTableModel) tableMenu.getModel();
+                    ArrayList lista = new ArrayList();
+                    lista.add(item);
+                    lista.add(id);
+                    lista.add(descripcion);
+                    lista.add(1);
+                    lista.add(precio);
+                    lista.add(total);
+                    Object[] O = new Object[6];
+                    O[0] = lista.get(1);
+                    O[1] = lista.get(2);
+                    O[2] = lista.get(3);
+                    O[3] = lista.get(4);
+                    O[4] = lista.get(5);
+                    O[5] = "";
+                    tmp.addRow(O);
+                    tableMenu.setModel(tmp);
+                    TotalPagar(tableMenu, totalMenu);
+            } else {
+                JOptionPane.showMessageDialog(null, "SELECCIONA UNA FILA");
+            }
     }//GEN-LAST:event_btnAddPlatoActionPerformed
 
     private void btnGenerarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarPedidoActionPerformed
@@ -1792,18 +1811,18 @@ public final class SistemaSave extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbxRolActionPerformed
 
-    private void btnGenerarPedido1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarPedido1ActionPerformed
-        // TODO add your handling code here:
-        //int fila = TablePedidos.rowAtPoint(evt.getPoint());
-        //int id_pedido = Integer.parseInt(TablePedidos.getValueAt(fila, 0).toString());
-        int id_pedido = 14;
-        LimpiarTable();
-        verPedido(id_pedido);
-        verPedidoDetalle(id_pedido);
-        jTabbedPane1.setSelectedIndex(4);
-        btnFinalizar.setEnabled(false);
-        txtIdHistorialPedido.setText(""+id_pedido);
-    }//GEN-LAST:event_btnGenerarPedido1ActionPerformed
+    private void btnAgregarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarPedidoActionPerformed
+        String txt = txtTempIDPed.getText();
+        if (tableMenu.getRowCount() > 0) {
+            modificarDetallePedido();
+            modificarTotalPedido();
+            LimpiarTableMenu();
+            JOptionPane.showMessageDialog(null, "PEDIDO REGISTRADO");
+            jTabbedPane1.setSelectedIndex(0);
+        } else {
+            JOptionPane.showMessageDialog(null, "NO HAY PRODUCTO EN LA PEDIDO");
+        }
+    }//GEN-LAST:event_btnAgregarPedidoActionPerformed
 
     private void txtIdSalaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdSalaActionPerformed
         // TODO add your handling code here:
@@ -1838,6 +1857,10 @@ public final class SistemaSave extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnUsuarios1ActionPerformed
 
+    private void txtTempIDPedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTempIDPedActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTempIDPedActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LabelConection;
@@ -1850,6 +1873,7 @@ public final class SistemaSave extends javax.swing.JFrame {
     private javax.swing.JButton btnActualizarConfig;
     private javax.swing.JButton btnActualizarSala;
     private javax.swing.JButton btnAddPlato;
+    private javax.swing.JButton btnAgregarPedido;
     private javax.swing.JButton btnConfig;
     private javax.swing.JButton btnEditarPlato;
     private javax.swing.JButton btnEliminarPlato;
@@ -1857,7 +1881,6 @@ public final class SistemaSave extends javax.swing.JFrame {
     private javax.swing.JButton btnEliminarTempPlato;
     private javax.swing.JButton btnFinalizar;
     private javax.swing.JButton btnGenerarPedido;
-    private javax.swing.JButton btnGenerarPedido1;
     private javax.swing.JButton btnGuardarPlato;
     private javax.swing.JButton btnIniciar;
     private javax.swing.JButton btnNuevoPlato;
@@ -1970,6 +1993,7 @@ public final class SistemaSave extends javax.swing.JFrame {
     private javax.swing.JTextField txtRucConfig;
     private javax.swing.JTextField txtSalaFinalizar;
     private javax.swing.JTextField txtTelefonoConfig;
+    private javax.swing.JTextField txtTempIDPed;
     private javax.swing.JTextField txtTempIdSala;
     private javax.swing.JTextField txtTempNumMesa;
     // End of variables declaration//GEN-END:variables
@@ -2097,7 +2121,7 @@ public final class SistemaSave extends javax.swing.JFrame {
     }
 
     //crear mesas
-    private void panelMesas(int id_sala, int cant) {
+    /*private void panelMesas(int id_sala, int cant) {
         for (int i = 1; i <= cant; i++) {
             int num_mesa = i;
             //verificar estado
@@ -2122,8 +2146,8 @@ public final class SistemaSave extends javax.swing.JFrame {
             txtTempNumMesa.setText("" + num_mesa);
             });
         }
-    }
-    /*private void panelMesas(int id_sala, int cant) {
+    }*/
+    private void panelMesas(int id_sala, int cant) {
         for (int i = 1; i <= cant; i++) {
             int num_mesa = i;
             //verificar estado
@@ -2142,22 +2166,33 @@ public final class SistemaSave extends javax.swing.JFrame {
             PanelMesas.add(boton);
             boton.addActionListener((ActionEvent e) -> {
                 if (verificar > 0) {
-                    LimpiarTable();
+                    /*LimpiarTable();
                     verPedido(verificar);
                     verPedidoDetalle(verificar);
                     btnFinalizar.setEnabled(true);
                     btnPdfPedido.setEnabled(false);
-                    jTabbedPane1.setSelectedIndex(3);
+                    jTabbedPane1.setSelectedIndex(3);*/
+                    LimpiarTable();
+                    ListarPlatos(tblTemPlatos);
+                    jTabbedPane1.setSelectedIndex(8);
+                    txtTempIdSala.setText("" + id_sala);
+                    txtTempNumMesa.setText("" + num_mesa);
+                    txtTempIDPed.setText("" + pedDao.IdPedido());
+                    btnGenerarPedido.setVisible(false);
+                    btnAgregarPedido.setVisible(true);
+                    
                 } else {
                     LimpiarTable();
                     ListarPlatos(tblTemPlatos);
                     jTabbedPane1.setSelectedIndex(8);
                     txtTempIdSala.setText("" + id_sala);
                     txtTempNumMesa.setText("" + num_mesa);
+                    btnGenerarPedido.setVisible(true);
+                    btnAgregarPedido.setVisible(false);
                 }
             });
         }
-    }*/
+    }
 
     // platos
     private void ListarPlatos(JTable tabla) {
@@ -2199,6 +2234,33 @@ public final class SistemaSave extends javax.swing.JFrame {
             pedDao.RegistrarDetalle(detPedido);
 
         }
+    }
+    
+    private void modificarDetallePedido(){
+        int mesa = Integer.parseInt(txtTempNumMesa.getText());
+        int sala = Integer.parseInt(txtTempIdSala.getText());
+        int id = pedDao.IdPedidoMesa(mesa, sala);
+        for (int i = 0; i < tableMenu.getRowCount(); i++) {
+            String nombre = tableMenu.getValueAt(i, 1).toString();
+            int cant = Integer.parseInt(tableMenu.getValueAt(i, 2).toString());
+            double precio = Double.parseDouble(tableMenu.getValueAt(i, 3).toString());
+            detPedido.setNombre(nombre);
+            detPedido.setCantidad(cant);
+            detPedido.setPrecio(precio);
+            detPedido.setComentario(tableMenu.getValueAt(i, 5).toString());
+            detPedido.setId_pedido(id);
+            pedDao.RegistrarDetalle(detPedido);
+
+        }
+    }
+    
+    private void modificarTotalPedido(){
+        int mesa = Integer.parseInt(txtTempNumMesa.getText());
+        int sala = Integer.parseInt(txtTempIdSala.getText());
+        double total = pedDao.VerTotalPedido(mesa, sala);
+        double totalAct = total + Totalpagar;
+        pedDao.EditarTotalPedido(totalAct, mesa, sala);
+        
     }
 
     public void verPedidoDetalle(int id_pedido) {
