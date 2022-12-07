@@ -1,6 +1,8 @@
 
 package Modelo;
 
+import com.github.anastaciocintra.escpos.EscPos;
+import com.github.anastaciocintra.output.PrinterOutputStream;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
@@ -24,6 +26,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.print.PrintService;
 import javax.swing.filechooser.FileSystemView;
 
 public class PedidosDao {
@@ -335,6 +338,14 @@ public class PedidosDao {
         }
     }
     
+    public void ticketPedido (String printerName){
+        PrintService printService = PrinterOutputStream.getPrintServiceByName(printerName);
+        EscPos escpos;
+        try {
+            
+        }
+        
+    }
     public boolean actualizarEstado (int id_pedido){
         String sql = "UPDATE pedidos SET estado = ? WHERE id = ?";
         try {
