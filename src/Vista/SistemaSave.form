@@ -2150,11 +2150,15 @@
                                   <Component id="txtTempIdSala" max="32767" attributes="0"/>
                                   <Component id="txtTempNumMesa" pref="117" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="540" max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" attributes="0">
-                                      <Component id="btnGenerarPedido1" min="-2" pref="120" max="-2" attributes="0"/>
+                                      <Component id="txtTempIDPed" pref="117" max="32767" attributes="0"/>
+                                      <EmptySpace min="-2" pref="544" max="-2" attributes="0"/>
+                                      <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <Component id="btnAgregarPedido" min="-2" pref="120" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                           <Component id="btnGenerarPedido" max="32767" attributes="0"/>
@@ -2173,7 +2177,7 @@
                                   <Component id="btnEliminarTempPlato" max="32767" attributes="0"/>
                               </Group>
                           </Group>
-                          <Component id="jScrollPane11" alignment="0" pref="915" max="32767" attributes="0"/>
+                          <Component id="jScrollPane11" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jPanel24" min="-2" max="-2" attributes="0"/>
@@ -2201,7 +2205,10 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="txtTempIdSala" min="-2" pref="37" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="txtTempIdSala" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                                          <Component id="txtTempIDPed" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
+                                      </Group>
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
@@ -2216,7 +2223,7 @@
                                               <Component id="txtTempNumMesa" min="-2" pref="41" max="-2" attributes="0"/>
                                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                           </Group>
-                                          <Component id="btnGenerarPedido1" max="32767" attributes="0"/>
+                                          <Component id="btnAgregarPedido" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -2313,7 +2320,6 @@
                             </Column>
                           </TableColumnModel>
                         </Property>
-                        <Property name="columnSelectionAllowed" type="boolean" value="true"/>
                         <Property name="rowHeight" type="int" value="23"/>
                         <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                           <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
@@ -2485,12 +2491,26 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtTempNumMesaActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnGenerarPedido1">
+            <Component class="javax.swing.JButton" name="btnAgregarPedido">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Pagar"/>
+                <Property name="text" type="java.lang.String" value="Editar Pedido"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGenerarPedido1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAgregarPedidoActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JTextField" name="txtTempIDPed">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="null"/>
+                </Property>
+                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                  <Color id="Text Cursor"/>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtTempIDPedActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

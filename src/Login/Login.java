@@ -154,6 +154,17 @@ public class Login extends javax.swing.JFrame {
                 txtPassMousePressed(evt);
             }
         });
+        txtPass.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPassKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtPassKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPassKeyTyped(evt);
+            }
+        });
 
         exitBTN1.setBackground(new java.awt.Color(122, 36, 38));
         exitBTN1.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
@@ -231,8 +242,8 @@ public class Login extends javax.swing.JFrame {
                     .addComponent(exitBTN1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(loginBTN2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(barra, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addComponent(barra, javax.swing.GroupLayout.DEFAULT_SIZE, 10, Short.MAX_VALUE)
+                .addGap(9, 9, 9))
         );
 
         bg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 900, 300));
@@ -331,6 +342,19 @@ public class Login extends javax.swing.JFrame {
             txtCorreo.setText("Ingrese el nombre de usuario");
         }
     }//GEN-LAST:event_txtPassFocusGained
+
+    private void txtPassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPassKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPassKeyPressed
+
+    private void txtPassKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPassKeyReleased
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_txtPassKeyReleased
+
+    private void txtPassKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPassKeyTyped
+
+    }//GEN-LAST:event_txtPassKeyTyped
 
     /**
      * @param args the command line arguments

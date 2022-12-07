@@ -52,6 +52,25 @@ public class PedidosDao {
         return id;
     }
     
+    public int IdPedidoMesa(int mesa, int id_sala){
+        int id_pedido = 0;
+        String sql = "SELECT id FROM pedidos WHERE num_mesa=? AND id_sala=?";
+        try {
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, mesa);
+            ps.setInt(2, id_sala);
+            rs = ps.executeQuery();
+            if(rs.next()){
+                id_pedido = rs.getInt("id");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+        return id_pedido;
+    }
+    
+    
     public int verificarStado(int mesa, int id_sala){
         int id_pedido = 0;
         String sql = "SELECT id FROM pedidos WHERE num_mesa=? AND id_sala=? AND estado = ?";
@@ -70,7 +89,6 @@ public class PedidosDao {
         }
         return id_pedido;
     }
-    
     public int RegistrarPedido(Pedidos ped){
         String sql2 = "ALTER TABLE pedidos AUTO_INCREMENT = 0";
         String sql = "INSERT INTO pedidos (id_sala, num_mesa, total, usuario) VALUES (?,?,?,?)";
@@ -129,6 +147,40 @@ public class PedidosDao {
             System.out.println(e.toString());
         }
         return r;
+    }
+    
+    public int EditarTotalPedido(double antprec, int mesa, int id_sala){
+        String sql = "UPDATE  pedidos SET total = ? WHERE num_mesa=? AND id_sala=?";
+        try {
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setDouble(1, antprec);
+            ps.setInt(2, mesa);
+            ps.setInt(3, id_sala);
+            ps.execute();
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+        return r;
+    }
+    
+    public double VerTotalPedido(int mesa, int id_sala){
+        double total = 0;
+        String sql = "SELECT total FROM pedidos WHERE num_mesa=? AND id_sala=?";
+        try {
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, mesa);
+            ps.setInt(2, id_sala);
+            rs = ps.executeQuery();
+            if(rs.next()){
+                total = rs.getInt("total");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+        return total;
+        
     }
     
     public List verPedidoDetalle(int id_pedido){
