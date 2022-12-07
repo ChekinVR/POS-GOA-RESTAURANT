@@ -81,6 +81,7 @@ public final class SistemaSave extends javax.swing.JFrame {
         } else {
             LabelVendedor.setText(priv.getNombre());
         }
+        
         LabelConection.setText("jdbc:mysql://localhost:3306/restaurant_goa");
         txtIdConfig.setVisible(false);
         txtIdHistorialPedido.setVisible(false);
@@ -446,7 +447,7 @@ public final class SistemaSave extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tableSala.setRowHeight(23);
+        tableSala.setRowHeight(50);
         tableSala.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tableSalaMouseClicked(evt);
@@ -631,7 +632,7 @@ public final class SistemaSave extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tableFinalizar.setRowHeight(23);
+        tableFinalizar.setRowHeight(50);
         jScrollPane13.setViewportView(tableFinalizar);
         if (tableFinalizar.getColumnModel().getColumnCount() > 0) {
             tableFinalizar.getColumnModel().getColumn(0).setMinWidth(30);
@@ -701,7 +702,7 @@ public final class SistemaSave extends javax.swing.JFrame {
         });
         TablePedidos.setColumnSelectionAllowed(true);
         TablePedidos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        TablePedidos.setRowHeight(23);
+        TablePedidos.setRowHeight(50);
         TablePedidos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TablePedidosMouseClicked(evt);
@@ -938,7 +939,7 @@ public final class SistemaSave extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        TableUsuarios.setRowHeight(23);
+        TableUsuarios.setRowHeight(50);
         jScrollPane6.setViewportView(TableUsuarios);
         if (TableUsuarios.getColumnModel().getColumnCount() > 0) {
             TableUsuarios.getColumnModel().getColumn(0).setMinWidth(50);
@@ -1005,7 +1006,7 @@ public final class SistemaSave extends javax.swing.JFrame {
                 cbxRolActionPerformed(evt);
             }
         });
-        jPanel15.add(cbxRol, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 380, 300, 30));
+        jPanel15.add(cbxRol, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 380, 300, 50));
 
         jPanel16.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -1203,7 +1204,7 @@ public final class SistemaSave extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        TablePlatos.setRowHeight(23);
+        TablePlatos.setRowHeight(50);
         TablePlatos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TablePlatosMouseClicked(evt);
@@ -1331,7 +1332,7 @@ public final class SistemaSave extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tableMenu.setRowHeight(23);
+        tableMenu.setRowHeight(50);
         jScrollPane11.setViewportView(tableMenu);
         if (tableMenu.getColumnModel().getColumnCount() > 0) {
             tableMenu.getColumnModel().getColumn(0).setMinWidth(30);
