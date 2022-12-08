@@ -16,7 +16,7 @@ public class PlatosDao {
     ResultSet rs;
 
     public boolean Registrar(Platos pla) {
-        String sql = "INSERT INTO platos (nombre, precio, fecha, categoria) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO platos (nombre, precio, fecha, categoria, sub_categoria) VALUES (?,?,?,?,?)";
         String sql2 = "ALTER TABLE platos AUTO_INCREMENT = 0";
         try {
             con = cn.getConnection();
@@ -27,6 +27,7 @@ public class PlatosDao {
             ps.setDouble(2, pla.getPrecio());
             ps.setString(3, pla.getFecha());
             ps.setString(4, pla.getCategoria());
+            ps.setString(5, pla.getSubCategoria());
             ps.execute();
             return true;
         } catch (SQLException e) {
@@ -39,6 +40,33 @@ public class PlatosDao {
                 System.out.println(ex.toString());
             }
         }
+    }
+    public List ListarCateg(String valor, String fecha) {
+        List<Platos> Lista = new ArrayList();
+        String sql = "SELECT * FROM platos";
+        String consulta = "SELECT * FROM platos WHERE categoria LIKE '%"+valor+"%'";
+        try {
+            con = cn.getConnection();
+            if(valor.equalsIgnoreCase("")){
+                ps = con.prepareStatement(sql);
+            }else{
+                ps = con.prepareStatement(consulta);
+            }
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Platos pl = new Platos();
+                pl.setId(rs.getInt("id"));
+                pl.setNombre(rs.getString("nombre"));
+                pl.setPrecio(rs.getDouble("precio"));
+                pl.setCategoria(rs.getString("categoria"));
+                pl.setSubCategoria(rs.getString("sub_categoria"));
+                
+                Lista.add(pl);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+        return Lista;
     }
 
     public List Listar(String valor, String fecha) {
@@ -59,6 +87,7 @@ public class PlatosDao {
                 pl.setNombre(rs.getString("nombre"));
                 pl.setPrecio(rs.getDouble("precio"));
                 pl.setCategoria(rs.getString("categoria"));
+                pl.setSubCategoria(rs.getString("sub_categoria"));
                 
                 Lista.add(pl);
             }
