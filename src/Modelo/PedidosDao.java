@@ -457,7 +457,7 @@ public class PedidosDao {
             }
             
             Style title = new Style()
-                    .setFontSize(Style.FontSize._4, Style.FontSize._3)
+                    .setFontSize(Style.FontSize._3, Style.FontSize._2)
                     .setJustification(EscPosConst.Justification.Center);
 
             Style subtitle = new Style(escpos.getStyle())
@@ -470,22 +470,14 @@ public class PedidosDao {
             algorithm = new BitonalOrderedDither(2,2,120,170);
             escposImage = new EscPosImage(new CoffeeImageImpl(imageBufferedImage), algorithm);
             escpos.write(imageWrapper, escposImage);
-            escpos.feed(5);
-            escpos.writeLF(title,"My Market")
-                    .feed(3)
-                    .write("Client: ")
-                    .writeLF(subtitle, "John Doe")
-                    .feed(3)
-                    .writeLF("Cup of coffee                      $1.00")
+            escpos.feed(1);
+            escpos.writeLF(title,"Goa Restaurant");
+            escpos.writeLF(bold, 
+                             "Plato          P.unt.            P.Total")
                     .writeLF("Botle of water                     $0.50")
-                    .writeLF("----------------------------------------")
-                    .feed(2)
-                    .writeLF(bold, 
-                             "TOTAL                              $1.50")
-                    .writeLF("----------------------------------------")
-                    .feed(8)
-                    .cut(EscPos.CutMode.FULL);
-            
+                    .writeLF(bold,
+                            "----------------------------------------")
+                    .write("Client: ");
             escpos.close();
             
         } catch (IOException e) {
