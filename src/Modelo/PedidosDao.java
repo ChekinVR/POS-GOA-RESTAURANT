@@ -4,6 +4,12 @@ package Modelo;
 import com.github.anastaciocintra.escpos.EscPos;
 import com.github.anastaciocintra.escpos.EscPosConst;
 import com.github.anastaciocintra.escpos.Style;
+import com.github.anastaciocintra.escpos.image.Bitonal;
+import com.github.anastaciocintra.escpos.image.BitonalOrderedDither;
+import com.github.anastaciocintra.escpos.image.BitonalThreshold;
+import com.github.anastaciocintra.escpos.image.CoffeeImageImpl;
+import com.github.anastaciocintra.escpos.image.EscPosImage;
+import com.github.anastaciocintra.escpos.image.RasterBitImageWrapper;
 import com.github.anastaciocintra.output.PrinterOutputStream;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
@@ -19,6 +25,7 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import java.awt.Desktop;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -28,6 +35,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.imageio.ImageIO;
 import javax.print.PrintService;
 import javax.swing.filechooser.FileSystemView;
 
@@ -397,28 +405,38 @@ public class PedidosDao {
     
     public void ticketPedido (int id_pedido){
         int x = 0;
-        String[ ] printerName = {"María", "Gerson"};
-        String fechaPedido = null, usuario = null, total = null,sala = null, num_mesa = null;
+        String[ ] printerName = {"XP-80C", "XP-80C"}; 
+        String fechaPedido = null, usuario = null, total = null, num_mesa = null;
+        BufferedImage imagen = null;
         PrintService printService = PrinterOutputStream.getPrintServiceByName(printerName[x]);
         EscPos escpos;
         try {
+            File archivo_imagen = new File("C://Users//PC//Desktop//logo-dark.png");
+            imagen = ImageIO.read(archivo_imagen);
+            
+            
+            BufferedImage  imageBufferedImage = imagen;
+            RasterBitImageWrapper imageWrapper = new RasterBitImageWrapper();
+            
             escpos = new EscPos(new PrinterOutputStream(printService));
+            Bitonal algorithm = new BitonalThreshold();
+            EscPosImage escposImage = new EscPosImage(new CoffeeImageImpl(imageBufferedImage), algorithm);
+            
             String informacion = "SELECT p.*, s.nombre FROM pedidos p INNER JOIN salas s ON p.id_sala = s.id WHERE p.id = ?";
+            
             try {
                 ps = con.prepareStatement(informacion);
                 ps.setInt(1, id_pedido);
                 rs = ps.executeQuery();
                 if (rs.next()) {
                     num_mesa = rs.getString("num_mesa");
-                    sala = rs.getString("nombre");
                     fechaPedido = rs.getString("fecha");
-                    usuario = rs.getString("usuario");
                     total = rs.getString("total");
                 }
-
             } catch (SQLException e) {
                 System.out.println(e.toString());
             }
+            
             Style title = new Style()
                     .setFontSize(Style.FontSize._4, Style.FontSize._3)
                     .setJustification(EscPosConst.Justification.Center);
@@ -428,6 +446,29 @@ public class PedidosDao {
                     .setUnderline(Style.Underline.OneDotThick);
             Style bold = new Style(escpos.getStyle())
                     .setBold(true);
+            
+            escpos.writeLF("BitonalOrderedDither (darkening) values");
+            algorithm = new BitonalOrderedDither(2,2,120,170);
+            escposImage = new EscPosImage(new CoffeeImageImpl(imageBufferedImage), algorithm);
+            escpos.write(imageWrapper, escposImage);
+            escpos.feed(5);
+            escpos.writeLF(title,"My Market")
+                    .feed(3)
+                    .write("Client: ")
+                    .writeLF(subtitle, "John Doe")
+                    .feed(3)
+                    .writeLF("Cup of coffee                      $1.00")
+                    .writeLF("Botle of water                     $0.50")
+                    .writeLF("----------------------------------------")
+                    .feed(2)
+                    .writeLF(bold, 
+                             "TOTAL                              $1.50")
+                    .writeLF("----------------------------------------")
+                    .feed(8)
+                    .cut(EscPos.CutMode.FULL);
+            
+            escpos.close();
+            
         } catch (IOException e) {
             System.out.println(e.toString());
         }finally{
@@ -436,9 +477,9 @@ public class PedidosDao {
             } catch (SQLException e) {
                 System.out.println(e.toString());
             }
-        }
-        
+        }  
     }
+    
     public boolean actualizarEstado (int id_pedido){
         String sql = "UPDATE pedidos SET estado = ? WHERE id = ?";
         try {
