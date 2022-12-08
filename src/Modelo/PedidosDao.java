@@ -134,6 +134,25 @@ public class PedidosDao {
         }
     }
     
+    public boolean EliminarPlatoPed(int id){
+        String sql = "DELETE FROM detalle_pedidos WHERE id = ?";
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.execute();
+            return true;
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+            return false;
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println(ex.toString());
+            }
+        }
+    }
+    
     public int RegistrarDetalle(DetallePedido det){
         String sql2 = "ALTER TABLE detalle_pedidos AUTO_INCREMENT = 0";
        String sql = "INSERT INTO detalle_pedidos (nombre, precio, cantidad, comentario, id_pedido) VALUES (?,?,?,?,?)";

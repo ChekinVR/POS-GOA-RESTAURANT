@@ -78,9 +78,17 @@ public final class SistemaSave extends javax.swing.JFrame {
         if (priv.getRol().equals("Mesero")) {
             btnSala.setEnabled(false);
             btnConfig.setEnabled(false);
+            btnPlatos.setEnabled(false);
+            btnUsuarios.setEnabled(false);
+            btnUsuarios.setVisible(false);
+            btnPlatos.setVisible(false);
+            btnConfig.setVisible(false);
+            btnSala.setVisible(false);
             LabelVendedor.setText(priv.getNombre());
+            txtRolUser.setText(priv.getRol());
         } else {
             LabelVendedor.setText(priv.getNombre());
+            txtRolUser.setText(priv.getRol());
         }
         
         LabelConection.setText("jdbc:mysql://localhost:3306/restaurant_goa");
@@ -90,8 +98,11 @@ public final class SistemaSave extends javax.swing.JFrame {
         txtIdPlato.setVisible(false);
         txtIdSala.setVisible(false);
         txtTempIdSala.setVisible(false);
+        txtHId.setVisible(false);
         txtTempNumMesa.setVisible(false);
         jTabbedPane1.setEnabled(false);
+        txtTempCateg.setVisible(false);
+        txtRolUser.setVisible(false);
         panelSalas();
     }
 
@@ -110,6 +121,7 @@ public final class SistemaSave extends javax.swing.JFrame {
         btnPlatos = new javax.swing.JButton();
         LabelConection = new javax.swing.JLabel();
         btnUsuarios1 = new javax.swing.JButton();
+        txtRolUser = new javax.swing.JTextField();
         jLabel38 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel9 = new javax.swing.JPanel();
@@ -150,13 +162,18 @@ public final class SistemaSave extends javax.swing.JFrame {
         txtNumMesaFinalizar = new javax.swing.JTextField();
         btnPdfPedido = new javax.swing.JButton();
         txtIdHistorialPedido = new javax.swing.JTextField();
+        jPanel13 = new javax.swing.JPanel();
+        jPanel14 = new javax.swing.JPanel();
+        btnElimPlati = new javax.swing.JButton();
+        txtIdHistorialPedido1 = new javax.swing.JTextField();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
         TablePedidos = new javax.swing.JTable();
         jLabel16 = new javax.swing.JLabel();
-        VerPedido = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         txtHId = new javax.swing.JTextField();
+        jPanel5 = new javax.swing.JPanel();
+        btnVerPedido = new javax.swing.JButton();
+        btnEliminarPedido = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
         jLabel32 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
@@ -379,6 +396,10 @@ public final class SistemaSave extends javax.swing.JFrame {
                 .addComponent(LabelConection, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addComponent(btnUsuarios1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(188, 188, 188)
+                .addComponent(txtRolUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -400,7 +421,9 @@ public final class SistemaSave extends javax.swing.JFrame {
                 .addComponent(btnUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnUsuarios1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
+                .addGap(41, 41, 41)
+                .addComponent(txtRolUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addComponent(LabelConection, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(47, 47, 47))
         );
@@ -644,6 +667,11 @@ public final class SistemaSave extends javax.swing.JFrame {
             }
         });
         tableFinalizar.setRowHeight(50);
+        tableFinalizar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableFinalizarMouseClicked(evt);
+            }
+        });
         jScrollPane13.setViewportView(tableFinalizar);
         if (tableFinalizar.getColumnModel().getColumnCount() > 0) {
             tableFinalizar.getColumnModel().getColumn(0).setMinWidth(30);
@@ -688,7 +716,51 @@ public final class SistemaSave extends javax.swing.JFrame {
             }
         });
         jPanel25.add(btnPdfPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 590, 130, 60));
-        jPanel25.add(txtIdHistorialPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 620, 50, -1));
+        jPanel25.add(txtIdHistorialPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 680, 50, -1));
+
+        jPanel14.setOpaque(false);
+
+        btnElimPlati.setText("Eliminar Plato");
+        btnElimPlati.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnElimPlatiActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
+        jPanel14.setLayout(jPanel14Layout);
+        jPanel14Layout.setHorizontalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel14Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnElimPlati, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(344, Short.MAX_VALUE))
+        );
+        jPanel14Layout.setVerticalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel14Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnElimPlati, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(161, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
+        jPanel13.setLayout(jPanel13Layout);
+        jPanel13Layout.setHorizontalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel13Layout.setVerticalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        jPanel25.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 520, -1, -1));
+        jPanel25.add(txtIdHistorialPedido1, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 620, 50, -1));
 
         jTabbedPane1.addTab("Finalizar Pedido", jPanel25);
 
@@ -739,30 +811,53 @@ public final class SistemaSave extends javax.swing.JFrame {
         jLabel16.setText("Historial Pedidos");
         jPanel6.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 10, 280, -1));
 
-        VerPedido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/eliminar.png"))); // NOI18N
-        VerPedido.setText("ELIMINAR PEDIDO");
-        VerPedido.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnElimPedDao(evt);
-            }
-        });
-        jPanel6.add(VerPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(1230, 540, 180, 70));
-
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/sala.png"))); // NOI18N
-        jButton3.setText("VER PEDIDO");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVerPedido(evt);
-            }
-        });
-        jPanel6.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 540, 180, 70));
-
         txtHId.setEditable(false);
         txtHId.setEnabled(false);
         txtHId.setFocusable(false);
         txtHId.setRequestFocusEnabled(false);
         txtHId.setVerifyInputWhenFocusTarget(false);
         jPanel6.add(txtHId, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 550, -1, -1));
+
+        jPanel5.setOpaque(false);
+
+        btnVerPedido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/sala.png"))); // NOI18N
+        btnVerPedido.setText("VER PEDIDO");
+        btnVerPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerPedido(evt);
+            }
+        });
+
+        btnEliminarPedido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/eliminar.png"))); // NOI18N
+        btnEliminarPedido.setText("ELIMINAR PEDIDO");
+        btnEliminarPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnElimPedDao(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnEliminarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addComponent(btnVerPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnVerPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEliminarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(24, Short.MAX_VALUE))
+        );
+
+        jPanel6.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 550, 420, 110));
 
         jTabbedPane1.addTab("Historial Pedidos", jPanel6);
 
@@ -1287,7 +1382,6 @@ public final class SistemaSave extends javax.swing.JFrame {
         });
 
         jScrollPane10.setAutoscrolls(true);
-        jScrollPane10.setPreferredSize(new java.awt.Dimension(700, 700));
 
         tblTemPlatos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1648,8 +1742,13 @@ public final class SistemaSave extends javax.swing.JFrame {
 
     private void btnVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentasActionPerformed
         // TODO add your handling code here:
+        int rolcheck = RolCheck();
+        if (rolcheck == 1){
+            btnEliminarPedido.setVisible(false);
+        } else{
+            btnEliminarPedido.setVisible(true);
+        }
         LimpiarTable();
-        txtHId.setVisible(false);
         ListarPedidos();
         jTabbedPane1.setSelectedIndex(4);
     }//GEN-LAST:event_btnVentasActionPerformed
@@ -2031,14 +2130,20 @@ public final class SistemaSave extends javax.swing.JFrame {
 
     private void btnVerPedido(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerPedido
         // TODO add your handling code here:
-        int fila = Integer.parseInt(txtHId.getText());
-        int id_pedido = Integer.parseInt(TablePedidos.getValueAt(fila, 0).toString());
-        LimpiarTable();
-        verPedido(id_pedido);
-        verPedidoDetalle(id_pedido);
-        jTabbedPane1.setSelectedIndex(3);
-        btnFinalizar.setEnabled(false);
-        txtIdHistorialPedido.setText(""+id_pedido);
+        if (!"".equals(txtIdPedido.getText())) {
+            int fila = Integer.parseInt(txtHId.getText());
+            int id_pedido = Integer.parseInt(TablePedidos.getValueAt(fila, 0).toString());
+            LimpiarTable();
+            verPedido(id_pedido);
+            verPedidoDetalle(id_pedido);
+            jTabbedPane1.setSelectedIndex(3);
+            btnFinalizar.setEnabled(false);
+            txtIdHistorialPedido.setText(""+id_pedido);
+            
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecciona un pedido");
+        }
+
     }//GEN-LAST:event_btnVerPedido
 
     private void cbxCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCategoriaActionPerformed
@@ -2137,6 +2242,31 @@ public final class SistemaSave extends javax.swing.JFrame {
         btnPostres.setVisible(false);
     }//GEN-LAST:event_btnPostresActionPerformed
 
+    private void btnElimPlatiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnElimPlatiActionPerformed
+        // TODO add your handling code here:
+        if (!"".equals(txtIdPedido.getText())) {
+            int pregunta = JOptionPane.showConfirmDialog(null, "Esta seguro de eliminar");
+            if (pregunta == 0) {
+                int id = Integer.parseInt(txtIdPedido.getText());
+                pedDao.EliminarPlatoPed(id);
+                LimpiarTable();
+                ListarPedidos();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecciona una fila");
+        }
+    }//GEN-LAST:event_btnElimPlatiActionPerformed
+
+    private void tableFinalizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableFinalizarMouseClicked
+        // TODO add your handling code here:
+        int fila = TablePedidos.rowAtPoint(evt.getPoint());
+        String filatxt = Integer.toString(fila);
+        txtHId.setText(filatxt);
+        int id_Platillo = Integer.parseInt(TablePedidos.getValueAt(fila, 0).toString());
+        txtIdPedido.setText(""+id_pedido);
+        txtIdHistorialPedido.setText(""+id_pedido);
+    }//GEN-LAST:event_tableFinalizarMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LabelConection;
@@ -2146,13 +2276,14 @@ public final class SistemaSave extends javax.swing.JFrame {
     private javax.swing.JTable TablePedidos;
     private javax.swing.JTable TablePlatos;
     public javax.swing.JTable TableUsuarios;
-    private javax.swing.JButton VerPedido;
     private javax.swing.JButton btnActualizarConfig;
     private javax.swing.JButton btnActualizarSala;
     private javax.swing.JButton btnAddPlato;
     private javax.swing.JButton btnAgregarPedido;
     private javax.swing.JButton btnConfig;
     private javax.swing.JButton btnEditarPlato;
+    private javax.swing.JButton btnElimPlati;
+    private javax.swing.JButton btnEliminarPedido;
     private javax.swing.JButton btnEliminarPlato;
     private javax.swing.JButton btnEliminarSala;
     private javax.swing.JButton btnEliminarTempPlato;
@@ -2175,11 +2306,11 @@ public final class SistemaSave extends javax.swing.JFrame {
     private javax.swing.JButton btnUsuarios;
     private javax.swing.JButton btnUsuarios1;
     private javax.swing.JButton btnVentas;
+    private javax.swing.JButton btnVerPedido;
     private javax.swing.JComboBox<String> cbxCategoria;
     private javax.swing.JComboBox<String> cbxRol;
     private javax.swing.JComboBox<String> cbxSubCategoria;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
@@ -2210,6 +2341,8 @@ public final class SistemaSave extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
@@ -2234,6 +2367,7 @@ public final class SistemaSave extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel43;
     private javax.swing.JPanel jPanel44;
     private javax.swing.JPanel jPanel45;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
@@ -2265,6 +2399,7 @@ public final class SistemaSave extends javax.swing.JFrame {
     private javax.swing.JTextField txtHId;
     private javax.swing.JTextField txtIdConfig;
     private javax.swing.JTextField txtIdHistorialPedido;
+    private javax.swing.JTextField txtIdHistorialPedido1;
     private javax.swing.JTextField txtIdPedido;
     private javax.swing.JTextField txtIdPlato;
     private javax.swing.JTextField txtIdSala;
@@ -2277,6 +2412,7 @@ public final class SistemaSave extends javax.swing.JFrame {
     private javax.swing.JTextField txtNumMesaFinalizar;
     private javax.swing.JPasswordField txtPass;
     private javax.swing.JTextField txtPrecioPlato;
+    private javax.swing.JTextField txtRolUser;
     private javax.swing.JTextField txtRucConfig;
     private javax.swing.JTextField txtSalaFinalizar;
     private javax.swing.JTextField txtTelefonoConfig;
@@ -2593,6 +2729,14 @@ public final class SistemaSave extends javax.swing.JFrame {
         txtSalaFinalizar.setText("" + ped.getSala());
         txtNumMesaFinalizar.setText("" + ped.getNum_mesa());
         txtIdPedido.setText("" + ped.getId());
+    }
+    
+    public int RolCheck(){
+        if ("Mesero".equals(txtRolUser.getText())) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 
 }
