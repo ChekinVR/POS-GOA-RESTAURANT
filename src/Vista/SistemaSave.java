@@ -18,11 +18,17 @@ import Modelo.Salas;
 import Modelo.SalasDao;
 import Modelo.Tables;
 import Modelo.login;
+import com.mysql.cj.log.Log;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Desktop;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -167,6 +173,7 @@ public final class SistemaSave extends javax.swing.JFrame {
         jPanel13 = new javax.swing.JPanel();
         jPanel14 = new javax.swing.JPanel();
         btnElimPlati = new javax.swing.JButton();
+        btnDescuento = new javax.swing.JButton();
         txtIdPlat = new javax.swing.JTextField();
         btnImprimir = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
@@ -440,6 +447,11 @@ public final class SistemaSave extends javax.swing.JFrame {
         jLabel38.setText("Goa Restaurant");
         jLabel38.setFocusable(false);
         jLabel38.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jLabel38.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel38MouseClicked(evt);
+            }
+        });
         getContentPane().add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(1490, 10, 430, 90));
         jLabel38.getAccessibleContext().setAccessibleDescription("");
 
@@ -732,21 +744,30 @@ public final class SistemaSave extends javax.swing.JFrame {
             }
         });
 
+        btnDescuento.setText("Descuento");
+        btnDescuento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDescuentoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
         jPanel14Layout.setHorizontalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel14Layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(btnElimPlati, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(344, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnDescuento, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(202, Short.MAX_VALUE))
         );
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel14Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnElimPlati, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(32278, Short.MAX_VALUE))
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnElimPlati, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDescuento, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
@@ -789,7 +810,7 @@ public final class SistemaSave extends javax.swing.JFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, true
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -800,6 +821,7 @@ public final class SistemaSave extends javax.swing.JFrame {
         TablePedidos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         TablePedidos.setRowHeight(50);
         TablePedidos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        TablePedidos.getTableHeader().setReorderingAllowed(false);
         TablePedidos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TablePedidosMouseClicked(evt);
@@ -877,9 +899,9 @@ public final class SistemaSave extends javax.swing.JFrame {
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel32.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jLabel32.setFont(new java.awt.Font("Arial", 1, 48)); // NOI18N
         jLabel32.setText("DATOS DEL RESTAURANTE");
-        jPanel7.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 40, -1, -1));
+        jPanel7.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 90, -1, -1));
 
         jPanel8.setBackground(new java.awt.Color(204, 204, 204));
         jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1020,11 +1042,11 @@ public final class SistemaSave extends javax.swing.JFrame {
 
         jPanel8.add(jPanel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 220, 220, 2));
 
-        jPanel7.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 420, 470));
+        jPanel7.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 290, 420, 470));
 
         jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/portada.png"))); // NOI18N
-        jPanel7.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 100, 620, 470));
+        jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/undraw_special_event_4aj8.png"))); // NOI18N
+        jPanel7.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 80, -1, -1));
 
         javax.swing.GroupLayout jPanel40Layout = new javax.swing.GroupLayout(jPanel40);
         jPanel40.setLayout(jPanel40Layout);
@@ -1599,28 +1621,28 @@ public final class SistemaSave extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(81, 81, 81)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(87, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(btnEspec, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnExtras, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(btnEntradas, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnEnsaladas, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(86, 86, 86)
                         .addComponent(btnPostres, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(12, Short.MAX_VALUE))
+                        .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnEspec, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnEntradas, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnExtras, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnEnsaladas, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(53, 53, 53)
+                .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEntradas, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEnsaladas, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1632,7 +1654,7 @@ public final class SistemaSave extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnPostres, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(101, Short.MAX_VALUE))
         );
 
         btnAgregarPedido.setText("Actualizar Pedido");
@@ -1649,7 +1671,7 @@ public final class SistemaSave extends javax.swing.JFrame {
             }
         });
 
-        btnFinalizarPedido.setText("Finalizar Pedido");
+        btnFinalizarPedido.setText("Ver Pedido");
         btnFinalizarPedido.setToolTipText("");
         btnFinalizarPedido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2054,6 +2076,8 @@ public final class SistemaSave extends javax.swing.JFrame {
             if (!"".equals(txtNombrePlato.getText()) || !"".equals(txtPrecioPlato.getText())) {
                 pla.setNombre(txtNombrePlato.getText());
                 pla.setPrecio(Double.parseDouble(txtPrecioPlato.getText()));
+                pla.setCategoria(cbxCategoria.getSelectedItem().toString());
+                pla.setSubCategoria(cbxSubCategoria.getSelectedItem().toString());
                 pla.setId(Integer.parseInt(txtIdPlato.getText()));
                 if (plaDao.Modificar(pla)) {
                     JOptionPane.showMessageDialog(null, "Plato Modificado");
@@ -2112,9 +2136,12 @@ public final class SistemaSave extends javax.swing.JFrame {
                 LimpiarTable();
                 ListarPedidos();
                 txtIdPedido.setText("");
+            }else{
+                txtIdPedido.setText("");
             }
         } else {
             JOptionPane.showMessageDialog(null, "Selecciona una fila");
+            txtIdPedido.setText("");
         }
     }//GEN-LAST:event_btnElimPedDao
 
@@ -2306,19 +2333,18 @@ public final class SistemaSave extends javax.swing.JFrame {
                 double precio_Platillo = Double.parseDouble(tableFinalizar.getValueAt(fila, 3).toString());
                 LimpiarTable();
                 double total = Double.parseDouble(totalFinalizar.getText());  //totalFinalizar.getText();
-                if (total == 0)
-                {
-                    modificarTotalPedidoNegativo(total);
-                }else{
-                    
-                    modificarTotalPedidoNegativo(precio_Platillo);
-                }
                 verPedido(id_pedido);
                 verPedidoDetalle(id_pedido);
+                
+                TotalPagar(tableFinalizar, totalFinalizar);
+                modificarTotal(Double.parseDouble(totalFinalizar.getText()));
                 txtIdPlat.setText("");
+            }else{
+                txtIdPedido.setText("");
             }
         } else {
             JOptionPane.showMessageDialog(null, "Selecciona una fila");
+            txtIdPlat.setText("");
         }
     }//GEN-LAST:event_btnElimPlatiActionPerformed
 
@@ -2340,6 +2366,7 @@ public final class SistemaSave extends javax.swing.JFrame {
         LimpiarTable();
         verPedido(id_pedido);
         verPedidoDetalle(id_pedido);
+        TotalPagar(tableFinalizar, totalFinalizar);
         jTabbedPane1.setSelectedIndex(3);
         btnFinalizar.setEnabled(true);
     }//GEN-LAST:event_btnFinalizarPedidoActionPerformed
@@ -2351,6 +2378,51 @@ public final class SistemaSave extends javax.swing.JFrame {
         int id_pedido = pedDao.IdPedidoMesa(mesa, sala);
         pedDao.ticketPedido(id_pedido);
     }//GEN-LAST:event_btnImprimirActionPerformed
+
+    private void jLabel38MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel38MouseClicked
+        // TODO add your handling code here:
+        URL url=null;
+        try {
+            url = new URL("https://goa.com.mx/");
+            try {
+                Desktop.getDesktop().browse(url.toURI());
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
+        } catch (MalformedURLException e1) {
+            e1.printStackTrace();
+        }
+    }//GEN-LAST:event_jLabel38MouseClicked
+
+    private void btnDescuentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDescuentoActionPerformed
+        // TODO add your handling code here:
+        if (!"".equals(txtIdPlat.getText())) {
+            double descuento = 0;
+            descuento = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el descuento deseado:"))/100;
+            int id = Integer.parseInt(txtIdPlat.getText());
+            int fila = Integer.parseInt(txtHId.getText());
+            
+            int id_pedido = Integer.parseInt(txtIdPedido.getText()); //Integer.parseInt(TablePedidos.getValueAt(fila, 0).toString());
+            pedDao.EditarCantidad(descuento,id);
+            LimpiarTable();
+            verPedido(id_pedido);
+            verPedidoDetalle(id_pedido);
+            double precio = Double.parseDouble(tableFinalizar.getValueAt(fila, 4).toString());
+            double cantidad = (((precio)*(100))/(100-(descuento*100)));
+            TotalPagar(tableFinalizar, totalFinalizar);
+            //modificarTotalPedidoNegativo(cantidad);
+            modificarTotal(Double.parseDouble(totalFinalizar.getText()));
+            /*LimpiarTable();
+            verPedido(id_pedido);
+            verPedidoDetalle(id_pedido);*/
+            txtIdPlat.setText("");
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecciona una fila");
+            txtIdPlat.setText("");
+        }
+    }//GEN-LAST:event_btnDescuentoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -2366,6 +2438,7 @@ public final class SistemaSave extends javax.swing.JFrame {
     private javax.swing.JButton btnAddPlato;
     private javax.swing.JButton btnAgregarPedido;
     private javax.swing.JButton btnConfig;
+    private javax.swing.JButton btnDescuento;
     private javax.swing.JButton btnEditarPlato;
     private javax.swing.JButton btnElimPlati;
     private javax.swing.JButton btnEliminarPedido;
@@ -2795,11 +2868,20 @@ public final class SistemaSave extends javax.swing.JFrame {
         pedDao.EditarTotalPedido(totalAct, mesa, sala);
         
     }
+    
+    private void modificarTotal(double total){
+        int mesa = Integer.parseInt(txtTempNumMesa.getText());
+        int sala = Integer.parseInt(txtTempIdSala.getText());
+        pedDao.EditarTotalPedido(total, mesa, sala);
+        
+    }
     private void modificarTotalPedidoNegativo(double precio){
         int mesa = Integer.parseInt(txtTempNumMesa.getText());
         int sala = Integer.parseInt(txtTempIdSala.getText());
         double total = pedDao.VerTotalPedido(mesa, sala);
+        System.out.println(total);
         double totalAct = total - precio;
+        System.out.println(totalAct);
         pedDao.EditarTotalPedido(totalAct, mesa, sala);
         
     }
@@ -2813,7 +2895,11 @@ public final class SistemaSave extends javax.swing.JFrame {
             ob[1] = Listar.get(i).getNombre();
             ob[2] = Listar.get(i).getCantidad();
             ob[3] = Listar.get(i).getPrecio();
-            ob[4] = Listar.get(i).getCantidad() * Listar.get(i).getPrecio();
+            if(Listar.get(i).getCantidad()== 1.0){
+                ob[4] = Listar.get(i).getPrecio();
+            }else{
+                ob[4] = (Listar.get(i).getPrecio()) - (Listar.get(i).getCantidad() * Listar.get(i).getPrecio());
+            }
             ob[5] = Listar.get(i).getComentario();
             modelo.addRow(ob);
         }
@@ -2822,7 +2908,6 @@ public final class SistemaSave extends javax.swing.JFrame {
 
     public void verPedido(int id_pedido) {
         ped = pedDao.verPedido(id_pedido);
-        totalFinalizar.setText("" + ped.getTotal());
         txtFechaHora.setText("" + ped.getFecha());
         txtSalaFinalizar.setText("" + ped.getSala());
         txtNumMesaFinalizar.setText("" + ped.getNum_mesa());
