@@ -92,6 +92,8 @@ public final class SistemaSave extends javax.swing.JFrame {
             btnSala.setVisible(false);
             LabelVendedor.setText(priv.getNombre());
             txtRolUser.setText(priv.getRol());
+            btnElimPlati.setVisible(false);
+            btnDescuento.setVisible(false);
             
         } else {
             LabelVendedor.setText(priv.getNombre());
