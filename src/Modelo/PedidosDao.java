@@ -525,7 +525,7 @@ public class PedidosDao {
        if(numSpaces < 0){
            numSpaces = 0;
        }
-       return fila = plato + "_".repeat(numSpaces) + "$" + precio + "____" + "$" + total;
+       return fila = plato + " ".repeat(numSpaces) + "$" + precio + "    " + "$" + total;
     }
     public boolean actualizarEstado (int id_pedido){
         String sql = "UPDATE pedidos SET estado = ? WHERE id = ?";
