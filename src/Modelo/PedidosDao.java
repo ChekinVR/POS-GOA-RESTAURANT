@@ -171,7 +171,7 @@ public class PedidosDao {
             ps = con.prepareStatement(sql);
             ps.setString(1, det.getNombre());
             ps.setDouble(2, det.getPrecio());
-            ps.setInt(3, det.getCantidad());
+            ps.setDouble(3, det.getCantidad());
             ps.setString(4, det.getComentario());
             ps.setInt(5, det.getId_pedido());
             ps.execute();
@@ -189,6 +189,20 @@ public class PedidosDao {
             ps.setDouble(1, antprec);
             ps.setInt(2, mesa);
             ps.setInt(3, id_sala);
+            ps.execute();
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+        return r;
+    }
+    
+    public int EditarCantidad(double cantidad, int id){
+        String sql = "UPDATE  detalle_pedidos SET cantidad = ? WHERE id=? ";
+        try {
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setDouble(1, cantidad);
+            ps.setInt(2, id);
             ps.execute();
         } catch (SQLException e) {
             System.out.println(e.toString());
@@ -228,7 +242,7 @@ public class PedidosDao {
                det.setId(rs.getInt("id"));
                det.setNombre(rs.getString("nombre"));
                det.setPrecio(rs.getDouble("precio"));
-               det.setCantidad(rs.getInt("cantidad"));
+               det.setCantidad(rs.getDouble("cantidad"));
                det.setComentario(rs.getString("comentario"));
                Lista.add(det);
            }

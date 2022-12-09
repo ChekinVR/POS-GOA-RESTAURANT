@@ -4,14 +4,14 @@ public class DetallePedido {
     private int id;
     private String nombre;
     private double precio;
-    private int cantidad;
+    private double cantidad;
     private String comentario;
     private int id_pedido;
 
     public DetallePedido() {
     }
 
-    public DetallePedido(int id, String nombre, double precio, int cantidad, String comentario, int id_pedido) {
+    public DetallePedido(int id, String nombre, double precio, double cantidad, String comentario, int id_pedido) {
         this.id = id;
         this.nombre = nombre;
         this.precio = precio;
@@ -44,11 +44,11 @@ public class DetallePedido {
         this.precio = precio;
     }
 
-    public int getCantidad() {
+    public double getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(int cantidad) {
+    public void setCantidad(double cantidad) {
         this.cantidad = cantidad;
     }
 

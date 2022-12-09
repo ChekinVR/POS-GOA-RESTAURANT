@@ -117,7 +117,7 @@ public class PlatosDao {
     }
 
     public boolean Modificar(Platos pla) {
-        String sql = "UPDATE platos SET nombre=?, precio=? WHERE id=?";
+        String sql = "UPDATE platos SET nombre=?, precio=?, categoria=?, sub_categoria=? WHERE id=?";
         String sql2 = "ALTER TABLE platos AUTO_INCREMENT = 0";
         try {
             con = cn.getConnection();
@@ -126,7 +126,9 @@ public class PlatosDao {
             ps = con.prepareStatement(sql);
             ps.setString(1, pla.getNombre());
             ps.setDouble(2, pla.getPrecio());
-            ps.setInt(3, pla.getId());
+            ps.setString(3, pla.getCategoria());
+            ps.setString(4, pla.getSubCategoria());
+            ps.setInt(5, pla.getId());
             ps.execute();
             return true;
         } catch (SQLException e) {
