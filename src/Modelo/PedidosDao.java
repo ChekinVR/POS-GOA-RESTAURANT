@@ -444,7 +444,7 @@ public class PedidosDao {
         PrintService printService = PrinterOutputStream.getPrintServiceByName(printerName[x]);
         EscPos escpos;
         try {
-            File archivo_imagen = new File("C://Users//PC//Desktop//logo-dark.png");
+            File archivo_imagen = new File("C://Users//PC//Documents//GitHub//POS-GOA-RESTAURANT//src//Img//logo-dark.png");
             imagen = ImageIO.read(archivo_imagen);
             
             
@@ -478,16 +478,16 @@ public class PedidosDao {
             Style bold = new Style(escpos.getStyle())
                     .setBold(true);
             
-            algorithm = new BitonalOrderedDither(2,2,120,170);
+            algorithm = new BitonalOrderedDither(3,2,150,150);
             escposImage = new EscPosImage(new CoffeeImageImpl(imageBufferedImage), algorithm);
             escpos.write(imageWrapper, escposImage);
             
             escpos.feed(1);
             escpos.writeLF(title,"Goa Restaurant");
             escpos.writeLF(bold, 
-                             "Plato          P.unt.            P.Total")
+                             "Plato                         P.unt.  P.Desc.")
                     .writeLF(bold,
-                            "----------------------------------------");
+                            "---------------------------------------------");
                     String product = "SELECT d.* FROM pedidos p INNER JOIN detalle_pedidos d ON p.id = d.id_pedido WHERE p.id = ?";
                     try{
                     ps = con.prepareStatement(product);
@@ -495,12 +495,13 @@ public class PedidosDao {
                     rs = ps.executeQuery();
                     while (rs.next()){
                         double totalTicket = rs.getInt("cantidad") * rs.getDouble("precio");
-                        escpos.writeLF(rs.getString("nombre") + "$" + totalTicket + "$" + rs.getDouble("precio"));
+                        escpos.writeLF(calFilaTicket(rs.getString("nombre"), totalTicket , rs.getDouble("precio")));
+                        escpos.feed(1);
                     }
-                    }catch (SQLException e) {
+                    }catch (SQLException e)  {
                         System.out.println(e.toString());
                     }
-            escpos.feed(5);
+            escpos.feed(4);
             escpos.cut(EscPos.CutMode.FULL);
             
             
@@ -515,9 +516,17 @@ public class PedidosDao {
             }
         }  
     }
-    public String calFilaTicket(String s){
+    public String calFilaTicket(String plato, double precio, double total){
         
-       return s; 
+       String fila; 
+       int tamPlato = plato.length();
+       int tamPrecio = Double.toString(precio).length();
+       int tamTotal = Double.toString(total).length();
+       int numSpaces = 45 - (tamTotal + tamPrecio + 6 + tamPlato);
+       if(numSpaces < 0){
+           numSpaces = 0;
+       }
+       return fila = plato + "_".repeat(numSpaces) + "$" + precio + "____" + "$" + total;
     }
     public boolean actualizarEstado (int id_pedido){
         String sql = "UPDATE pedidos SET estado = ? WHERE id = ?";
