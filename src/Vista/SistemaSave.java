@@ -2284,6 +2284,7 @@ public final class SistemaSave extends javax.swing.JFrame {
 
     private void btnElimPlatiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnElimPlatiActionPerformed
         // TODO add your handling code here:
+        
         if (!"".equals(txtIdPlat.getText())) {
             int pregunta = JOptionPane.showConfirmDialog(null, "Esta seguro de eliminar");
             if (pregunta == 0) {
@@ -2303,6 +2304,7 @@ public final class SistemaSave extends javax.swing.JFrame {
                 }
                 verPedido(id_pedido);
                 verPedidoDetalle(id_pedido);
+                txtIdPlat.setText("");
             }
         } else {
             JOptionPane.showMessageDialog(null, "Selecciona una fila");
