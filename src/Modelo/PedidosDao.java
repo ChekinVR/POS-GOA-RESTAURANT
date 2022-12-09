@@ -433,7 +433,6 @@ public class PedidosDao {
             File archivo_imagen = new File("C://Users//PC//Desktop//logo-dark.png");
             imagen = ImageIO.read(archivo_imagen);
             
-            
             BufferedImage  imageBufferedImage = imagen;
             RasterBitImageWrapper imageWrapper = new RasterBitImageWrapper();
             
@@ -459,7 +458,7 @@ public class PedidosDao {
             Style title = new Style()
                     .setFontSize(Style.FontSize._3, Style.FontSize._2)
                     .setJustification(EscPosConst.Justification.Center);
-
+            
             Style subtitle = new Style(escpos.getStyle())
                     .setBold(true)
                     .setUnderline(Style.Underline.OneDotThick);
@@ -473,11 +472,20 @@ public class PedidosDao {
             escpos.feed(1);
             escpos.writeLF(title,"Goa Restaurant");
             escpos.writeLF(bold, 
-                             "Plato          P.unt.            P.Total")
-                    .writeLF("Botle of water                     $0.50")
+                             "Plato           P.unt.           P.Total")
                     .writeLF(bold,
-                            "----------------------------------------")
-                    .write("Client: ");
+                            "----------------------------------------");
+            try{
+                ps = con.prepareStatement(informacion);
+                ps.setInt(1, id_pedido);
+                rs = ps.executeQuery();
+                while (rs.next()){
+                    escpos.writeLF(rs.getString("nombre") );
+                }
+                
+            }catch (SQLException e) {
+                System.out.println(e.toString());
+            }
             escpos.close();
             
         } catch (IOException e) {
@@ -489,6 +497,11 @@ public class PedidosDao {
                 System.out.println(e.toString());
             }
         }  
+    }
+    
+    public String linea(String s){
+        
+        return s;
     }
     
     public boolean actualizarEstado (int id_pedido){
