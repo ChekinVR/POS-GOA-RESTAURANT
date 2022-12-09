@@ -455,10 +455,8 @@ public class PedidosDao {
             Bitonal algorithm = new BitonalThreshold();
             EscPosImage escposImage = new EscPosImage(new CoffeeImageImpl(imageBufferedImage), algorithm);
             
-            String informacion = "SELECT p.*, s.nombre FROM pedidos p INNER JOIN salas s ON p.id_sala = s.id WHERE p.id = ?";
             
             try {
-                ps = con.prepareStatement(informacion);
                 ps.setInt(1, id_pedido);
                 rs = ps.executeQuery();
                 if (rs.next()) {
@@ -480,22 +478,33 @@ public class PedidosDao {
             Style bold = new Style(escpos.getStyle())
                     .setBold(true);
             
-            escpos.writeLF("BitonalOrderedDither (darkening) values");
             algorithm = new BitonalOrderedDither(2,2,120,170);
             escposImage = new EscPosImage(new CoffeeImageImpl(imageBufferedImage), algorithm);
             escpos.write(imageWrapper, escposImage);
+            
             escpos.feed(1);
             escpos.writeLF(title,"Goa Restaurant");
             escpos.writeLF(bold, 
                              "Plato          P.unt.            P.Total")
-                    .writeLF("Botle of water                     $0.50")
-                    //String variable = Character(platillo.size());
-                    //.writeLF(platillo + variable + total)
                     .writeLF(bold,
-                            "----------------------------------------")
-                    .write("Client: ");
-            escpos.close();
+                            "----------------------------------------");
+                    String product = "SELECT d.* FROM pedidos p INNER JOIN detalle_pedidos d ON p.id = d.id_pedido WHERE p.id = ?";
+                    try{
+                    ps = con.prepareStatement(product);
+                    ps.setInt(1, id_pedido);
+                    rs = ps.executeQuery();
+                    while (rs.next()){
+                        double totalTicket = rs.getInt("cantidad") * rs.getDouble("precio");
+                        escpos.writeLF(rs.getString("nombre") + "$" + totalTicket + "$" + rs.getDouble("precio"));
+                    }
+                    }catch (SQLException e) {
+                        System.out.println(e.toString());
+                    }
+            escpos.feed(5);
+            escpos.cut(EscPos.CutMode.FULL);
             
+            
+            escpos.close(); 
         } catch (IOException e) {
             System.out.println(e.toString());
         }finally{
@@ -506,7 +515,10 @@ public class PedidosDao {
             }
         }  
     }
-    
+    public String calFilaTicket(String s){
+        
+       return s; 
+    }
     public boolean actualizarEstado (int id_pedido){
         String sql = "UPDATE pedidos SET estado = ? WHERE id = ?";
         try {
