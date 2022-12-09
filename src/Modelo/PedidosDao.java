@@ -438,13 +438,13 @@ public class PedidosDao {
     
     public void ticketPedido (int id_pedido){
         int x = 0;
-        String[ ] printerName = {"XP-80C", "XP-80C"}; 
+        String[ ] printerName = {"XP-80C1", "XP-80C"}; 
         String fechaPedido = null, usuario = null, total = null, num_mesa = null;
         BufferedImage imagen = null;
         PrintService printService = PrinterOutputStream.getPrintServiceByName(printerName[x]);
         EscPos escpos;
         try {
-            File archivo_imagen = new File("C://Users//PC//Desktop//logo-dark.png");
+            File archivo_imagen = new File("D://GitHub//POS-GOA-RESTAURANT//src//Img//logo-dark.png");
             imagen = ImageIO.read(archivo_imagen);
             
             
@@ -455,18 +455,6 @@ public class PedidosDao {
             Bitonal algorithm = new BitonalThreshold();
             EscPosImage escposImage = new EscPosImage(new CoffeeImageImpl(imageBufferedImage), algorithm);
             
-            
-            try {
-                ps.setInt(1, id_pedido);
-                rs = ps.executeQuery();
-                if (rs.next()) {
-                    num_mesa = rs.getString("num_mesa");
-                    fechaPedido = rs.getString("fecha");
-                    total = rs.getString("total");
-                }
-            } catch (SQLException e) {
-                System.out.println(e.toString());
-            }
             
             Style title = new Style()
                     .setFontSize(Style.FontSize._3, Style.FontSize._2)
