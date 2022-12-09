@@ -542,6 +542,21 @@ public class PedidosDao {
         }
     }
     
+    public boolean actualizarImpreso (int id_pedido, String impreso){
+        String sql = "UPDATE pedidos SET impreso = ? WHERE id = ?";
+        try {
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, impreso);
+            ps.setInt(2, id_pedido);
+            ps.execute();
+            return true;
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+            return false;
+        }
+    }
+    
     public List listarPedidos(){
        List<Pedidos> Lista = new ArrayList();
        String sql = "SELECT p.*, s.nombre FROM pedidos p INNER JOIN salas s ON p.id_sala = s.id ORDER BY p.fecha DESC";
