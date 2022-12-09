@@ -168,6 +168,7 @@ public final class SistemaSave extends javax.swing.JFrame {
         jPanel14 = new javax.swing.JPanel();
         btnElimPlati = new javax.swing.JButton();
         txtIdPlat = new javax.swing.JTextField();
+        btnImprimir = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
         TablePedidos = new javax.swing.JTable();
@@ -719,7 +720,7 @@ public final class SistemaSave extends javax.swing.JFrame {
                 btnPdfPedidoActionPerformed(evt);
             }
         });
-        jPanel25.add(btnPdfPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 590, 130, 60));
+        jPanel25.add(btnPdfPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 670, 130, 60));
         jPanel25.add(txtIdHistorialPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 680, 50, -1));
 
         jPanel14.setOpaque(false);
@@ -765,6 +766,14 @@ public final class SistemaSave extends javax.swing.JFrame {
 
         jPanel25.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 520, -1, -1));
         jPanel25.add(txtIdPlat, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 620, 50, -1));
+
+        btnImprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/print.png"))); // NOI18N
+        btnImprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImprimirActionPerformed(evt);
+            }
+        });
+        jPanel25.add(btnImprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 590, 130, 60));
 
         jTabbedPane1.addTab("Finalizar Pedido", jPanel25);
 
@@ -2102,6 +2111,7 @@ public final class SistemaSave extends javax.swing.JFrame {
                 pedDao.Eliminar(id);
                 LimpiarTable();
                 ListarPedidos();
+                txtIdPedido.setText("");
             }
         } else {
             JOptionPane.showMessageDialog(null, "Selecciona una fila");
@@ -2179,6 +2189,7 @@ public final class SistemaSave extends javax.swing.JFrame {
             jTabbedPane1.setSelectedIndex(3);
             btnFinalizar.setEnabled(false);
             txtIdHistorialPedido.setText(""+id_pedido);
+            txtIdPedido.setText("");
             
         } else {
             JOptionPane.showMessageDialog(null, "Selecciona un pedido");
@@ -2333,6 +2344,14 @@ public final class SistemaSave extends javax.swing.JFrame {
         btnFinalizar.setEnabled(true);
     }//GEN-LAST:event_btnFinalizarPedidoActionPerformed
 
+    private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
+        // TODO add your handling code here:
+        int mesa = Integer.parseInt(txtTempNumMesa.getText());
+        int sala = Integer.parseInt(txtTempIdSala.getText());
+        int id_pedido = pedDao.IdPedidoMesa(mesa, sala);
+        pedDao.ticketPedido(id_pedido);
+    }//GEN-LAST:event_btnImprimirActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LabelConection;
@@ -2361,6 +2380,7 @@ public final class SistemaSave extends javax.swing.JFrame {
     private javax.swing.JButton btnFinalizarPedido;
     private javax.swing.JButton btnGenerarPedido;
     private javax.swing.JButton btnGuardarPlato;
+    private javax.swing.JButton btnImprimir;
     private javax.swing.JButton btnIniciar;
     private javax.swing.JButton btnNuevoPlato;
     private javax.swing.JButton btnNuevoSala;
