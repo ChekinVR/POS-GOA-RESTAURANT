@@ -475,6 +475,8 @@ public class PedidosDao {
             escpos.writeLF(bold, 
                              "Plato          P.unt.            P.Total")
                     .writeLF("Botle of water                     $0.50")
+                    //String variable = Character(platillo.size());
+                    //.writeLF(platillo + variable + total)
                     .writeLF(bold,
                             "----------------------------------------")
                     .write("Client: ");
