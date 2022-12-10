@@ -436,13 +436,41 @@ public class PedidosDao {
         }
     }
     
-    public void ticketPedido (int id_pedido){
+    public void ticketPedido (int id_pedido, String lugarTicket){
         int x = 0;
         String[ ] printerName = {"XP-80C1", "XP-80C"}; 
-        String fechaPedido = null, usuario = null, total = null, num_mesa = null, sala = null,comentario = null;
+        ticketusuario(id_pedido, printerName[x]);
+        ticketBar(id_pedido, printerName[x]);
+        
+    }
+    
+    public void ticketBar(int id_pedido, String printerName){
+        
+    }
+    
+    public void ticketCocina(int id_pedido, String printerName){
+        String num_mesa = null, sala = null;
+        PrintService printService = PrinterOutputStream.getPrintServiceByName(printerName);
+        EscPos escpos;
+        try{
+            escpos = new EscPos(new PrinterOutputStream(printService));
+            Style title = new Style()
+                    .setFontSize(Style.FontSize._3, Style.FontSize._2)
+                    .setJustification(EscPosConst.Justification.Center);
+
+            Style subtitle = new Style(escpos.getStyle())
+                    .setJustification(EscPosConst.Justification.Center);
+            
+        }catch(IOException e){
+            System.out.println(e.toString());
+        }
+    }
+    
+    public void ticketusuario(int id_pedido, String printerName){
+        String fechaPedido = null, total = null, num_mesa = null, sala = null;
         BufferedImage imagen = null;
         double totalTicket = 0.0;
-        PrintService printService = PrinterOutputStream.getPrintServiceByName(printerName[x]);
+        PrintService printService = PrinterOutputStream.getPrintServiceByName(printerName);
         EscPos escpos;
         try {
             imagen = ImageIO.read(getClass().getResource("/Img/logo-dark-modo.png"));
@@ -486,7 +514,8 @@ public class PedidosDao {
  
             escpos.writeLF(title,"Goa Restaurant");
             escpos.writeLF("N_Mesa: " + num_mesa + "          " + "Fecha: " + fechaPedido );
-            escpos.writeLF("N_Sala: " + sala + "                 " + "N_ticket: " + id_pedido);
+            escpos.writeLF("N_Sala: " + sala);
+            escpos.writeLF("N_ticket: " + id_pedido);
             escpos.feed(1);
             escpos.writeLF(bold, 
                              "Plato                     P.SubTotal  P.Total")
@@ -545,10 +574,9 @@ public class PedidosDao {
             }
         }  
     }
-    
     public String calFilaTicket(String plato, double precio, double total){
         
-       String fila; 
+       String fila = null; 
        int tamPlato = plato.length();
        int tamPrecio = Double.toString(precio).length();
        int tamTotal = Double.toString(total).length();
