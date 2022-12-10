@@ -2473,7 +2473,7 @@ public final class SistemaSave extends javax.swing.JFrame {
         int mesa = Integer.parseInt(txtTempNumMesa.getText());
         int sala = Integer.parseInt(txtTempIdSala.getText());
         int id_pedido = pedDao.IdPedidoMesa(mesa, sala);
-        pedDao.ticketPedido(id_pedido);
+        pedDao.ticketPedido(id_pedido, "COCINA");
         pedDao.actualizarImpreso(id_pedido,"COCINA");
         btnImprimir.setVisible(true);
         btnFinalizar.setVisible(true);
