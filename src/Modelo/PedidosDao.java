@@ -181,14 +181,15 @@ public class PedidosDao {
         return r;
     }
     
-    public int EditarTotalPedido(double antprec, int mesa, int id_sala){
-        String sql = "UPDATE  pedidos SET total = ? WHERE num_mesa=? AND id_sala=?";
+    public int EditarTotalPedido(double antprec, int mesa, int id_sala, int id_pedido){
+        String sql = "UPDATE  pedidos SET total = ? WHERE num_mesa=? AND id_sala=? AND id = ?";
         try {
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
             ps.setDouble(1, antprec);
             ps.setInt(2, mesa);
             ps.setInt(3, id_sala);
+            ps.setInt(4, id_pedido);
             ps.execute();
         } catch (SQLException e) {
             System.out.println(e.toString());
@@ -210,14 +211,15 @@ public class PedidosDao {
         return r;
     }
     
-    public double VerTotalPedido(int mesa, int id_sala){
+    public double VerTotalPedido(int mesa, int id_sala, int id_pedido){
         double total = 0;
-        String sql = "SELECT total FROM pedidos WHERE num_mesa=? AND id_sala=?";
+        String sql = "SELECT total FROM pedidos WHERE num_mesa=? AND id_sala=? AND id = ?";
         try {
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
             ps.setInt(1, mesa);
             ps.setInt(2, id_sala);
+            ps.setInt(3, id_pedido);
             rs = ps.executeQuery();
             if(rs.next()){
                 total = rs.getInt("total");

@@ -186,6 +186,8 @@ public final class SistemaSave extends javax.swing.JFrame {
         btnImprimir = new javax.swing.JButton();
         btnCociImp = new javax.swing.JButton();
         btnClientImp = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+        txtdFinalizarP = new javax.swing.JTextField();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
         TablePedidos = new javax.swing.JTable();
@@ -833,6 +835,13 @@ public final class SistemaSave extends javax.swing.JFrame {
             }
         });
         jPanel25.add(btnClientImp, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 590, 130, 60));
+
+        jLabel10.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jLabel10.setText("N° Ticket:");
+        jPanel25.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 670, -1, -1));
+
+        txtdFinalizarP.setEditable(false);
+        jPanel25.add(txtdFinalizarP, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 670, 240, 30));
 
         jTabbedPane1.addTab("Finalizar Pedido", jPanel25);
 
@@ -2401,6 +2410,7 @@ public final class SistemaSave extends javax.swing.JFrame {
         int verificar = pedDao.verificarStado(mesa, sala);
         LimpiarTable();
         txtIdPedido.setText(""+verificar);
+        txtdFinalizarP.setText(""+verificar);
         verPedido(verificar);
         verPedidoDetalle(verificar);
         TotalPagar(tableFinalizar, totalFinalizar);
@@ -2444,7 +2454,7 @@ public final class SistemaSave extends javax.swing.JFrame {
             int id = Integer.parseInt(txtIdPlat.getText());
             //int fila = Integer.parseInt(txtHId.getText());
             
-            int id_pedido = Integer.parseInt(txtIdPedido.getText()); //Integer.parseInt(TablePedidos.getValueAt(fila, 0).toString());
+            int id_pedido = Integer.parseInt(txtdFinalizarP.getText()); //Integer.parseInt(TablePedidos.getValueAt(fila, 0).toString());
             pedDao.EditarCantidad(descuento,id);
             LimpiarTable();
             verPedido(id_pedido);
@@ -2478,7 +2488,7 @@ public final class SistemaSave extends javax.swing.JFrame {
         // TODO add your handling code here:
         int mesa = Integer.parseInt(txtTempNumMesa.getText());
         int sala = Integer.parseInt(txtTempIdSala.getText());
-        int id_pedido = pedDao.IdPedidoMesa(mesa, sala);
+        int id_pedido = Integer.parseInt(txtIdPedido.getText());
         pedDao.ticketPedido(id_pedido, "COCINA",0);
         pedDao.actualizarImpreso(id_pedido,"COCINA");
         btnImprimir.setVisible(true);
@@ -2613,6 +2623,7 @@ public final class SistemaSave extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbxRol;
     private javax.swing.JComboBox<String> cbxSubCategoria;
     private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
@@ -2723,6 +2734,7 @@ public final class SistemaSave extends javax.swing.JFrame {
     private javax.swing.JTextField txtTempIDPed;
     private javax.swing.JTextField txtTempIdSala;
     private javax.swing.JTextField txtTempNumMesa;
+    private javax.swing.JTextField txtdFinalizarP;
     // End of variables declaration//GEN-END:variables
 
     private void TotalPagar(JTable tabla, JLabel label) {
@@ -2907,10 +2919,18 @@ public final class SistemaSave extends javax.swing.JFrame {
                     txtTempIDPed.setText("" + verificar);
                     btnGenerarPedido.setVisible(false);
                     btnAgregarPedido.setVisible(true);
-                    btnRegresar.setVisible(false);
                     txtIdPedido.setText(""+verificar);
-                    
+                    totalMenu.setText("0.00");
                     btnFinalizarPedido.setVisible(true);
+                    btnRegresar.setVisible(false);
+                    btnEntradas.setVisible(true);
+                    btnEnsaladas.setVisible(true);
+                    btnExtras.setVisible(true);
+                    btnEspec.setVisible(true);
+                    btnPostres.setVisible(true);
+                    btnBebidas.setVisible(true);
+                    txtTempCateg.setText("");
+                    ListarPlatosCategorias(tblTemPlatos);
                     
                 } else {
                     LimpiarTable();
@@ -2922,6 +2942,14 @@ public final class SistemaSave extends javax.swing.JFrame {
                     btnAgregarPedido.setVisible(false);
                     btnRegresar.setVisible(false);
                     btnFinalizarPedido.setVisible(false);
+                    btnEntradas.setVisible(true);
+                    btnEnsaladas.setVisible(true);
+                    btnExtras.setVisible(true);
+                    btnEspec.setVisible(true);
+                    btnPostres.setVisible(true);
+                    btnBebidas.setVisible(true);
+                    txtTempCateg.setText("");
+                    ListarPlatosCategorias(tblTemPlatos);
                 }
             });
         }
@@ -2989,7 +3017,7 @@ public final class SistemaSave extends javax.swing.JFrame {
     private void modificarDetallePedido(){
         int mesa = Integer.parseInt(txtTempNumMesa.getText());
         int sala = Integer.parseInt(txtTempIdSala.getText());
-        int id = pedDao.IdPedidoMesa(mesa, sala);
+        int id = pedDao.verificarStado(mesa, sala);
         for (int i = 0; i < tableMenu.getRowCount(); i++) {
             String nombre = tableMenu.getValueAt(i, 1).toString();
             int cant = Integer.parseInt(tableMenu.getValueAt(i, 2).toString());
@@ -3007,26 +3035,30 @@ public final class SistemaSave extends javax.swing.JFrame {
     private void modificarTotalPedido(){
         int mesa = Integer.parseInt(txtTempNumMesa.getText());
         int sala = Integer.parseInt(txtTempIdSala.getText());
-        double total = pedDao.VerTotalPedido(mesa, sala);
+        int id = Integer.parseInt(txtIdPedido.getText());
+        double total = pedDao.VerTotalPedido(mesa, sala, id);
         double totalAct = total + Totalpagar;
-        pedDao.EditarTotalPedido(totalAct, mesa, sala);
+        
+        pedDao.EditarTotalPedido(totalAct, mesa, sala,id);
         
     }
     
     private void modificarTotal(double total){
         int mesa = Integer.parseInt(txtTempNumMesa.getText());
         int sala = Integer.parseInt(txtTempIdSala.getText());
-        pedDao.EditarTotalPedido(total, mesa, sala);
+        int id = Integer.parseInt(txtIdPedido.getText());
+        pedDao.EditarTotalPedido(total, mesa, sala,id);
         
     }
     private void modificarTotalPedidoNegativo(double precio){
         int mesa = Integer.parseInt(txtTempNumMesa.getText());
         int sala = Integer.parseInt(txtTempIdSala.getText());
-        double total = pedDao.VerTotalPedido(mesa, sala);
+        int id = Integer.parseInt(txtdFinalizarP.getText());
+        double total = pedDao.VerTotalPedido(mesa, sala,id);
         System.out.println(total);
         double totalAct = total - precio;
         System.out.println(totalAct);
-        pedDao.EditarTotalPedido(totalAct, mesa, sala);
+        pedDao.EditarTotalPedido(totalAct, mesa, sala,id);
         
     }
 
