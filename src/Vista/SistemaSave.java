@@ -2039,7 +2039,7 @@ public final class SistemaSave extends javax.swing.JFrame {
             int mesa = Integer.parseInt(txtTempNumMesa.getText());
             int sala = Integer.parseInt(txtTempIdSala.getText());
             int id_pedido = pedDao.IdPedidoMesa(mesa, sala);
-            pedDao.ticketPedido(id_pedido,"BARR/COCI");
+            pedDao.ticketPedido(id_pedido,"BARR/COCI",0);
         } else {
             JOptionPane.showMessageDialog(null, "NO HAY PRODUCTO EN LA PEDIDO");
         }
@@ -2246,7 +2246,8 @@ public final class SistemaSave extends javax.swing.JFrame {
             jTabbedPane1.setSelectedIndex(3);
             btnFinalizar.setEnabled(false);
             txtIdHistorialPedido.setText(""+id_pedido);
-            txtIdPedido.setText("");
+            txtIdPedido.setText(""+id_pedido);
+            TotalPagar(tableFinalizar, totalFinalizar);
             
         } else {
             JOptionPane.showMessageDialog(null, "Selecciona un pedido");
@@ -2364,14 +2365,13 @@ public final class SistemaSave extends javax.swing.JFrame {
             if (pregunta == 0) {
                 int id = Integer.parseInt(txtIdPlat.getText());
                 pedDao.EliminarPlatoPed(id);
-                int fila = Integer.parseInt(txtHId.getText());
+                //int fila = Integer.parseInt(txtHId.getText());
                 int id_pedido = Integer.parseInt(txtIdPedido.getText()); //Integer.parseInt(TablePedidos.getValueAt(fila, 0).toString());
-                double precio_Platillo = Double.parseDouble(tableFinalizar.getValueAt(fila, 3).toString());
+                //double precio_Platillo = Double.parseDouble(tableFinalizar.getValueAt(fila, 3).toString());
                 LimpiarTable();
-                double total = Double.parseDouble(totalFinalizar.getText());  //totalFinalizar.getText();
+                //double total = Double.parseDouble(totalFinalizar.getText());  //totalFinalizar.getText();
                 verPedido(id_pedido);
                 verPedidoDetalle(id_pedido);
-                
                 TotalPagar(tableFinalizar, totalFinalizar);
                 modificarTotal(Double.parseDouble(totalFinalizar.getText()));
                 txtIdPlat.setText("");
@@ -2477,7 +2477,7 @@ public final class SistemaSave extends javax.swing.JFrame {
         int mesa = Integer.parseInt(txtTempNumMesa.getText());
         int sala = Integer.parseInt(txtTempIdSala.getText());
         int id_pedido = pedDao.IdPedidoMesa(mesa, sala);
-        pedDao.ticketPedido(id_pedido, "COCINA");
+        pedDao.ticketPedido(id_pedido, "COCINA",0);
         pedDao.actualizarImpreso(id_pedido,"COCINA");
         btnImprimir.setVisible(true);
         btnFinalizar.setVisible(true);

@@ -436,17 +436,17 @@ public class PedidosDao {
         }
     }
     
-    public void ticketPedido (int id_pedido, String lugarTicket){
-        int x = 0;
+    public void ticketPedido (int id_pedido, String lugarTicket, int x){
         String[ ] printerName = {"XP-80C2", "XP-80C"}; 
         if("BARR/COCI".equals(lugarTicket))
         {
-            ticketCocina(id_pedido, printerName[x]);
+            ticketCocina(id_pedido, printerName[x+1]);
             ticketBar(id_pedido, printerName[x]);
+            ticketusuario(id_pedido, printerName[x]);
         }
         //ticketusuario(id_pedido, printerName[x]);
         //ticketBar(id_pedido, printerName[x]);}
-        ticketCocina(id_pedido, printerName[x]);
+        //ticketCocina(id_pedido, printerName[x]);
         
     }
     
