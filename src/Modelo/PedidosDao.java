@@ -400,7 +400,7 @@ public class PedidosDao {
                     tabla.addCell(rs.getString("precio"));
                     tabla.addCell(String.valueOf(subTotal));
                 }
-
+                
             } catch (SQLException e) {
                 System.out.println(e.toString());
             }
@@ -439,13 +439,13 @@ public class PedidosDao {
     public void ticketPedido (int id_pedido){
         int x = 0;
         String[ ] printerName = {"XP-80C1", "XP-80C"}; 
-        String fechaPedido = null, usuario = null, total = null, num_mesa = null;
+        String fechaPedido = null, usuario = null, total = null, num_mesa = null, sala = null,comentario = null;
         BufferedImage imagen = null;
+        double totalTicket = 0.0;
         PrintService printService = PrinterOutputStream.getPrintServiceByName(printerName[x]);
         EscPos escpos;
         try {
             imagen = ImageIO.read(getClass().getResource("/Img/logo-dark-modo.png"));
-            
             
             BufferedImage  imageBufferedImage = imagen;
             RasterBitImageWrapper imageWrapper = new RasterBitImageWrapper();
@@ -454,37 +454,42 @@ public class PedidosDao {
             Bitonal algorithm = new BitonalThreshold();
             EscPosImage escposImage = new EscPosImage(new CoffeeImageImpl(imageBufferedImage), algorithm);
             
-            
-//            try {
-//                ps.setInt(1, id_pedido);
-//                rs = ps.executeQuery();
-//                if (rs.next()) {
-//                    num_mesa = rs.getString("num_mesa");
-//                    fechaPedido = rs.getString("fecha");
-//                    total = rs.getString("total");
-//                }
-//            } catch (SQLException e) {
-//                System.out.println(e.toString());
-//            }
-            
             Style title = new Style()
                     .setFontSize(Style.FontSize._3, Style.FontSize._2)
                     .setJustification(EscPosConst.Justification.Center);
 
             Style subtitle = new Style(escpos.getStyle())
-                    .setBold(true)
-                    .setUnderline(Style.Underline.OneDotThick);
+                    .setJustification(EscPosConst.Justification.Center);
             Style bold = new Style(escpos.getStyle())
                     .setBold(true);
-            
+            String informacion = "SELECT p.*, s.nombre FROM pedidos p INNER JOIN salas s ON p.id_sala = s.id WHERE p.id = ?";
+            try {
+                
+                ps = con.prepareStatement(informacion);
+                ps.setInt(1, id_pedido);
+                rs = ps.executeQuery();
+                
+                if (rs.next()) {
+                    num_mesa = rs.getString("num_mesa");
+                    sala = rs.getString("nombre");
+                    fechaPedido = rs.getString("fecha");
+                    total = rs.getString("total");
+                    
+                }
+            } catch (SQLException e) {
+                System.out.println(e.toString());
+            }
+                       
             algorithm = new BitonalOrderedDither(3,2,150,150);
             escposImage = new EscPosImage(new CoffeeImageImpl(imageBufferedImage), algorithm);
             escpos.write(imageWrapper, escposImage);
-            
-            escpos.feed(1);
+ 
             escpos.writeLF(title,"Goa Restaurant");
+            escpos.writeLF("N_Mesa: " + num_mesa + "          " + "Fecha: " + fechaPedido );
+            escpos.writeLF("N_Sala: " + sala + "                 " + "N_ticket: " + id_pedido);
+            escpos.feed(1);
             escpos.writeLF(bold, 
-                             "Plato                         P.unt.  P.Desc.")
+                             "Plato                     P.SubTotal  P.Total")
                     .writeLF(bold,
                             "---------------------------------------------");
                     String product = "SELECT d.* FROM pedidos p INNER JOIN detalle_pedidos d ON p.id = d.id_pedido WHERE p.id = ?";
@@ -493,14 +498,39 @@ public class PedidosDao {
                     ps.setInt(1, id_pedido);
                     rs = ps.executeQuery();
                     while (rs.next()){
-                        double totalTicket = rs.getInt("cantidad") * rs.getDouble("precio");
-                        escpos.writeLF(calFilaTicket(rs.getString("nombre"), totalTicket , rs.getDouble("precio")));
+                        
+                        if(rs.getDouble("cantidad") <= 1){
+                            totalTicket =rs.getDouble("precio");
+                        }else{
+                            totalTicket = (rs.getDouble("precio") - ((rs.getDouble("cantidad") * rs.getDouble("precio"))));
+                        }
+                        
+                        escpos.writeLF(subtitle,calFilaTicket(rs.getString("nombre") , rs.getDouble("precio"), totalTicket));
                         escpos.feed(1);
                     }
                     }catch (SQLException e)  {
                         System.out.println(e.toString());
                     }
-            escpos.feed(4);
+            escpos.writeLF(bold,
+                            "---------------------------------------------");
+            escpos.writeLF(bold,
+                                "                              Total S/: " + total);
+            String mensaje = "SELECT c.* FROM config c WHERE id = ?";
+            try{
+                ps = con.prepareStatement(mensaje);
+                ps.setInt(1, 1);
+                rs = ps.executeQuery();
+                if(rs.next()){
+                    escpos.feed(2);
+                    escpos.writeLF(subtitle,rs.getString("mensaje"));
+                    escpos.writeLF(subtitle,"Visitanos en goa.com.mx");
+                    escpos.writeLF(subtitle,"Gracias por su visita");
+                }
+            }catch(SQLException e){
+               System.out.println(e.toString()); 
+            }
+            
+            escpos.feed(5);
             escpos.cut(EscPos.CutMode.FULL);
             
             
@@ -515,6 +545,7 @@ public class PedidosDao {
             }
         }  
     }
+    
     public String calFilaTicket(String plato, double precio, double total){
         
        String fila; 
@@ -527,6 +558,7 @@ public class PedidosDao {
        }
        return fila = plato + " ".repeat(numSpaces) + "$" + precio + "    " + "$" + total;
     }
+    
     public boolean actualizarEstado (int id_pedido){
         String sql = "UPDATE pedidos SET estado = ? WHERE id = ?";
         try {
