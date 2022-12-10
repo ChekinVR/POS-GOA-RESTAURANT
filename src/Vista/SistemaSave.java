@@ -2047,8 +2047,9 @@ public final class SistemaSave extends javax.swing.JFrame {
             jTabbedPane1.setSelectedIndex(0);
             int mesa = Integer.parseInt(txtTempNumMesa.getText());
             int sala = Integer.parseInt(txtTempIdSala.getText());
-            int id_pedido = pedDao.IdPedidoMesa(mesa, sala);
+            int id_pedido = pedDao.verificarStado(mesa,sala);
             pedDao.ticketPedido(id_pedido,"BARR/COCI",0);
+            pedDao.actualizarImpreso(id_pedido, "BARR/COCI");
         } else {
             JOptionPane.showMessageDialog(null, "NO HAY PRODUCTO EN LA PEDIDO");
         }
