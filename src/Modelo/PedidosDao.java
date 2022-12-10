@@ -499,7 +499,7 @@ public class PedidosDao {
                     rs = ps.executeQuery();
                     while (rs.next()){
                         
-                        if(rs.getDouble("cantidad") <= 1){
+                        if(rs.getDouble("cantidad") >= 1){
                             totalTicket =rs.getDouble("precio");
                         }else{
                             totalTicket = (rs.getDouble("precio") - ((rs.getDouble("cantidad") * rs.getDouble("precio"))));
