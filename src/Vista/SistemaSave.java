@@ -1747,9 +1747,9 @@ public final class SistemaSave extends javax.swing.JFrame {
                     .addComponent(btnGenerarPedido, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel19Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnAgregarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnFinalizarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnFinalizarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnAgregarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(119, 119, 119))
         );
 
@@ -2398,12 +2398,14 @@ public final class SistemaSave extends javax.swing.JFrame {
         // TODO add your handling code here:
         int mesa = Integer.parseInt(txtTempNumMesa.getText());
         int sala = Integer.parseInt(txtTempIdSala.getText());
-        int id_pedido = pedDao.IdPedidoMesa(mesa, sala);
+        int verificar = pedDao.verificarStado(mesa, sala);
         LimpiarTable();
-        verPedido(id_pedido);
-        verPedidoDetalle(id_pedido);
+        txtIdPedido.setText(""+verificar);
+        verPedido(verificar);
+        verPedidoDetalle(verificar);
         TotalPagar(tableFinalizar, totalFinalizar);
         jTabbedPane1.setSelectedIndex(3);
+        
         btnFinalizar.setEnabled(true);
     }//GEN-LAST:event_btnFinalizarPedidoActionPerformed
 
@@ -2902,10 +2904,12 @@ public final class SistemaSave extends javax.swing.JFrame {
                     jTabbedPane1.setSelectedIndex(8);
                     txtTempIdSala.setText("" + id_sala);
                     txtTempNumMesa.setText("" + num_mesa);
-                    txtTempIDPed.setText("" + pedDao.IdPedido());
+                    txtTempIDPed.setText("" + verificar);
                     btnGenerarPedido.setVisible(false);
                     btnAgregarPedido.setVisible(true);
                     btnRegresar.setVisible(false);
+                    txtIdPedido.setText(""+verificar);
+                    
                     btnFinalizarPedido.setVisible(true);
                     
                 } else {
