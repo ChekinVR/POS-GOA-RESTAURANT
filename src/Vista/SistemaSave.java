@@ -2036,6 +2036,10 @@ public final class SistemaSave extends javax.swing.JFrame {
             LimpiarTableMenu();
             JOptionPane.showMessageDialog(null, "PEDIDO REGISTRADO");
             jTabbedPane1.setSelectedIndex(0);
+            int mesa = Integer.parseInt(txtTempNumMesa.getText());
+            int sala = Integer.parseInt(txtTempIdSala.getText());
+            int id_pedido = pedDao.IdPedidoMesa(mesa, sala);
+            pedDao.ticketPedido(id_pedido,"BARR/COCI");
         } else {
             JOptionPane.showMessageDialog(null, "NO HAY PRODUCTO EN LA PEDIDO");
         }
