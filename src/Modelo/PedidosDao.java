@@ -461,8 +461,21 @@ public class PedidosDao {
         {
             ticketCocina(id_pedido, printerName[x+1]);
             ticketBar(id_pedido, printerName[x]);
+            
+        }
+        if("BARRA".equals(lugarTicket))
+        {
+            ticketBar(id_pedido, printerName[x]);
+        }
+        if("COCINA".equals(lugarTicket))
+        {
+            ticketCocina(id_pedido, printerName[x+1]);
+        }
+        if("CLIENTE".equals(lugarTicket))
+        {
             ticketusuario(id_pedido, printerName[x]);
         }
+        //ticketusuario(id_pedido, printerName[x]);
         //ticketusuario(id_pedido, printerName[x]);
         //ticketBar(id_pedido, printerName[x]);}
         //ticketCocina(id_pedido, printerName[x]);

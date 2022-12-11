@@ -98,6 +98,7 @@ public final class SistemaSave extends javax.swing.JFrame {
             btnImprimir.setEnabled(false);
             btnImprimir.setVisible(false);
             btnPdfPedido.setVisible(false);
+            btnElimDesc.setVisible(false);
             
         } else {
             LabelVendedor.setText(priv.getNombre());
@@ -119,6 +120,7 @@ public final class SistemaSave extends javax.swing.JFrame {
         txtRolUser.setVisible(false);
         btnCociImp.setVisible(false);
         btnClientImp.setVisible(false);
+        btnBarraImp.setVisible(false);
         panelSalas();
     }
 
@@ -189,6 +191,8 @@ public final class SistemaSave extends javax.swing.JFrame {
         btnClientImp = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         txtdFinalizarP = new javax.swing.JTextField();
+        btnBarraImp = new javax.swing.JButton();
+        btnAnterior = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
         TablePedidos = new javax.swing.JTable();
@@ -848,6 +852,22 @@ public final class SistemaSave extends javax.swing.JFrame {
         txtdFinalizarP.setEditable(false);
         jPanel25.add(txtdFinalizarP, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 670, 240, 30));
 
+        btnBarraImp.setText("BARRA");
+        btnBarraImp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBarraImpActionPerformed(evt);
+            }
+        });
+        jPanel25.add(btnBarraImp, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 670, 130, 60));
+
+        btnAnterior.setText("Anterior");
+        btnAnterior.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAnteriorActionPerformed(evt);
+            }
+        });
+        jPanel25.add(btnAnterior, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 670, 130, 60));
+
         jTabbedPane1.addTab("Finalizar Pedido", jPanel25);
 
         jPanel6.setBackground(new java.awt.Color(204, 204, 204));
@@ -1396,7 +1416,7 @@ public final class SistemaSave extends javax.swing.JFrame {
         jPanel11.add(jPanel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 50));
         jPanel11.add(txtIdPlato, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 470, 80, -1));
 
-        cbxCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Vacio>", "Entradas", "Ensaladas Frias", "Especialidades", "Extras", "Postres", "Bebidas", " ", " " }));
+        cbxCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "  ", "Entradas", "Ensaladas Frias", "Especialidades", "Extras", "Postres", "Bebidas", " ", " " }));
         cbxCategoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbxCategoriaActionPerformed(evt);
@@ -1404,7 +1424,7 @@ public final class SistemaSave extends javax.swing.JFrame {
         });
         jPanel11.add(cbxCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, 140, 60));
 
-        cbxSubCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Vacio>", "Cordero", "Pescado y Camarones", "Vegetariano", "Biryani", "Arroz Especial" }));
+        cbxSubCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "  ", "Cordero", "Pescado y Camarones", "Vegetariano", "Biryani", "Arroz Especial" }));
         cbxSubCategoria.setToolTipText("");
         cbxSubCategoria.setName(""); // NOI18N
         cbxSubCategoria.addActionListener(new java.awt.event.ActionListener() {
@@ -2283,6 +2303,7 @@ public final class SistemaSave extends javax.swing.JFrame {
             btnFinalizar.setEnabled(false);
             txtIdHistorialPedido.setText(""+id_pedido);
             txtIdPedido.setText(""+id_pedido);
+            txtdFinalizarP.setText(""+id_pedido);
             TotalPagar(tableFinalizar, totalFinalizar);
             
         } else {
@@ -2513,15 +2534,14 @@ public final class SistemaSave extends javax.swing.JFrame {
 
     private void btnCociImpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCociImpActionPerformed
         // TODO add your handling code here:
-        int mesa = Integer.parseInt(txtTempNumMesa.getText());
-        int sala = Integer.parseInt(txtTempIdSala.getText());
-        int id_pedido = Integer.parseInt(txtIdPedido.getText());
+        int id_pedido = Integer.parseInt(txtdFinalizarP.getText());
         pedDao.ticketPedido(id_pedido, "COCINA",0);
         pedDao.actualizarImpreso(id_pedido,"COCINA");
         btnImprimir.setVisible(true);
         btnFinalizar.setVisible(true);
         btnPdfPedido.setVisible(true);
         btnCociImp.setVisible(false);
+        btnBarraImp.setVisible(false);
     }//GEN-LAST:event_btnCociImpActionPerformed
 
     private void btnFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarActionPerformed
@@ -2531,6 +2551,9 @@ public final class SistemaSave extends javax.swing.JFrame {
             if (pedDao.actualizarEstado(Integer.parseInt(txtIdPedido.getText()))) {
                 pedDao.pdfPedido(Integer.parseInt(txtIdPedido.getText()));
                 jTabbedPane1.setSelectedIndex(0);
+                pedDao.ticketPedido(Integer.parseInt(txtIdPedido.getText()),"CLIENTE",0);
+                pedDao.ticketPedido(Integer.parseInt(txtIdPedido.getText()),"CLIENTE",0);
+                pedDao.actualizarImpreso(Integer.parseInt(txtIdPedido.getText()), "CLIENTE");
             }
         }
     }//GEN-LAST:event_btnFinalizarActionPerformed
@@ -2546,15 +2569,22 @@ public final class SistemaSave extends javax.swing.JFrame {
         btnPdfPedido.setVisible(false);
         btnCociImp.setVisible(true);
         btnClientImp.setVisible(true);
+        btnBarraImp.setVisible(true);
+        btnAnterior.setVisible(true);
     }//GEN-LAST:event_btnImprimirActionPerformed
 
     private void btnClientImpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientImpActionPerformed
         // TODO add your handling code here:
+        int id_pedido = Integer.parseInt(txtdFinalizarP.getText());
+        pedDao.ticketPedido(id_pedido, "CLIENTE",0);
+        pedDao.actualizarImpreso(id_pedido,"CLIENTE");
         btnImprimir.setVisible(true);
         btnFinalizar.setVisible(true);
         btnPdfPedido.setVisible(true);
         btnCociImp.setVisible(false);
         btnClientImp.setVisible(false);
+        btnBarraImp.setVisible(false);
+        btnAnterior.setVisible(false);
     }//GEN-LAST:event_btnClientImpActionPerformed
 
     private void btnElimDescActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnElimDescActionPerformed
@@ -2597,7 +2627,33 @@ public final class SistemaSave extends javax.swing.JFrame {
         btnEspec.setVisible(false);
         btnPostres.setVisible(false);
         btnBebidas.setVisible(false);
+        btnAnterior.setVisible(false);
     }//GEN-LAST:event_btnBebidasActionPerformed
+
+    private void btnBarraImpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBarraImpActionPerformed
+        // TODO add your handling code here:
+        int id_pedido = Integer.parseInt(txtdFinalizarP.getText());
+        pedDao.ticketPedido(id_pedido, "BARRA",0);
+        pedDao.actualizarImpreso(id_pedido,"BARRA");
+        btnImprimir.setVisible(true);
+        btnFinalizar.setVisible(true);
+        btnPdfPedido.setVisible(true);
+        btnCociImp.setVisible(false);
+        btnClientImp.setVisible(false);
+        btnBarraImp.setVisible(false);
+        btnAnterior.setVisible(false);
+    }//GEN-LAST:event_btnBarraImpActionPerformed
+
+    private void btnAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnteriorActionPerformed
+        // TODO add your handling code here:
+        btnImprimir.setVisible(true);
+        btnFinalizar.setVisible(true);
+        btnPdfPedido.setVisible(true);
+        btnCociImp.setVisible(false);
+        btnClientImp.setVisible(false);
+        btnBarraImp.setVisible(false);
+        btnAnterior.setVisible(false);
+    }//GEN-LAST:event_btnAnteriorActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -2612,6 +2668,8 @@ public final class SistemaSave extends javax.swing.JFrame {
     private javax.swing.JButton btnActualizarSala;
     private javax.swing.JButton btnAddPlato;
     private javax.swing.JButton btnAgregarPedido;
+    private javax.swing.JButton btnAnterior;
+    private javax.swing.JButton btnBarraImp;
     private javax.swing.JButton btnBebidas;
     private javax.swing.JButton btnClientImp;
     private javax.swing.JButton btnCociImp;
