@@ -18,6 +18,7 @@ import Modelo.Salas;
 import Modelo.SalasDao;
 import Modelo.Tables;
 import Modelo.login;
+import com.github.anastaciocintra.output.PrinterOutputStream;
 import com.mysql.cj.log.Log;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -216,6 +217,10 @@ public final class SistemaSave extends javax.swing.JFrame {
         jPanel43 = new javax.swing.JPanel();
         jPanel44 = new javax.swing.JPanel();
         jPanel45 = new javax.swing.JPanel();
+        cbxImpresoC = new javax.swing.JComboBox<>();
+        cbxImpresoB = new javax.swing.JComboBox<>();
+        jLabel41 = new javax.swing.JLabel();
+        jLabel42 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         jPanel40 = new javax.swing.JPanel();
         jPanel12 = new javax.swing.JPanel();
@@ -977,8 +982,8 @@ public final class SistemaSave extends javax.swing.JFrame {
         jPanel8.add(txtDireccionConfig, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 147, 30));
 
         jLabel31.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
-        jLabel31.setText("Mensaje");
-        jPanel8.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, -1, -1));
+        jLabel31.setText("IMPRESORA BARRA");
+        jPanel8.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 380, 140, -1));
 
         txtMensaje.setBackground(new java.awt.Color(204, 204, 204));
         txtMensaje.setBorder(null);
@@ -996,7 +1001,7 @@ public final class SistemaSave extends javax.swing.JFrame {
                 btnActualizarConfigActionPerformed(evt);
             }
         });
-        jPanel8.add(btnActualizarConfig, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 405, 220, 50));
+        jPanel8.add(btnActualizarConfig, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 500, 220, 50));
 
         jLabel27.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
         jLabel27.setText("RFC");
@@ -1089,7 +1094,21 @@ public final class SistemaSave extends javax.swing.JFrame {
 
         jPanel8.add(jPanel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 220, 220, 2));
 
-        jPanel7.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 290, 420, 470));
+        cbxImpresoC.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel8.add(cbxImpresoC, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 400, 150, 60));
+
+        cbxImpresoB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel8.add(cbxImpresoB, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 150, 60));
+
+        jLabel41.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
+        jLabel41.setText("Mensaje");
+        jPanel8.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, -1, -1));
+
+        jLabel42.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
+        jLabel42.setText("IMPRESORA COCINA");
+        jPanel8.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 380, 140, -1));
+
+        jPanel7.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 290, 420, 580));
 
         jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/undraw_special_event_4aj8.png"))); // NOI18N
@@ -1858,6 +1877,9 @@ public final class SistemaSave extends javax.swing.JFrame {
         // TODO add your handling code here:
         jTabbedPane1.setSelectedIndex(5);
         ListarConfig();
+        String[] printServicesNames = PrinterOutputStream.getListPrintServicesNames();
+        cbxImpresoB.setModel(new javax.swing.DefaultComboBoxModel<>(printServicesNames));
+        cbxImpresoC.setModel(new javax.swing.DefaultComboBoxModel<>(printServicesNames));
     }//GEN-LAST:event_btnConfigActionPerformed
 
     private void btnVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentasActionPerformed
@@ -1871,6 +1893,8 @@ public final class SistemaSave extends javax.swing.JFrame {
         LimpiarTable();
         ListarPedidos();
         jTabbedPane1.setSelectedIndex(4);
+        
+
     }//GEN-LAST:event_btnVentasActionPerformed
 
     private void btnUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuariosActionPerformed
@@ -1888,6 +1912,8 @@ public final class SistemaSave extends javax.swing.JFrame {
             conf.setTelefono(txtTelefonoConfig.getText());
             conf.setDireccion(txtDireccionConfig.getText());
             conf.setMensaje(txtMensaje.getText());
+            conf.setImpresoraB(cbxImpresoB.getSelectedItem().toString());
+            conf.setImpresoraC(cbxImpresoC.getSelectedItem().toString());
             conf.setId(Integer.parseInt(txtIdConfig.getText()));
             lgDao.ModificarDatos(conf);
             JOptionPane.showMessageDialog(null, "Datos de la empresa modificado");
@@ -2621,6 +2647,8 @@ public final class SistemaSave extends javax.swing.JFrame {
     private javax.swing.JButton btnVentas;
     private javax.swing.JButton btnVerPedido;
     private javax.swing.JComboBox<String> cbxCategoria;
+    private javax.swing.JComboBox<String> cbxImpresoB;
+    private javax.swing.JComboBox<String> cbxImpresoC;
     private javax.swing.JComboBox<String> cbxRol;
     private javax.swing.JComboBox<String> cbxSubCategoria;
     private javax.swing.JButton jButton2;
@@ -2647,6 +2675,8 @@ public final class SistemaSave extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel40;
+    private javax.swing.JLabel jLabel41;
+    private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;

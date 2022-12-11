@@ -439,7 +439,24 @@ public class PedidosDao {
     }
     
     public void ticketPedido (int id_pedido, String lugarTicket, int x){
-        String[ ] printerName = {"XP-80C2", "XP-80C"}; 
+        String informacion = "SELECT c.*, c.ImpresoraC, c.ImpresoraB FROM config c WHERE c.id = ?";
+        String[] printerName = new String[2];
+            try {
+                
+                ps = con.prepareStatement(informacion);
+                ps.setInt(1, 1);
+                rs = ps.executeQuery();
+                
+                if (rs.next()) {
+                    printerName[0] = rs.getString("ImpresoraC");
+                    System.out.println(printerName[0]);
+                    printerName[1] = rs.getString("ImpresoraB");
+                    System.out.println(printerName[1]);
+                }
+            } catch (SQLException e) {
+                System.out.println(e.toString());
+            }
+        //String[ ] printerName = {"XP-80C2", "XP-80C"}; 
         if("BARR/COCI".equals(lugarTicket))
         {
             ticketCocina(id_pedido, printerName[x+1]);

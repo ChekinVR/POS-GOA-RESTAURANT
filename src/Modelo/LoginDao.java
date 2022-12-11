@@ -76,7 +76,7 @@ public class LoginDao {
    }
     
     public boolean ModificarDatos(Config conf){
-        String sql = "UPDATE config SET ruc=?, nombre=?, telefono=?, direccion=?, mensaje=? WHERE id=?";
+        String sql = "UPDATE config SET ruc=?, nombre=?, telefono=?, direccion=?, mensaje=?, ImpresoraC=?, ImpresoraB=? WHERE id=?";
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, conf.getRuc());
@@ -84,7 +84,9 @@ public class LoginDao {
             ps.setString(3, conf.getTelefono());
             ps.setString(4, conf.getDireccion());
             ps.setString(5, conf.getMensaje());
-            ps.setInt(6, conf.getId());
+            ps.setString(6, conf.getImpresoraB());
+            ps.setString(7, conf.getImpresoraC());
+            ps.setInt(8, conf.getId());
             ps.execute();
             return true;
         } catch (SQLException e) {
