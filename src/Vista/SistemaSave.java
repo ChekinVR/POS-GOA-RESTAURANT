@@ -99,6 +99,7 @@ public final class SistemaSave extends javax.swing.JFrame {
             btnImprimir.setVisible(false);
             btnPdfPedido.setVisible(false);
             btnElimDesc.setVisible(false);
+            btnAnterior.setVisible(false);
             
         } else {
             LabelVendedor.setText(priv.getNombre());
