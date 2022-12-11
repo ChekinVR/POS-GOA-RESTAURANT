@@ -35,6 +35,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.print.PrintService;
 import javax.swing.filechooser.FileSystemView;
@@ -475,13 +477,57 @@ public class PedidosDao {
         {
             ticketusuario(id_pedido, printerName[x]);
         }
-        //ticketusuario(id_pedido, printerName[x]);
-        //ticketusuario(id_pedido, printerName[x]);
-        //ticketBar(id_pedido, printerName[x]);}
-        //ticketCocina(id_pedido, printerName[x]);
-        
     }
-    
+    public void ticketActualizado(DetallePedido[] tablaPedidos, int i) {
+        EscPos escpos;
+        String informacion = "SELECT c.*, c.ImpresoraC, c.ImpresoraB FROM config c WHERE c.id = ?";
+        String[] printerName = new String[2];
+        
+            try {
+                
+                ps = con.prepareStatement(informacion);
+                ps.setInt(1, 1);
+                rs = ps.executeQuery();
+                
+                if (rs.next()) {
+                    printerName[0] = rs.getString("ImpresoraC");
+                    System.out.println(printerName[0]);
+                    printerName[1] = rs.getString("ImpresoraB");
+                    System.out.println(printerName[1]);
+                }
+                
+                
+                
+            } catch (SQLException e) {
+                System.out.println(e.toString());
+            }
+        PrintService printService = PrinterOutputStream.getPrintServiceByName(printerName[0]);
+        try {
+            escpos = new EscPos(new PrinterOutputStream(printService));
+            
+            Style title = new Style()
+                .setFontSize(Style.FontSize._3, Style.FontSize._2)
+                .setJustification(EscPosConst.Justification.Center);
+        
+            Style subtitle = new Style(escpos.getStyle())     
+                .setJustification(EscPosConst.Justification.Center);
+            
+            Style miestilo = new Style()   
+                .setFontSize(Style.FontSize._2, Style.FontSize._1)
+                .setJustification(EscPosConst.Justification.Center);
+            
+            escpos.writeLF(title,"Goa Restaurant");
+                escpos.writeLF("N_Mesa: " + num_mesa );
+                escpos.writeLF("N_Sala: " + sala);
+            for(int x=0; x<i;i++){
+
+            }
+            
+            
+        } catch (IOException ex) {
+            System.out.println(ex.toString());
+        }
+    }
     public void ticketBar(int id_pedido, String printerName){
         String num_mesa = null, sala = null, Bebidas = null;
         PrintService printService = PrinterOutputStream.getPrintServiceByName(printerName);
@@ -515,9 +561,7 @@ public class PedidosDao {
             escpos.writeLF(title,"Goa Restaurant");
             escpos.writeLF("N_Mesa: " + num_mesa );
             escpos.writeLF("N_Sala: " + sala);
-            int CBebidas = 0;
             int IBebidas = 0;
-            String NTemp = "";
                     try{
                     ps = con.prepareStatement(categ);
                     ps.setInt(1, id_pedido);
@@ -531,36 +575,6 @@ public class PedidosDao {
                           System.out.println(rs.getString("nombre"));
                           IBebidas++;  
                         }
-//                        
-//                        if("".equals(NTemp)){
-//                                NTemp = rs.getString("nombre");
-//                        }
-//                        if("Bebidas".equals(rs.getString("categoria")))
-//                        {
-//                            
-//                            System.out.println(rs.getString("nombre"));
-//                            System.out.println(rs.getString("categoria"));
-//                            if(NTemp.equals(rs.getString("nombre")))
-//                            {
-//                                
-//                                
-//                                System.out.println(IBebidas);
-//                            }else{
-//                                NTemp = rs.getString("nombre");
-//                                System.out.println(rs.getString("nombre")+"__"+IBebidas);
-//                                
-//                            }
-//                            
-//                            escpos.writeLF(subtitle,rs.getString("nombre")+"__"+IBebidas);
-//                            
-//                            
-//                            if(!"".equals(rs.getString("comentario")))
-//                            {
-//                                escpos.writeLF(subtitle,rs.getString("comentario"));
-//                            }
-//                            IBebidas++;
-//                            NTemp = rs.getString("nombre");   
-//                        }
                     }
                     }catch (SQLException e)  {
                         System.out.println(e.toString());
@@ -575,7 +589,7 @@ public class PedidosDao {
     }
     
     public void ticketCocina(int id_pedido, String printerName){
-        String num_mesa = null, sala = null, Bebidas = null;
+        String num_mesa = null, sala = null;
         PrintService printService = PrinterOutputStream.getPrintServiceByName(printerName);
         EscPos escpos;
         try{
@@ -607,9 +621,7 @@ public class PedidosDao {
             escpos.writeLF(title,"Goa Restaurant");
             escpos.writeLF("N_Mesa: " + num_mesa );
             escpos.writeLF("N_Sala: " + sala);
-            int CBebidas = 0;
             int IBebidas = 0;
-            String NTemp = "";
                     try{
                     ps = con.prepareStatement(categ);
                     ps.setInt(1, id_pedido);
@@ -628,36 +640,6 @@ public class PedidosDao {
                           System.out.println(rs.getString("nombre"));
                           IBebidas++;  
                         }
-//                        
-//                        if("".equals(NTemp)){
-//                                NTemp = rs.getString("nombre");
-//                        }
-//                        if("Bebidas".equals(rs.getString("categoria")))
-//                        {
-//                            
-//                            System.out.println(rs.getString("nombre"));
-//                            System.out.println(rs.getString("categoria"));
-//                            if(NTemp.equals(rs.getString("nombre")))
-//                            {
-//                                
-//                                
-//                                System.out.println(IBebidas);
-//                            }else{
-//                                NTemp = rs.getString("nombre");
-//                                System.out.println(rs.getString("nombre")+"__"+IBebidas);
-//                                
-//                            }
-//                            
-//                            escpos.writeLF(subtitle,rs.getString("nombre")+"__"+IBebidas);
-//                            
-//                            
-//                            if(!"".equals(rs.getString("comentario")))
-//                            {
-//                                escpos.writeLF(subtitle,rs.getString("comentario"));
-//                            }
-//                            IBebidas++;
-//                            NTemp = rs.getString("nombre");   
-//                        }
                     }
                     }catch (SQLException e)  {
                         System.out.println(e.toString());
@@ -845,5 +827,7 @@ public class PedidosDao {
        }
        return Lista;
    }
+
+
     
 }
