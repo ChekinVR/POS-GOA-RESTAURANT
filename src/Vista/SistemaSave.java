@@ -66,6 +66,7 @@ public final class SistemaSave extends javax.swing.JFrame {
     LoginDao lgDao = new LoginDao();
     int item;
     double Totalpagar = 0.00;
+    double Totalcorte = 0.00;
 
     Date fechaActual = new Date();
     String fechaFormato = new SimpleDateFormat("yyyy-MM-dd").format(fechaActual);
@@ -202,6 +203,10 @@ public final class SistemaSave extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         btnVerPedido = new javax.swing.JButton();
         btnEliminarPedido = new javax.swing.JButton();
+        btnTodosPedidos = new javax.swing.JButton();
+        btnPedidosHoy = new javax.swing.JButton();
+        btnCorteDia = new javax.swing.JButton();
+        txtCorte = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jLabel32 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
@@ -872,7 +877,6 @@ public final class SistemaSave extends javax.swing.JFrame {
         jTabbedPane1.addTab("Finalizar Pedido", jPanel25);
 
         jPanel6.setBackground(new java.awt.Color(204, 204, 204));
-        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         TablePedidos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -912,19 +916,15 @@ public final class SistemaSave extends javax.swing.JFrame {
             TablePedidos.getColumnModel().getColumn(4).setPreferredWidth(60);
         }
 
-        jPanel6.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 1380, 480));
-
         jLabel16.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel16.setText("Historial Pedidos");
-        jPanel6.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 10, 280, -1));
 
         txtHId.setEditable(false);
         txtHId.setEnabled(false);
         txtHId.setFocusable(false);
         txtHId.setRequestFocusEnabled(false);
         txtHId.setVerifyInputWhenFocusTarget(false);
-        jPanel6.add(txtHId, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 550, -1, -1));
 
         jPanel5.setOpaque(false);
 
@@ -944,28 +944,101 @@ public final class SistemaSave extends javax.swing.JFrame {
             }
         });
 
+        btnTodosPedidos.setText("VER TODOS\n LOS PEDIDOS");
+        btnTodosPedidos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTodosPedidos(evt);
+            }
+        });
+
+        btnPedidosHoy.setText("VER PEDIDOS DE HOY");
+        btnPedidosHoy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPedidosHoy(evt);
+            }
+        });
+
+        btnCorteDia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/money.png"))); // NOI18N
+        btnCorteDia.setText("CORTE DEL DIA");
+        btnCorteDia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCorteDiabtnElimPedDao(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(104, Short.MAX_VALUE)
+                .addComponent(btnCorteDia, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnPedidosHoy, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnTodosPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(btnEliminarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(btnVerPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addGap(15, 15, 15)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnEliminarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnTodosPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnVerPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEliminarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(24, Short.MAX_VALUE))
+                    .addComponent(btnPedidosHoy, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCorteDia, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
-        jPanel6.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 550, 420, 110));
+        txtCorte.setEnabled(false);
+        txtCorte.setFocusable(false);
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel6Layout.createSequentialGroup()
+                            .addGap(460, 460, 460)
+                            .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel6Layout.createSequentialGroup()
+                            .addGap(30, 30, 30)
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 1380, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(48, 48, 48)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtHId)
+                            .addComponent(txtCorte, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jLabel16)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                        .addGap(527, 527, 527)
+                        .addComponent(txtCorte)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtHId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38))))
+        );
 
         jTabbedPane1.addTab("Historial Pedidos", jPanel6);
 
@@ -1398,7 +1471,7 @@ public final class SistemaSave extends javax.swing.JFrame {
         jLabel40.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel40.setForeground(new java.awt.Color(255, 255, 255));
         jLabel40.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel40.setText("Platos del Día");
+        jLabel40.setText("PLATILLOS");
 
         javax.swing.GroupLayout jPanel39Layout = new javax.swing.GroupLayout(jPanel39);
         jPanel39.setLayout(jPanel39Layout);
@@ -1490,7 +1563,7 @@ public final class SistemaSave extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Platos", jPanel2);
 
-        jPanel24.setBorder(javax.swing.BorderFactory.createTitledBorder("Platos del Dia"));
+        jPanel24.setBorder(javax.swing.BorderFactory.createTitledBorder("Platillos"));
 
         txtBuscarPlato.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1591,6 +1664,7 @@ public final class SistemaSave extends javax.swing.JFrame {
             }
         });
         tableMenu.setRowHeight(50);
+        tableMenu.getTableHeader().setReorderingAllowed(false);
         jScrollPane11.setViewportView(tableMenu);
         if (tableMenu.getColumnModel().getColumnCount() > 0) {
             tableMenu.getColumnModel().getColumn(0).setMinWidth(30);
@@ -1908,8 +1982,12 @@ public final class SistemaSave extends javax.swing.JFrame {
         int rolcheck = RolCheck();
         if (rolcheck == 1){
             btnEliminarPedido.setVisible(false);
+            btnPedidosHoy.setVisible(false);
+            btnTodosPedidos.setVisible(false);
         } else{
             btnEliminarPedido.setVisible(true);
+            btnPedidosHoy.setVisible(false);
+            btnTodosPedidos.setVisible(true);
         }
         LimpiarTable();
         ListarPedidos();
@@ -2550,7 +2628,7 @@ public final class SistemaSave extends javax.swing.JFrame {
         int pregunta = JOptionPane.showConfirmDialog(null, "Esta seguro de finalizar");
         if (pregunta == 0) {
             if (pedDao.actualizarEstado(Integer.parseInt(txtIdPedido.getText()))) {
-                pedDao.pdfPedido(Integer.parseInt(txtIdPedido.getText()));
+                //pedDao.pdfPedido(Integer.parseInt(txtIdPedido.getText()));
                 jTabbedPane1.setSelectedIndex(0);
                 pedDao.ticketPedido(Integer.parseInt(txtIdPedido.getText()),"CLIENTE",0);
                 pedDao.ticketPedido(Integer.parseInt(txtIdPedido.getText()),"CLIENTE",0);
@@ -2656,6 +2734,28 @@ public final class SistemaSave extends javax.swing.JFrame {
         btnAnterior.setVisible(false);
     }//GEN-LAST:event_btnAnteriorActionPerformed
 
+    private void btnTodosPedidos(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTodosPedidos
+        // TODO add your handling code here:
+        LimpiarTable();
+        ListarTodosPedidos();
+        btnPedidosHoy.setVisible(true);
+        btnTodosPedidos.setVisible(false);
+    }//GEN-LAST:event_btnTodosPedidos
+
+    private void btnPedidosHoy(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPedidosHoy
+        // TODO add your handling code here:
+        LimpiarTable();
+        ListarPedidos();
+        btnPedidosHoy.setVisible(false);
+        btnTodosPedidos.setVisible(true);
+    }//GEN-LAST:event_btnPedidosHoy
+
+    private void btnCorteDiabtnElimPedDao(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCorteDiabtnElimPedDao
+        // TODO add your handling code here:
+        double corte = Corte(TablePedidos,txtCorte);
+        JOptionPane.showMessageDialog(null, "SU CORTE AL MOMENTO ES DE: " + corte);
+    }//GEN-LAST:event_btnCorteDiabtnElimPedDao
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LabelConection;
@@ -2675,6 +2775,7 @@ public final class SistemaSave extends javax.swing.JFrame {
     private javax.swing.JButton btnClientImp;
     private javax.swing.JButton btnCociImp;
     private javax.swing.JButton btnConfig;
+    private javax.swing.JButton btnCorteDia;
     private javax.swing.JButton btnDescuento;
     private javax.swing.JButton btnEditarPlato;
     private javax.swing.JButton btnElimDesc;
@@ -2696,11 +2797,13 @@ public final class SistemaSave extends javax.swing.JFrame {
     private javax.swing.JButton btnNuevoPlato;
     private javax.swing.JButton btnNuevoSala;
     private javax.swing.JButton btnPdfPedido;
+    private javax.swing.JButton btnPedidosHoy;
     private javax.swing.JButton btnPlatos;
     private javax.swing.JButton btnPostres;
     private javax.swing.JButton btnRegistrarSala;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JButton btnSala;
+    private javax.swing.JButton btnTodosPedidos;
     private javax.swing.JButton btnUsuarios;
     private javax.swing.JButton btnUsuarios1;
     private javax.swing.JButton btnVentas;
@@ -2798,6 +2901,7 @@ public final class SistemaSave extends javax.swing.JFrame {
     private javax.swing.JTextField txtBuscarPlato;
     private javax.swing.JTextPane txtComentario;
     private javax.swing.JTextField txtCorreo;
+    private javax.swing.JLabel txtCorte;
     private javax.swing.JTextField txtDireccionConfig;
     private javax.swing.JTextField txtFechaHora;
     private javax.swing.JTextField txtHId;
@@ -2836,6 +2940,17 @@ public final class SistemaSave extends javax.swing.JFrame {
         }
         label.setText(String.format("%.2f", Totalpagar));
     }
+    
+    private double Corte(JTable tabla, JLabel label) {
+        Totalcorte = 0.00;
+        int numFila = tabla.getRowCount();
+        for (int i = 0; i < numFila; i++) {
+            double cal = Double.parseDouble(String.valueOf(tabla.getModel().getValueAt(i, 5)));
+            Totalcorte += cal;
+        }
+//        label.setText(String.format("%.2f", Totalpagar));7
+        return Totalcorte;
+    }
 
     private void LimpiarTableMenu() {
         tmp = (DefaultTableModel) tableMenu.getModel();
@@ -2853,6 +2968,25 @@ public final class SistemaSave extends javax.swing.JFrame {
         txtTelefonoConfig.setText("" + conf.getTelefono());
         txtDireccionConfig.setText("" + conf.getDireccion());
         txtMensaje.setText("" + conf.getMensaje());
+    }
+    
+    private void ListarTodosPedidos() {
+        Tables color = new Tables();
+        List<Pedidos> Listar = pedDao.listarTodosPedidos();
+        modelo = (DefaultTableModel) TablePedidos.getModel();
+        Object[] ob = new Object[7];
+        for (int i = 0; i < Listar.size(); i++) {
+            ob[0] = Listar.get(i).getId();
+            ob[1] = Listar.get(i).getSala();
+            ob[2] = Listar.get(i).getUsuario();
+            ob[3] = Listar.get(i).getNum_mesa();
+            ob[4] = Listar.get(i).getFecha();
+            ob[5] = Listar.get(i).getTotal();
+            ob[6] = Listar.get(i).getEstado();
+            modelo.addRow(ob);
+        }
+        colorHeader(TablePedidos);
+        TablePedidos.setDefaultRenderer(Object.class, color);
     }
 
     private void ListarPedidos() {

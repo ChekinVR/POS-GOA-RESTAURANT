@@ -822,9 +822,33 @@ public class PedidosDao {
         }
     }
     
+    public List listarTodosPedidos(){
+       List<Pedidos> Lista = new ArrayList();
+       String sql = "SELECT p.*, s.nombre FROM pedidos p INNER JOIN salas s ON p.id_sala = s.id ORDER BY p.fecha DESC;";
+       try {
+           con = cn.getConnection();
+           ps = con.prepareStatement(sql);
+           rs = ps.executeQuery();
+           while (rs.next()) {               
+               Pedidos ped = new Pedidos();
+               ped.setId(rs.getInt("id"));
+               ped.setSala(rs.getString("nombre"));
+               ped.setNum_mesa(rs.getInt("num_mesa"));
+               ped.setFecha(rs.getString("fecha"));
+               ped.setTotal(rs.getDouble("total"));
+               ped.setUsuario(rs.getString("usuario"));
+               ped.setEstado(rs.getString("estado"));
+               Lista.add(ped);
+           }
+       } catch (SQLException e) {
+           System.out.println(e.toString());
+       }
+       return Lista;
+   }
+    
     public List listarPedidos(){
        List<Pedidos> Lista = new ArrayList();
-       String sql = "SELECT p.*, s.nombre FROM pedidos p INNER JOIN salas s ON p.id_sala = s.id ORDER BY p.fecha DESC";
+       String sql = "SELECT p.*, s.nombre FROM pedidos p INNER JOIN salas s ON p.id_sala = s.id WHERE p.fecha > CURRENT_DATE ORDER BY p.fecha DESC;";
        try {
            con = cn.getConnection();
            ps = con.prepareStatement(sql);
