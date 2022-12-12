@@ -101,6 +101,8 @@ public final class SistemaSave extends javax.swing.JFrame {
             btnPdfPedido.setVisible(false);
             btnElimDesc.setVisible(false);
             btnAnterior.setVisible(false);
+            btnCorteDia.setVisible(false);
+            btnPedidosHoy.setVisible(false);
             
         } else {
             LabelVendedor.setText(priv.getNombre());
@@ -3255,7 +3257,6 @@ public final class SistemaSave extends javax.swing.JFrame {
             detPedido.setId_pedido(id);
             pedDao.RegistrarDetalle(detPedido);   
         }
-        pedDao.ticketActualizado(tablaPedidos,tableMenu.getRowCount());
         
     }
     

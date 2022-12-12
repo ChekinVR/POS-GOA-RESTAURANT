@@ -478,56 +478,7 @@ public class PedidosDao {
             ticketusuario(id_pedido, printerName[x]);
         }
     }
-    public void ticketActualizado(DetallePedido[] tablaPedidos, int i) {
-        EscPos escpos;
-        String informacion = "SELECT c.*, c.ImpresoraC, c.ImpresoraB FROM config c WHERE c.id = ?";
-        String[] printerName = new String[2];
-        
-            try {
-                
-                ps = con.prepareStatement(informacion);
-                ps.setInt(1, 1);
-                rs = ps.executeQuery();
-                
-                if (rs.next()) {
-                    printerName[0] = rs.getString("ImpresoraC");
-                    System.out.println(printerName[0]);
-                    printerName[1] = rs.getString("ImpresoraB");
-                    System.out.println(printerName[1]);
-                }
-                
-                
-                
-            } catch (SQLException e) {
-                System.out.println(e.toString());
-            }
-        PrintService printService = PrinterOutputStream.getPrintServiceByName(printerName[0]);
-        try {
-            escpos = new EscPos(new PrinterOutputStream(printService));
-            
-            Style title = new Style()
-                .setFontSize(Style.FontSize._3, Style.FontSize._2)
-                .setJustification(EscPosConst.Justification.Center);
-        
-            Style subtitle = new Style(escpos.getStyle())     
-                .setJustification(EscPosConst.Justification.Center);
-            
-            Style miestilo = new Style()   
-                .setFontSize(Style.FontSize._2, Style.FontSize._1)
-                .setJustification(EscPosConst.Justification.Center);
-            
-            escpos.writeLF(title,"Goa Restaurant");
-                escpos.writeLF("N_Mesa: " + num_mesa );
-                escpos.writeLF("N_Sala: " + sala);
-            for(int x=0; x<i;i++){
-
-            }
-            
-            
-        } catch (IOException ex) {
-            System.out.println(ex.toString());
-        }
-    }
+    
     public void ticketBar(int id_pedido, String printerName){
         String num_mesa = null, sala = null, Bebidas = null;
         PrintService printService = PrinterOutputStream.getPrintServiceByName(printerName);
