@@ -3239,10 +3239,12 @@ public final class SistemaSave extends javax.swing.JFrame {
     }
     
     private void modificarDetallePedido(){
+        DetallePedido[] tablaPedidos = new DetallePedido[tableMenu.getRowCount()];
         int mesa = Integer.parseInt(txtTempNumMesa.getText());
         int sala = Integer.parseInt(txtTempIdSala.getText());
         int id = pedDao.verificarStado(mesa, sala);
         for (int i = 0; i < tableMenu.getRowCount(); i++) {
+            tablaPedidos[i] = detPedido;
             String nombre = tableMenu.getValueAt(i, 1).toString();
             int cant = Integer.parseInt(tableMenu.getValueAt(i, 2).toString());
             double precio = Double.parseDouble(tableMenu.getValueAt(i, 3).toString());
@@ -3251,9 +3253,10 @@ public final class SistemaSave extends javax.swing.JFrame {
             detPedido.setPrecio(precio);
             detPedido.setComentario(tableMenu.getValueAt(i, 5).toString());
             detPedido.setId_pedido(id);
-            pedDao.RegistrarDetalle(detPedido);
-
+            pedDao.RegistrarDetalle(detPedido);   
         }
+        pedDao.ticketActualizado(tablaPedidos,tableMenu.getRowCount());
+        
     }
     
     private void modificarTotalPedido(){
