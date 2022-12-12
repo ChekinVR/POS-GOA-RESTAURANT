@@ -2244,6 +2244,11 @@ public final class SistemaSave extends javax.swing.JFrame {
             LimpiarTableMenu();
             JOptionPane.showMessageDialog(null, "PEDIDO REGISTRADO");
             jTabbedPane1.setSelectedIndex(0);
+            int mesa = Integer.parseInt(txtTempNumMesa.getText());
+            int sala = Integer.parseInt(txtTempIdSala.getText());
+            int id_pedido = pedDao.verificarStado(mesa,sala);
+            pedDao.ticketPedido(id_pedido,"BARR/COCI",0);
+            pedDao.actualizarImpreso(id_pedido, "BARR/COCI");
         } else {
             JOptionPane.showMessageDialog(null, "NO HAY PRODUCTO EN LA PEDIDO");
         }
@@ -3105,12 +3110,10 @@ public final class SistemaSave extends javax.swing.JFrame {
     }
     
     private void modificarDetallePedido(){
-        DetallePedido[] tablaPedidos = new DetallePedido[tableMenu.getRowCount()];
         int mesa = Integer.parseInt(txtTempNumMesa.getText());
         int sala = Integer.parseInt(txtTempIdSala.getText());
         int id = pedDao.verificarStado(mesa, sala);
         for (int i = 0; i < tableMenu.getRowCount(); i++) {
-            tablaPedidos[i] = detPedido;
             String nombre = tableMenu.getValueAt(i, 1).toString();
             int cant = Integer.parseInt(tableMenu.getValueAt(i, 2).toString());
             double precio = Double.parseDouble(tableMenu.getValueAt(i, 3).toString());
@@ -3121,7 +3124,6 @@ public final class SistemaSave extends javax.swing.JFrame {
             detPedido.setId_pedido(id);
             pedDao.RegistrarDetalle(detPedido);   
         }
-        pedDao.ticketActualizado(tablaPedidos,tableMenu.getRowCount());
         
     }
     
