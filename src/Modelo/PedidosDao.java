@@ -461,17 +461,21 @@ public class PedidosDao {
         //String[ ] printerName = {"XP-80C2", "XP-80C"}; 
         if("BARR/COCI".equals(lugarTicket))
         {
-            ticketCocina(id_pedido, printerName[x+1]);
-            ticketBar(id_pedido, printerName[x]);
+            ticketCocina(id_pedido, printerName[x+1],false);
+            ticketBar(id_pedido, printerName[x],false);
+            actualizarImpresoPlat(id_pedido);
             
         }
         if("BARRA".equals(lugarTicket))
         {
-            ticketBar(id_pedido, printerName[x]);
+            ticketBar(id_pedido, printerName[x],true);
+            actualizarImpresoPlat(id_pedido);
         }
         if("COCINA".equals(lugarTicket))
         {
-            ticketCocina(id_pedido, printerName[x+1]);
+            ticketCocina(id_pedido, printerName[x+1],true);
+            actualizarImpresoPlat(id_pedido);
+            
         }
         if("CLIENTE".equals(lugarTicket))
         {
@@ -479,7 +483,7 @@ public class PedidosDao {
         }
     }
     
-    public void ticketBar(int id_pedido, String printerName){
+    public void ticketBar(int id_pedido, String printerName, boolean impreso){
         String num_mesa = null, sala = null, Bebidas = null;
         PrintService printService = PrinterOutputStream.getPrintServiceByName(printerName);
         EscPos escpos;
@@ -508,7 +512,7 @@ public class PedidosDao {
             Style miestilo = new Style()
                     .setFontSize(Style.FontSize._2, Style.FontSize._1)
                     .setJustification(EscPosConst.Justification.Center);
-            String categ = "SELECT d.nombre, d.comentario, pl.categoria FROM pedidos p INNER JOIN detalle_pedidos d ON p.id = d.id_pedido INNER JOIN platos pl ON d.nombre = pl.nombre WHERE p.id = ? ORDER BY (pl.categoria && d.nombre)";
+            String categ = "SELECT d.nombre, d.comentario, pl.categoria FROM pedidos p INNER JOIN detalle_pedidos d ON p.id = d.id_pedido INNER JOIN platos pl ON d.nombre = pl.nombre WHERE p.id = ? && d.impreso = ? ORDER BY (pl.categoria && d.nombre)";
             escpos.writeLF(title,"Goa Restaurant");
             escpos.writeLF("N_Mesa: " + num_mesa );
             escpos.writeLF("N_Sala: " + sala);
@@ -516,6 +520,7 @@ public class PedidosDao {
                     try{
                     ps = con.prepareStatement(categ);
                     ps.setInt(1, id_pedido);
+                    ps.setBoolean(2, impreso);
                     rs = ps.executeQuery();
                     while (rs.next()){
                         
@@ -539,7 +544,7 @@ public class PedidosDao {
         }  
     }
     
-    public void ticketCocina(int id_pedido, String printerName){
+    public void ticketCocina(int id_pedido, String printerName, boolean impreso){
         String num_mesa = null, sala = null;
         PrintService printService = PrinterOutputStream.getPrintServiceByName(printerName);
         EscPos escpos;
@@ -568,7 +573,7 @@ public class PedidosDao {
             Style miestilo = new Style()
                     .setFontSize(Style.FontSize._2, Style.FontSize._1)
                     .setJustification(EscPosConst.Justification.Center);
-            String categ = "SELECT d.nombre, d.comentario, pl.categoria FROM pedidos p INNER JOIN detalle_pedidos d ON p.id = d.id_pedido INNER JOIN platos pl ON d.nombre = pl.nombre WHERE p.id = ? ORDER BY (pl.categoria && d.nombre)";
+            String categ = "SELECT d.nombre, d.comentario, pl.categoria FROM pedidos p INNER JOIN detalle_pedidos d ON p.id = d.id_pedido INNER JOIN platos pl ON d.nombre = pl.nombre WHERE p.id = ? && d.impreso = ? ORDER BY (pl.categoria && d.nombre)";
             escpos.writeLF(title,"Goa Restaurant");
             escpos.writeLF("N_Mesa: " + num_mesa );
             escpos.writeLF("N_Sala: " + sala);
@@ -576,6 +581,7 @@ public class PedidosDao {
                     try{
                     ps = con.prepareStatement(categ);
                     ps.setInt(1, id_pedido);
+                    ps.setBoolean(2, impreso);
                     rs = ps.executeQuery();
                     while (rs.next()){
                         
@@ -752,6 +758,20 @@ public class PedidosDao {
         } catch (SQLException e) {
             System.out.println(e.toString());
             return false;
+        }
+    }
+    public void actualizarImpresoPlat(int id_pedido){
+        String sql = "UPDATE detalle_pedidos SET impreso = ? WHERE id_pedido = ?";
+        try {
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setBoolean(1, true);
+            ps.setInt(2, id_pedido);
+            ps.execute();
+            
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+            
         }
     }
     
