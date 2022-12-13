@@ -125,6 +125,8 @@ public final class SistemaSave extends javax.swing.JFrame {
         btnCociImp.setVisible(false);
         btnClientImp.setVisible(false);
         btnBarraImp.setVisible(false);
+        txtIdUsuario.setVisible(false);
+        jPanel40.setVisible(false);
         panelSalas();
     }
 
@@ -253,6 +255,9 @@ public final class SistemaSave extends javax.swing.JFrame {
         jPanel18 = new javax.swing.JPanel();
         jPanel21 = new javax.swing.JPanel();
         jLabel39 = new javax.swing.JLabel();
+        txtIdUsuario = new javax.swing.JTextField();
+        btnActU = new javax.swing.JButton();
+        btnElimU = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
         jLabel23 = new javax.swing.JLabel();
@@ -405,10 +410,10 @@ public final class SistemaSave extends javax.swing.JFrame {
         btnUsuarios1.setFont(new java.awt.Font("Script MT Bold", 0, 24)); // NOI18N
         btnUsuarios1.setForeground(new java.awt.Color(0, 0, 0));
         btnUsuarios1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/salir_Interfaz.png"))); // NOI18N
+        btnUsuarios1.setText("Salir");
         btnUsuarios1.setBorder(null);
         btnUsuarios1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnUsuarios1.setFocusable(false);
-        btnUsuarios1.setLabel("Exit");
         btnUsuarios1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUsuarios1ActionPerformed(evt);
@@ -571,7 +576,7 @@ public final class SistemaSave extends javax.swing.JFrame {
         });
         jPanel10.add(btnRegistrarSala, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 140, 80));
 
-        btnActualizarSala.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Actualizar (2).png"))); // NOI18N
+        btnActualizarSala.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/config.png"))); // NOI18N
         btnActualizarSala.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnActualizarSalaActionPerformed(evt);
@@ -961,7 +966,7 @@ public final class SistemaSave extends javax.swing.JFrame {
         });
 
         btnCorteDia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/money.png"))); // NOI18N
-        btnCorteDia.setText("CORTE DEL DIA");
+        btnCorteDia.setText("CORTE");
         btnCorteDia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCorteDiabtnElimPedDao(evt);
@@ -1244,6 +1249,11 @@ public final class SistemaSave extends javax.swing.JFrame {
             }
         });
         TableUsuarios.setRowHeight(50);
+        TableUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TableUsuariosMouseClicked(evt);
+            }
+        });
         jScrollPane6.setViewportView(TableUsuarios);
         if (TableUsuarios.getColumnModel().getColumnCount() > 0) {
             TableUsuarios.getColumnModel().getColumn(0).setMinWidth(50);
@@ -1260,7 +1270,7 @@ public final class SistemaSave extends javax.swing.JFrame {
         jPanel15.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel34.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
-        jLabel34.setText("Correo Electrónico");
+        jLabel34.setText("Usuario");
         jPanel15.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 102, -1, -1));
 
         jLabel35.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
@@ -1290,7 +1300,7 @@ public final class SistemaSave extends javax.swing.JFrame {
                 btnIniciarActionPerformed(evt);
             }
         });
-        jPanel15.add(btnIniciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 440, 300, 50));
+        jPanel15.add(btnIniciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 540, 300, 50));
 
         jLabel36.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
         jLabel36.setText("Nombre:");
@@ -1368,7 +1378,39 @@ public final class SistemaSave extends javax.swing.JFrame {
 
         jPanel15.add(jPanel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 360, 35));
 
-        jPanel12.add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 360, 520));
+        txtIdUsuario.setEnabled(false);
+        txtIdUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIdUsuarioActionPerformed(evt);
+            }
+        });
+        jPanel15.add(txtIdUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 350, 30, -1));
+
+        btnActU.setBackground(new java.awt.Color(0, 0, 0));
+        btnActU.setFont(new java.awt.Font("Times New Roman", 1, 13)); // NOI18N
+        btnActU.setForeground(new java.awt.Color(255, 255, 255));
+        btnActU.setText("Actualizar");
+        btnActU.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnActU.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActUActionPerformed(evt);
+            }
+        });
+        jPanel15.add(btnActU, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 460, 300, 50));
+
+        btnElimU.setBackground(new java.awt.Color(0, 0, 0));
+        btnElimU.setFont(new java.awt.Font("Times New Roman", 1, 13)); // NOI18N
+        btnElimU.setForeground(new java.awt.Color(255, 255, 255));
+        btnElimU.setText("Eliminar");
+        btnElimU.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnElimU.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnElimUActionPerformed(evt);
+            }
+        });
+        jPanel15.add(btnElimU, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 620, 300, 50));
+
+        jPanel12.add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 360, 700));
 
         jTabbedPane1.addTab("Usuarios", jPanel12);
 
@@ -1414,7 +1456,7 @@ public final class SistemaSave extends javax.swing.JFrame {
         });
         jPanel11.add(btnGuardarPlato, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, 140, 70));
 
-        btnEditarPlato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Actualizar (2).png"))); // NOI18N
+        btnEditarPlato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/config.png"))); // NOI18N
         btnEditarPlato.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditarPlatoActionPerformed(evt);
@@ -2093,7 +2135,7 @@ public final class SistemaSave extends javax.swing.JFrame {
     private void btnEliminarSalaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarSalaActionPerformed
         // TODO add your handling code here:
         if (!"".equals(txtIdSala.getText())) {
-            int pregunta = JOptionPane.showConfirmDialog(null, "Esta seguro de eliminar");
+            int pregunta = JOptionPane.showConfirmDialog(null, "¿ESTA SEGURO DE ELIMINAR?, esta opcion vacia los pedidos hechos anteriormente con esta sala");
             if (pregunta == 0) {
                 int id = Integer.parseInt(txtIdSala.getText());
                 slDao.Eliminar(id);
@@ -2126,6 +2168,8 @@ public final class SistemaSave extends javax.swing.JFrame {
             lgDao.Registrar(lg);
             JOptionPane.showMessageDialog(null, "Usuario Registrado");
         }
+        LimpiarTable();
+        ListarUsuarios();
     }//GEN-LAST:event_btnIniciarActionPerformed
 
     private void txtBuscarPlatoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarPlatoKeyReleased
@@ -2763,6 +2807,54 @@ public final class SistemaSave extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "SU CORTE AL MOMENTO ES DE: " + corte);
     }//GEN-LAST:event_btnCorteDiabtnElimPedDao
 
+    private void TableUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableUsuariosMouseClicked
+        // TODO add your handling code here:
+        int fila = TableUsuarios.rowAtPoint(evt.getPoint());
+        txtIdUsuario.setText(TableUsuarios.getValueAt(fila, 0).toString());
+        txtCorreo.setText(TableUsuarios.getValueAt(fila, 2).toString());
+        txtNombre.setText(TableUsuarios.getValueAt(fila, 1).toString());
+    }//GEN-LAST:event_TableUsuariosMouseClicked
+
+    private void txtIdUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIdUsuarioActionPerformed
+
+    private void btnActUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActUActionPerformed
+        // TODO add your handling code here:
+        if (txtNombre.getText().equals("") || txtCorreo.getText().equals("") || txtPass.getPassword().equals("")) {
+            JOptionPane.showMessageDialog(null, "Todo los campos son requeridos");
+        } else {
+            login lg = new login();
+            String correo = txtCorreo.getText();
+            String pass = String.valueOf(txtPass.getPassword());
+            String nom = txtNombre.getText();
+            String rol = cbxRol.getSelectedItem().toString();
+            int id = Integer.parseInt(txtIdUsuario.getText());//txtIdUsuario.getText();
+            lg.setNombre(nom);
+            lg.setCorreo(correo);
+            lg.setPass(pass);
+            lg.setRol(rol);
+            lgDao.Update(lg,id);
+            JOptionPane.showMessageDialog(null, "Usuario Actualizado");
+        }
+        LimpiarTable();
+        ListarUsuarios();
+    }//GEN-LAST:event_btnActUActionPerformed
+
+    private void btnElimUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnElimUActionPerformed
+        // TODO add your handling code here:
+        int pregunta = JOptionPane.showConfirmDialog(null, "¿Esta seguro de eliminar al usuario?");
+        if (pregunta == 0) {
+            int id = Integer.parseInt(txtIdUsuario.getText());//txtIdUsuario.getText();
+            lgDao.Eliminar(id);
+            LimpiarTable();
+            ListarUsuarios();
+            JOptionPane.showMessageDialog(null, "Usuario Eliminado");
+        }else{
+        }
+        
+    }//GEN-LAST:event_btnElimUActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LabelConection;
@@ -2772,6 +2864,7 @@ public final class SistemaSave extends javax.swing.JFrame {
     private javax.swing.JTable TablePedidos;
     private javax.swing.JTable TablePlatos;
     public javax.swing.JTable TableUsuarios;
+    private javax.swing.JButton btnActU;
     private javax.swing.JButton btnActualizarConfig;
     private javax.swing.JButton btnActualizarSala;
     private javax.swing.JButton btnAddPlato;
@@ -2787,6 +2880,7 @@ public final class SistemaSave extends javax.swing.JFrame {
     private javax.swing.JButton btnEditarPlato;
     private javax.swing.JButton btnElimDesc;
     private javax.swing.JButton btnElimPlati;
+    private javax.swing.JButton btnElimU;
     private javax.swing.JButton btnEliminarPedido;
     private javax.swing.JButton btnEliminarPlato;
     private javax.swing.JButton btnEliminarSala;
@@ -2918,6 +3012,7 @@ public final class SistemaSave extends javax.swing.JFrame {
     private javax.swing.JTextField txtIdPlat;
     private javax.swing.JTextField txtIdPlato;
     private javax.swing.JTextField txtIdSala;
+    private javax.swing.JTextField txtIdUsuario;
     private javax.swing.JTextField txtMensaje;
     private javax.swing.JTextField txtMesas;
     private javax.swing.JTextField txtNombre;
@@ -3143,7 +3238,7 @@ public final class SistemaSave extends javax.swing.JFrame {
                     btnPdfPedido.setEnabled(false);
                     jTabbedPane1.setSelectedIndex(3);*/
                     LimpiarTable();
-                    ListarPlatos(tblTemPlatos);
+                    //ListarPlatos(tblTemPlatos);
                     jTabbedPane1.setSelectedIndex(8);
                     txtTempIdSala.setText("" + id_sala);
                     txtTempNumMesa.setText("" + num_mesa);
@@ -3165,7 +3260,7 @@ public final class SistemaSave extends javax.swing.JFrame {
                     
                 } else {
                     LimpiarTable();
-                    ListarPlatos(tblTemPlatos);
+                    //ListarPlatos(tblTemPlatos);
                     jTabbedPane1.setSelectedIndex(8);
                     txtTempIdSala.setText("" + id_sala);
                     txtTempNumMesa.setText("" + num_mesa);

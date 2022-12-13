@@ -60,6 +60,12 @@ public class PedidosDao {
             }
         } catch (SQLException e) {
             System.out.println(e.toString());
+        }finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println(ex.toString());
+            }
         }
         return id;
     }
@@ -78,6 +84,12 @@ public class PedidosDao {
             }
         } catch (SQLException e) {
             System.out.println(e.toString());
+        }finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println(ex.toString());
+            }
         }
         return id_pedido;
     }
@@ -98,6 +110,12 @@ public class PedidosDao {
             }
         } catch (SQLException e) {
             System.out.println(e.toString());
+        }finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println(ex.toString());
+            }
         }
         return id_pedido;
     }
@@ -179,6 +197,12 @@ public class PedidosDao {
             ps.execute();
         } catch (SQLException e) {
             System.out.println(e.toString());
+        }finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println(ex.toString());
+            }
         }
         return r;
     }
@@ -195,6 +219,12 @@ public class PedidosDao {
             ps.execute();
         } catch (SQLException e) {
             System.out.println(e.toString());
+        }finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println(ex.toString());
+            }
         }
         return r;
     }
@@ -228,6 +258,12 @@ public class PedidosDao {
             }
         } catch (SQLException e) {
             System.out.println(e.toString());
+        }finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println(ex.toString());
+            }
         }
         return total;
         
@@ -252,7 +288,13 @@ public class PedidosDao {
            }
        } catch (SQLException e) {
            System.out.println(e.toString());
-       }
+       }finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println(ex.toString());
+            }
+        }
        return Lista;
    }
     
@@ -274,7 +316,13 @@ public class PedidosDao {
            }
        } catch (SQLException e) {
            System.out.println(e.toString());
-       }
+       }finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println(ex.toString());
+            }
+        }
        return ped;
    }
     
@@ -297,7 +345,13 @@ public class PedidosDao {
            }
        } catch (SQLException e) {
            System.out.println(e.toString());
-       }
+       }finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println(ex.toString());
+            }
+        }
        return Lista;
    }
     
@@ -457,7 +511,13 @@ public class PedidosDao {
                 }
             } catch (SQLException e) {
                 System.out.println(e.toString());
+            }finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println(ex.toString());
             }
+        }
         //String[ ] printerName = {"XP-80C2", "XP-80C"}; 
         if("BARR/COCI".equals(lugarTicket))
         {
@@ -541,7 +601,13 @@ public class PedidosDao {
                     escpos.close();
         }catch(IOException e){
             System.out.println(e.toString());
-        }  
+        }finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println(ex.toString());
+            }
+        }
     }
     
     public void ticketCocina(int id_pedido, String printerName, boolean impreso){
@@ -607,6 +673,12 @@ public class PedidosDao {
                     escpos.close();
         }catch(IOException e){
             System.out.println(e.toString());
+        }finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println(ex.toString());
+            }
         }  
     }
     
@@ -743,6 +815,12 @@ public class PedidosDao {
         } catch (SQLException e) {
             System.out.println(e.toString());
             return false;
+        }finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println(ex.toString());
+            }
         }
     }
     
@@ -758,6 +836,12 @@ public class PedidosDao {
         } catch (SQLException e) {
             System.out.println(e.toString());
             return false;
+        }finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println(ex.toString());
+            }
         }
     }
     public void actualizarImpresoPlat(int id_pedido){
@@ -772,6 +856,12 @@ public class PedidosDao {
         } catch (SQLException e) {
             System.out.println(e.toString());
             
+        }finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println(ex.toString());
+            }
         }
     }
     
@@ -795,7 +885,13 @@ public class PedidosDao {
            }
        } catch (SQLException e) {
            System.out.println(e.toString());
-       }
+       }finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println(ex.toString());
+            }
+        }
        return Lista;
    }
     
@@ -819,7 +915,13 @@ public class PedidosDao {
            }
        } catch (SQLException e) {
            System.out.println(e.toString());
-       }
+       }finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println(ex.toString());
+            }
+        }
        return Lista;
    }
 
