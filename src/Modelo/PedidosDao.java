@@ -1,6 +1,16 @@
 
 package Modelo;
 
+import com.github.anastaciocintra.escpos.EscPos;
+import com.github.anastaciocintra.escpos.EscPosConst;
+import com.github.anastaciocintra.escpos.Style;
+import com.github.anastaciocintra.escpos.image.Bitonal;
+import com.github.anastaciocintra.escpos.image.BitonalOrderedDither;
+import com.github.anastaciocintra.escpos.image.BitonalThreshold;
+import com.github.anastaciocintra.escpos.image.CoffeeImageImpl;
+import com.github.anastaciocintra.escpos.image.EscPosImage;
+import com.github.anastaciocintra.escpos.image.RasterBitImageWrapper;
+import com.github.anastaciocintra.output.PrinterOutputStream;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
@@ -15,6 +25,7 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import java.awt.Desktop;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -24,6 +35,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.print.PrintService;
 import javax.swing.filechooser.FileSystemView;
 
 public class PedidosDao {
@@ -45,9 +60,40 @@ public class PedidosDao {
             }
         } catch (SQLException e) {
             System.out.println(e.toString());
+        }finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println(ex.toString());
+            }
         }
         return id;
     }
+    
+    public int IdPedidoMesa(int mesa, int id_sala){
+        int id_pedido = 0;
+        String sql = "SELECT id FROM pedidos WHERE num_mesa=? AND id_sala=?";
+        try {
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, mesa);
+            ps.setInt(2, id_sala);
+            rs = ps.executeQuery();
+            if(rs.next()){
+                id_pedido = rs.getInt("id");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println(ex.toString());
+            }
+        }
+        return id_pedido;
+    }
+    
     
     public int verificarStado(int mesa, int id_sala){
         int id_pedido = 0;
@@ -64,10 +110,15 @@ public class PedidosDao {
             }
         } catch (SQLException e) {
             System.out.println(e.toString());
+        }finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println(ex.toString());
+            }
         }
         return id_pedido;
     }
-    
     public int RegistrarPedido(Pedidos ped){
         String sql2 = "ALTER TABLE pedidos AUTO_INCREMENT = 0";
         String sql = "INSERT INTO pedidos (id_sala, num_mesa, total, usuario) VALUES (?,?,?,?)";
@@ -111,21 +162,111 @@ public class PedidosDao {
         }
     }
     
+    public boolean EliminarPlatoPed(int id){
+        String sql = "DELETE FROM detalle_pedidos WHERE id = ?";
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.execute();
+            return true;
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+            return false;
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println(ex.toString());
+            }
+        }
+    }
+    
     public int RegistrarDetalle(DetallePedido det){
+        String sql2 = "ALTER TABLE detalle_pedidos AUTO_INCREMENT = 0";
        String sql = "INSERT INTO detalle_pedidos (nombre, precio, cantidad, comentario, id_pedido) VALUES (?,?,?,?,?)";
         try {
             con = cn.getConnection();
+            ps2 = con.prepareStatement(sql2);
+            ps2.execute();
             ps = con.prepareStatement(sql);
             ps.setString(1, det.getNombre());
             ps.setDouble(2, det.getPrecio());
-            ps.setInt(3, det.getCantidad());
+            ps.setDouble(3, det.getCantidad());
             ps.setString(4, det.getComentario());
             ps.setInt(5, det.getId_pedido());
             ps.execute();
         } catch (SQLException e) {
             System.out.println(e.toString());
+        }finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println(ex.toString());
+            }
         }
         return r;
+    }
+    
+    public int EditarTotalPedido(double antprec, int mesa, int id_sala, int id_pedido){
+        String sql = "UPDATE  pedidos SET total = ? WHERE num_mesa=? AND id_sala=? AND id = ?";
+        try {
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setDouble(1, antprec);
+            ps.setInt(2, mesa);
+            ps.setInt(3, id_sala);
+            ps.setInt(4, id_pedido);
+            ps.execute();
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println(ex.toString());
+            }
+        }
+        return r;
+    }
+    
+    public int EditarCantidad(double cantidad, int id){
+        String sql = "UPDATE  detalle_pedidos SET cantidad = ? WHERE id=? ";
+        try {
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setDouble(1, cantidad);
+            ps.setInt(2, id);
+            ps.execute();
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+        return r;
+    }
+    
+    public double VerTotalPedido(int mesa, int id_sala, int id_pedido){
+        double total = 0;
+        String sql = "SELECT total FROM pedidos WHERE num_mesa=? AND id_sala=? AND id = ?";
+        try {
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, mesa);
+            ps.setInt(2, id_sala);
+            ps.setInt(3, id_pedido);
+            rs = ps.executeQuery();
+            if(rs.next()){
+                total = rs.getInt("total");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println(ex.toString());
+            }
+        }
+        return total;
+        
     }
     
     public List verPedidoDetalle(int id_pedido){
@@ -141,13 +282,19 @@ public class PedidosDao {
                det.setId(rs.getInt("id"));
                det.setNombre(rs.getString("nombre"));
                det.setPrecio(rs.getDouble("precio"));
-               det.setCantidad(rs.getInt("cantidad"));
+               det.setCantidad(rs.getDouble("cantidad"));
                det.setComentario(rs.getString("comentario"));
                Lista.add(det);
            }
        } catch (SQLException e) {
            System.out.println(e.toString());
-       }
+       }finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println(ex.toString());
+            }
+        }
        return Lista;
    }
     
@@ -169,7 +316,13 @@ public class PedidosDao {
            }
        } catch (SQLException e) {
            System.out.println(e.toString());
-       }
+       }finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println(ex.toString());
+            }
+        }
        return ped;
    }
     
@@ -192,7 +345,13 @@ public class PedidosDao {
            }
        } catch (SQLException e) {
            System.out.println(e.toString());
-       }
+       }finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println(ex.toString());
+            }
+        }
        return Lista;
    }
     
@@ -299,7 +458,7 @@ public class PedidosDao {
                     tabla.addCell(rs.getString("precio"));
                     tabla.addCell(String.valueOf(subTotal));
                 }
-
+                
             } catch (SQLException e) {
                 System.out.println(e.toString());
             }
@@ -335,6 +494,315 @@ public class PedidosDao {
         }
     }
     
+    public void ticketPedido (int id_pedido, String lugarTicket, int x){
+        String informacion = "SELECT c.*, c.ImpresoraC, c.ImpresoraB FROM config c WHERE c.id = ?";
+        String[] printerName = new String[2];
+            try {
+                
+                ps = con.prepareStatement(informacion);
+                ps.setInt(1, 1);
+                rs = ps.executeQuery();
+                
+                if (rs.next()) {
+                    printerName[0] = rs.getString("ImpresoraC");
+                    System.out.println(printerName[0]);
+                    printerName[1] = rs.getString("ImpresoraB");
+                    System.out.println(printerName[1]);
+                }
+            } catch (SQLException e) {
+                System.out.println(e.toString());
+            }finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println(ex.toString());
+            }
+        }
+        //String[ ] printerName = {"XP-80C2", "XP-80C"}; 
+        if("BARR/COCI".equals(lugarTicket))
+        {
+            ticketCocina(id_pedido, printerName[x+1],false);
+            ticketBar(id_pedido, printerName[x],false);
+            actualizarImpresoPlat(id_pedido);
+            
+        }
+        if("BARRA".equals(lugarTicket))
+        {
+            ticketBar(id_pedido, printerName[x],true);
+            actualizarImpresoPlat(id_pedido);
+        }
+        if("COCINA".equals(lugarTicket))
+        {
+            ticketCocina(id_pedido, printerName[x+1],true);
+            actualizarImpresoPlat(id_pedido);
+            
+        }
+        if("CLIENTE".equals(lugarTicket))
+        {
+            ticketusuario(id_pedido, printerName[x]);
+        }
+    }
+    
+    public void ticketBar(int id_pedido, String printerName, boolean impreso){
+        String num_mesa = null, sala = null, Bebidas = null;
+        PrintService printService = PrinterOutputStream.getPrintServiceByName(printerName);
+        EscPos escpos;
+        try{
+            escpos = new EscPos(new PrinterOutputStream(printService));
+            Style title = new Style()
+                    .setFontSize(Style.FontSize._3, Style.FontSize._2)
+                    .setJustification(EscPosConst.Justification.Center);
+            String informacion = "SELECT p.*, s.nombre FROM pedidos p INNER JOIN salas s ON p.id_sala = s.id WHERE p.id = ?";
+            try {
+                
+                ps = con.prepareStatement(informacion);
+                ps.setInt(1, id_pedido);
+                rs = ps.executeQuery();
+                
+                if (rs.next()) {
+                    num_mesa = rs.getString("num_mesa");
+                    sala = rs.getString("nombre");
+                }
+            } catch (SQLException e) {
+                System.out.println(e.toString());
+            }        
+            Style subtitle = new Style(escpos.getStyle())
+                    
+                    .setJustification(EscPosConst.Justification.Center);
+            Style miestilo = new Style()
+                    .setFontSize(Style.FontSize._2, Style.FontSize._1)
+                    .setJustification(EscPosConst.Justification.Center);
+            String categ = "SELECT d.nombre, d.comentario, pl.categoria FROM pedidos p INNER JOIN detalle_pedidos d ON p.id = d.id_pedido INNER JOIN platos pl ON d.nombre = pl.nombre WHERE p.id = ? && d.impreso = ? ORDER BY (pl.categoria && d.nombre)";
+            escpos.writeLF(title,"Goa Restaurant");
+            escpos.writeLF("N_Mesa: " + num_mesa );
+            escpos.writeLF("N_Sala: " + sala);
+            int IBebidas = 0;
+                    try{
+                    ps = con.prepareStatement(categ);
+                    ps.setInt(1, id_pedido);
+                    ps.setBoolean(2, impreso);
+                    rs = ps.executeQuery();
+                    while (rs.next()){
+                        
+                        if("Bebidas".equals(rs.getString("categoria")))
+                        {
+                          escpos.writeLF(miestilo,rs.getString("nombre"));
+                          escpos.feed(1);
+                          System.out.println(rs.getString("nombre"));
+                          IBebidas++;  
+                        }
+                    }
+                    }catch (SQLException e)  {
+                        System.out.println(e.toString());
+                    }
+                    escpos.writeLF(subtitle,"No. de Bebidas" + " " + IBebidas);
+                    escpos.feed(5);
+                    escpos.cut(EscPos.CutMode.FULL);
+                    escpos.close();
+        }catch(IOException e){
+            System.out.println(e.toString());
+        }finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println(ex.toString());
+            }
+        }
+    }
+    
+    public void ticketCocina(int id_pedido, String printerName, boolean impreso){
+        String num_mesa = null, sala = null;
+        PrintService printService = PrinterOutputStream.getPrintServiceByName(printerName);
+        EscPos escpos;
+        try{
+            escpos = new EscPos(new PrinterOutputStream(printService));
+            Style title = new Style()
+                    .setFontSize(Style.FontSize._3, Style.FontSize._2)
+                    .setJustification(EscPosConst.Justification.Center);
+            String informacion = "SELECT p.*, s.nombre FROM pedidos p INNER JOIN salas s ON p.id_sala = s.id WHERE p.id = ?";
+            try {
+                
+                ps = con.prepareStatement(informacion);
+                ps.setInt(1, id_pedido);
+                rs = ps.executeQuery();
+                
+                if (rs.next()) {
+                    num_mesa = rs.getString("num_mesa");
+                    sala = rs.getString("nombre");
+                }
+            } catch (SQLException e) {
+                System.out.println(e.toString());
+            }        
+            Style subtitle = new Style(escpos.getStyle())
+                    
+                    .setJustification(EscPosConst.Justification.Center);
+            Style miestilo = new Style()
+                    .setFontSize(Style.FontSize._2, Style.FontSize._1)
+                    .setJustification(EscPosConst.Justification.Center);
+            String categ = "SELECT d.nombre, d.comentario, pl.categoria FROM pedidos p INNER JOIN detalle_pedidos d ON p.id = d.id_pedido INNER JOIN platos pl ON d.nombre = pl.nombre WHERE p.id = ? && d.impreso = ? ORDER BY (pl.categoria && d.nombre)";
+            escpos.writeLF(title,"Goa Restaurant");
+            escpos.writeLF("N_Mesa: " + num_mesa );
+            escpos.writeLF("N_Sala: " + sala);
+            int IBebidas = 0;
+                    try{
+                    ps = con.prepareStatement(categ);
+                    ps.setInt(1, id_pedido);
+                    ps.setBoolean(2, impreso);
+                    rs = ps.executeQuery();
+                    while (rs.next()){
+                        
+                        if(!"Bebidas".equals(rs.getString("categoria")))
+                        {
+                          escpos.writeLF(miestilo,rs.getString("nombre"));
+                          
+                          if(!"".equals(rs.getString("comentario")))
+                            {
+                               escpos.writeLF(subtitle,rs.getString("comentario"));
+                            }
+                          escpos.feed(1);
+                          System.out.println(rs.getString("nombre"));
+                          IBebidas++;  
+                        }
+                    }
+                    }catch (SQLException e)  {
+                        System.out.println(e.toString());
+                    }
+                    escpos.writeLF(subtitle,"No. de Platillos" + " " + IBebidas);
+                    escpos.feed(5);
+                    escpos.cut(EscPos.CutMode.FULL);
+                    escpos.close();
+        }catch(IOException e){
+            System.out.println(e.toString());
+        }finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println(ex.toString());
+            }
+        }  
+    }
+    
+    public void ticketusuario(int id_pedido, String printerName){
+        String fechaPedido = null, total = null, num_mesa = null, sala = null;
+        BufferedImage imagen = null;
+        double totalTicket = 0.0;
+        PrintService printService = PrinterOutputStream.getPrintServiceByName(printerName);
+        EscPos escpos;
+        try {
+            imagen = ImageIO.read(getClass().getResource("/Img/logo-dark-modo.png"));
+            
+            BufferedImage  imageBufferedImage = imagen;
+            RasterBitImageWrapper imageWrapper = new RasterBitImageWrapper();
+            
+            escpos = new EscPos(new PrinterOutputStream(printService));
+            Bitonal algorithm = new BitonalThreshold();
+            EscPosImage escposImage = new EscPosImage(new CoffeeImageImpl(imageBufferedImage), algorithm);
+            
+            Style title = new Style()
+                    .setFontSize(Style.FontSize._3, Style.FontSize._2)
+                    .setJustification(EscPosConst.Justification.Center);
+
+            Style subtitle = new Style(escpos.getStyle())
+                    .setJustification(EscPosConst.Justification.Center);
+            Style bold = new Style(escpos.getStyle())
+                    .setBold(true);
+            String informacion = "SELECT p.*, s.nombre FROM pedidos p INNER JOIN salas s ON p.id_sala = s.id WHERE p.id = ?";
+            try {
+                
+                ps = con.prepareStatement(informacion);
+                ps.setInt(1, id_pedido);
+                rs = ps.executeQuery();
+                
+                if (rs.next()) {
+                    num_mesa = rs.getString("num_mesa");
+                    sala = rs.getString("nombre");
+                    fechaPedido = rs.getString("fecha");
+                    total = rs.getString("total");
+                    
+                }
+            } catch (SQLException e) {
+                System.out.println(e.toString());
+            }
+                       
+            algorithm = new BitonalOrderedDither(3,2,150,150);
+            escposImage = new EscPosImage(new CoffeeImageImpl(imageBufferedImage), algorithm);
+            escpos.write(imageWrapper, escposImage);
+ 
+            escpos.writeLF(title,"Goa Restaurant");
+            escpos.writeLF("N_Mesa: " + num_mesa + "          " + "Fecha: " + fechaPedido );
+            escpos.writeLF("N_Sala: " + sala);
+            escpos.writeLF("N_ticket: " + id_pedido);
+            escpos.feed(1);
+            escpos.writeLF(bold, 
+                             "Plato                     P.SubTotal  P.Total")
+                    .writeLF(bold,
+                            "---------------------------------------------");
+                    String product = "SELECT d.* FROM pedidos p INNER JOIN detalle_pedidos d ON p.id = d.id_pedido WHERE p.id = ?";
+                    try{
+                    ps = con.prepareStatement(product);
+                    ps.setInt(1, id_pedido);
+                    rs = ps.executeQuery();
+                    while (rs.next()){
+                        
+                        if(rs.getDouble("cantidad") >= 1){
+                            totalTicket =rs.getDouble("precio");
+                        }else{
+                            totalTicket = (rs.getDouble("precio") - ((rs.getDouble("cantidad") * rs.getDouble("precio"))));
+                        }
+                        
+                        escpos.writeLF(subtitle,calFilaTicket(rs.getString("nombre") , rs.getDouble("precio"), totalTicket));
+                        escpos.feed(1);
+                    }
+                    }catch (SQLException e)  {
+                        System.out.println(e.toString());
+                    }
+            escpos.writeLF(bold,
+                            "---------------------------------------------");
+            escpos.writeLF(bold,
+                                "                              Total S/: " + total);
+            String mensaje = "SELECT c.* FROM config c WHERE id = ?";
+            try{
+                ps = con.prepareStatement(mensaje);
+                ps.setInt(1, 1);
+                rs = ps.executeQuery();
+                if(rs.next()){
+                    escpos.feed(2);
+                    escpos.writeLF(subtitle,rs.getString("mensaje"));
+                    escpos.writeLF(subtitle,"Visitanos en goa.com.mx");
+                    escpos.writeLF(subtitle,"Gracias por su visita");
+                }
+            }catch(SQLException e){
+               System.out.println(e.toString()); 
+            }
+            
+            escpos.feed(5);
+            escpos.cut(EscPos.CutMode.FULL);
+            
+            
+            escpos.close(); 
+        } catch (IOException e) {
+            System.out.println(e.toString());
+        }finally{
+            try {
+                con.close();
+            } catch (SQLException e) {
+                System.out.println(e.toString());
+            }
+        }  
+    }
+    public String calFilaTicket(String plato, double precio, double total){
+        
+       String fila = null; 
+       int tamPlato = plato.length();
+       int tamPrecio = Double.toString(precio).length();
+       int tamTotal = Double.toString(total).length();
+       int numSpaces = 45 - (tamTotal + tamPrecio + 6 + tamPlato);
+       if(numSpaces < 0){
+           numSpaces = 0;
+       }
+       return fila = plato + " ".repeat(numSpaces) + "$" + precio + "    " + "$" + total;
+    }
+    
     public boolean actualizarEstado (int id_pedido){
         String sql = "UPDATE pedidos SET estado = ? WHERE id = ?";
         try {
@@ -347,12 +815,59 @@ public class PedidosDao {
         } catch (SQLException e) {
             System.out.println(e.toString());
             return false;
+        }finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println(ex.toString());
+            }
         }
     }
     
-    public List listarPedidos(){
+    public boolean actualizarImpreso (int id_pedido, String impreso){
+        String sql = "UPDATE pedidos SET impreso = ? WHERE id = ?";
+        try {
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, impreso);
+            ps.setInt(2, id_pedido);
+            ps.execute();
+            return true;
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+            return false;
+        }finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println(ex.toString());
+            }
+        }
+    }
+    public void actualizarImpresoPlat(int id_pedido){
+        String sql = "UPDATE detalle_pedidos SET impreso = ? WHERE id_pedido = ?";
+        try {
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setBoolean(1, true);
+            ps.setInt(2, id_pedido);
+            ps.execute();
+            
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+            
+        }finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println(ex.toString());
+            }
+        }
+    }
+    
+    public List listarTodosPedidos(){
        List<Pedidos> Lista = new ArrayList();
-       String sql = "SELECT p.*, s.nombre FROM pedidos p INNER JOIN salas s ON p.id_sala = s.id ORDER BY p.fecha DESC";
+       String sql = "SELECT p.*, s.nombre FROM pedidos p INNER JOIN salas s ON p.id_sala = s.id ORDER BY p.fecha DESC;";
        try {
            con = cn.getConnection();
            ps = con.prepareStatement(sql);
@@ -370,8 +885,46 @@ public class PedidosDao {
            }
        } catch (SQLException e) {
            System.out.println(e.toString());
-       }
+       }finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println(ex.toString());
+            }
+        }
        return Lista;
    }
+    
+    public List listarPedidos(){
+       List<Pedidos> Lista = new ArrayList();
+       String sql = "SELECT p.*, s.nombre FROM pedidos p INNER JOIN salas s ON p.id_sala = s.id WHERE p.fecha > CURRENT_DATE ORDER BY p.fecha DESC;";
+       try {
+           con = cn.getConnection();
+           ps = con.prepareStatement(sql);
+           rs = ps.executeQuery();
+           while (rs.next()) {               
+               Pedidos ped = new Pedidos();
+               ped.setId(rs.getInt("id"));
+               ped.setSala(rs.getString("nombre"));
+               ped.setNum_mesa(rs.getInt("num_mesa"));
+               ped.setFecha(rs.getString("fecha"));
+               ped.setTotal(rs.getDouble("total"));
+               ped.setUsuario(rs.getString("usuario"));
+               ped.setEstado(rs.getString("estado"));
+               Lista.add(ped);
+           }
+       } catch (SQLException e) {
+           System.out.println(e.toString());
+       }finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println(ex.toString());
+            }
+        }
+       return Lista;
+   }
+
+
     
 }

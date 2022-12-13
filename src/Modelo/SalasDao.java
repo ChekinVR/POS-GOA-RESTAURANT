@@ -54,6 +54,12 @@ public class SalasDao {
             
         } catch (SQLException e) {
             System.out.println(e.toString());
+        }finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println(ex.toString());
+            }
         }
         return Lista;
     }

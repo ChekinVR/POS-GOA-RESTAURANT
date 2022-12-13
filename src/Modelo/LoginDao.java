@@ -10,7 +10,7 @@ import java.util.List;
 
 public class LoginDao {
     Connection con;
-    PreparedStatement ps;
+    PreparedStatement ps,ps2;
     ResultSet rs;
     Conexion cn = new Conexion();
     
@@ -39,6 +39,26 @@ public class LoginDao {
     
     public boolean Registrar(login reg){
         String sql = "INSERT INTO usuarios (nombre, correo, pass, rol) VALUES (?,?,?,?)";
+        String sql2 = "ALTER TABLE usuarios AUTO_INCREMENT = 0";
+        try {
+            con = cn.getConnection();
+            ps2 = con.prepareStatement(sql2);
+            ps2.execute();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, reg.getNombre());
+            ps.setString(2, reg.getCorreo());
+            ps.setString(3, reg.getPass());
+            ps.setString(4, reg.getRol());
+            ps.execute();
+            return true;
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+            return false;
+        }
+    }
+    
+    public boolean Update(login reg, int id){
+        String sql = "UPDATE usuarios u SET u.nombre = ?, u.correo = ?, u.pass = ?, u.rol = ? WHERE u.id = ?";
         try {
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
@@ -46,6 +66,21 @@ public class LoginDao {
             ps.setString(2, reg.getCorreo());
             ps.setString(3, reg.getPass());
             ps.setString(4, reg.getRol());
+            ps.setInt(5, id);
+            ps.execute();
+            return true;
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+            return false;
+        }
+    }
+    
+    public boolean Eliminar(int id){
+        String sql = "DELETE FROM usuarios WHERE usuarios.id = ?";
+        try {
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
             ps.execute();
             return true;
         } catch (SQLException e) {
@@ -76,7 +111,7 @@ public class LoginDao {
    }
     
     public boolean ModificarDatos(Config conf){
-        String sql = "UPDATE config SET ruc=?, nombre=?, telefono=?, direccion=?, mensaje=? WHERE id=?";
+        String sql = "UPDATE config SET ruc=?, nombre=?, telefono=?, direccion=?, mensaje=?, ImpresoraC=?, ImpresoraB=? WHERE id=?";
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, conf.getRuc());
@@ -84,7 +119,9 @@ public class LoginDao {
             ps.setString(3, conf.getTelefono());
             ps.setString(4, conf.getDireccion());
             ps.setString(5, conf.getMensaje());
-            ps.setInt(6, conf.getId());
+            ps.setString(6, conf.getImpresoraB());
+            ps.setString(7, conf.getImpresoraC());
+            ps.setInt(8, conf.getId());
             ps.execute();
             return true;
         } catch (SQLException e) {
