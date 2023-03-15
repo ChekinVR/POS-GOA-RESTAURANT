@@ -13,6 +13,10 @@ public class SalasDao {
     Conexion cn = new Conexion();
     PreparedStatement ps, ps2;
     ResultSet rs;
+    
+    
+    
+    
     public boolean RegistrarSala(Salas sl){
         String sql = "INSERT INTO salas(nombre, mesas) VALUES (?,?)";
         String sql2 = "ALTER TABLE salas AUTO_INCREMENT = 0";
@@ -54,12 +58,6 @@ public class SalasDao {
             
         } catch (SQLException e) {
             System.out.println(e.toString());
-        }finally {
-            try {
-                con.close();
-            } catch (SQLException ex) {
-                System.out.println(ex.toString());
-            }
         }
         return Lista;
     }

@@ -126,6 +126,7 @@ public final class SistemaSave extends javax.swing.JFrame {
         btnClientImp.setVisible(false);
         btnBarraImp.setVisible(false);
         txtIdUsuario.setVisible(false);
+        btnPdfPedido.setVisible(false);
         jPanel40.setVisible(false);
         panelSalas();
     }
@@ -1909,14 +1910,12 @@ public final class SistemaSave extends javax.swing.JFrame {
         jPanel19Layout.setVerticalGroup(
             jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel19Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnGenerarPedido, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel19Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnFinalizarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnAgregarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(btnFinalizarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnAgregarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnGenerarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(119, 119, 119))
         );
 
@@ -2009,6 +2008,7 @@ public final class SistemaSave extends javax.swing.JFrame {
         // TODO add your handling code here:
         LimpiarTable();
         ListarSalas();
+        
         jTabbedPane1.setSelectedIndex(1);
     }//GEN-LAST:event_btnSalaActionPerformed
 
@@ -2641,7 +2641,7 @@ public final class SistemaSave extends javax.swing.JFrame {
             //double cantidad = (((precio)*(100))/(100-(descuento*100)));
             TotalPagar(tableFinalizar, totalFinalizar);
             //modificarTotalPedidoNegativo(cantidad);
-            modificarTotal(Double.parseDouble(totalFinalizar.getText()));
+            modificarTotal(Double.parseDouble(totalFinalizar.getText().toString()));
             /*LimpiarTable();
             verPedido(id_pedido);
             verPedidoDetalle(id_pedido);*/
@@ -2686,6 +2686,7 @@ public final class SistemaSave extends javax.swing.JFrame {
                 pedDao.actualizarImpreso(Integer.parseInt(txtIdPedido.getText()), "CLIENTE");
             }
         }
+        pedDao.closeConnection();
     }//GEN-LAST:event_btnFinalizarActionPerformed
 
     private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed

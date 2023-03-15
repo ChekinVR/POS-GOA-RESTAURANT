@@ -48,6 +48,14 @@ public class PedidosDao {
     ResultSet rs;
     int r;
     
+    public void closeConnection(){
+        try {
+                con.close();
+            } catch (SQLException e) {
+                System.out.println(e.toString());
+            }
+    }
+    
     public int IdPedido(){
         int id = 0;
         String sql = "SELECT MAX(id) FROM pedidos";
@@ -110,12 +118,6 @@ public class PedidosDao {
             }
         } catch (SQLException e) {
             System.out.println(e.toString());
-        }finally {
-            try {
-                con.close();
-            } catch (SQLException ex) {
-                System.out.println(ex.toString());
-            }
         }
         return id_pedido;
     }
@@ -134,12 +136,6 @@ public class PedidosDao {
             ps.execute();
         } catch (SQLException e) {
             System.out.println(e.toString());
-        }finally{
-            try {
-                con.close();
-            } catch (SQLException e) {
-                System.out.println(e.toString());
-            }
         }
         return r;
     }
@@ -197,12 +193,6 @@ public class PedidosDao {
             ps.execute();
         } catch (SQLException e) {
             System.out.println(e.toString());
-        }finally {
-            try {
-                con.close();
-            } catch (SQLException ex) {
-                System.out.println(ex.toString());
-            }
         }
         return r;
     }
@@ -219,12 +209,6 @@ public class PedidosDao {
             ps.execute();
         } catch (SQLException e) {
             System.out.println(e.toString());
-        }finally {
-            try {
-                con.close();
-            } catch (SQLException ex) {
-                System.out.println(ex.toString());
-            }
         }
         return r;
     }
@@ -258,12 +242,6 @@ public class PedidosDao {
             }
         } catch (SQLException e) {
             System.out.println(e.toString());
-        }finally {
-            try {
-                con.close();
-            } catch (SQLException ex) {
-                System.out.println(ex.toString());
-            }
         }
         return total;
         
@@ -288,13 +266,7 @@ public class PedidosDao {
            }
        } catch (SQLException e) {
            System.out.println(e.toString());
-       }finally {
-            try {
-                con.close();
-            } catch (SQLException ex) {
-                System.out.println(ex.toString());
-            }
-        }
+       }
        return Lista;
    }
     
@@ -316,13 +288,7 @@ public class PedidosDao {
            }
        } catch (SQLException e) {
            System.out.println(e.toString());
-       }finally {
-            try {
-                con.close();
-            } catch (SQLException ex) {
-                System.out.println(ex.toString());
-            }
-        }
+       }
        return ped;
    }
     
@@ -511,13 +477,7 @@ public class PedidosDao {
                 }
             } catch (SQLException e) {
                 System.out.println(e.toString());
-            }finally {
-            try {
-                con.close();
-            } catch (SQLException ex) {
-                System.out.println(ex.toString());
             }
-        }
         //String[ ] printerName = {"XP-80C2", "XP-80C"}; 
         if("BARR/COCI".equals(lugarTicket))
         {
@@ -544,142 +504,170 @@ public class PedidosDao {
     }
     
     public void ticketBar(int id_pedido, String printerName, boolean impreso){
-        String num_mesa = null, sala = null, Bebidas = null;
-        PrintService printService = PrinterOutputStream.getPrintServiceByName(printerName);
-        EscPos escpos;
+        String cuantas = "SELECT d.nombre, d.comentario, pl.categoria FROM pedidos p INNER JOIN detalle_pedidos d ON p.id = d.id_pedido INNER JOIN platos pl ON d.nombre = pl.nombre WHERE p.id = ? && d.impreso = ? ORDER BY (pl.categoria && d.nombre)";
+        int IoBebidas = 0;
         try{
-            escpos = new EscPos(new PrinterOutputStream(printService));
-            Style title = new Style()
-                    .setFontSize(Style.FontSize._3, Style.FontSize._2)
-                    .setJustification(EscPosConst.Justification.Center);
-            String informacion = "SELECT p.*, s.nombre FROM pedidos p INNER JOIN salas s ON p.id_sala = s.id WHERE p.id = ?";
-            try {
-                
-                ps = con.prepareStatement(informacion);
-                ps.setInt(1, id_pedido);
-                rs = ps.executeQuery();
-                
-                if (rs.next()) {
-                    num_mesa = rs.getString("num_mesa");
-                    sala = rs.getString("nombre");
-                }
-            } catch (SQLException e) {
-                System.out.println(e.toString());
-            }        
-            Style subtitle = new Style(escpos.getStyle())
-                    
-                    .setJustification(EscPosConst.Justification.Center);
-            Style miestilo = new Style()
-                    .setFontSize(Style.FontSize._2, Style.FontSize._1)
-                    .setJustification(EscPosConst.Justification.Center);
-            String categ = "SELECT d.nombre, d.comentario, pl.categoria FROM pedidos p INNER JOIN detalle_pedidos d ON p.id = d.id_pedido INNER JOIN platos pl ON d.nombre = pl.nombre WHERE p.id = ? && d.impreso = ? ORDER BY (pl.categoria && d.nombre)";
-            escpos.writeLF(title,"Goa Restaurant");
-            escpos.writeLF("N_Mesa: " + num_mesa );
-            escpos.writeLF("N_Sala: " + sala);
-            int IBebidas = 0;
-                    try{
-                    ps = con.prepareStatement(categ);
-                    ps.setInt(1, id_pedido);
-                    ps.setBoolean(2, impreso);
-                    rs = ps.executeQuery();
-                    while (rs.next()){
-                        
-                        if("Bebidas".equals(rs.getString("categoria")))
-                        {
-                          escpos.writeLF(miestilo,rs.getString("nombre"));
-                          escpos.feed(1);
-                          System.out.println(rs.getString("nombre"));
-                          IBebidas++;  
-                        }
-                    }
-                    }catch (SQLException e)  {
-                        System.out.println(e.toString());
-                    }
-                    escpos.writeLF(subtitle,"No. de Bebidas" + " " + IBebidas);
-                    escpos.feed(5);
-                    escpos.cut(EscPos.CutMode.FULL);
-                    escpos.close();
-        }catch(IOException e){
+        ps = con.prepareStatement(cuantas);
+        ps.setInt(1, id_pedido);
+        ps.setBoolean(2, impreso);
+        rs = ps.executeQuery();
+        while (rs.next()){
+
+            if("Bebidas".equals(rs.getString("categoria")))
+            {
+              System.out.println(rs.getString("nombre"));
+              IoBebidas++;  
+            }
+        }
+        }catch (SQLException e)  {
             System.out.println(e.toString());
-        }finally {
-            try {
-                con.close();
-            } catch (SQLException ex) {
-                System.out.println(ex.toString());
+        }
+        if(IoBebidas > 0){
+            String num_mesa = null, sala = null, Bebidas = null;
+            PrintService printService = PrinterOutputStream.getPrintServiceByName(printerName);
+            EscPos escpos;
+            try{
+                escpos = new EscPos(new PrinterOutputStream(printService));
+                Style title = new Style()
+                        .setFontSize(Style.FontSize._3, Style.FontSize._2)
+                        .setJustification(EscPosConst.Justification.Center);
+                String informacion = "SELECT p.*, s.nombre FROM pedidos p INNER JOIN salas s ON p.id_sala = s.id WHERE p.id = ?";
+                try {
+
+                    ps = con.prepareStatement(informacion);
+                    ps.setInt(1, id_pedido);
+                    rs = ps.executeQuery();
+
+                    if (rs.next()) {
+                        num_mesa = rs.getString("num_mesa");
+                        sala = rs.getString("nombre");
+                    }
+                } catch (SQLException e) {
+                    System.out.println(e.toString());
+                }        
+                Style subtitle = new Style(escpos.getStyle())
+
+                        .setJustification(EscPosConst.Justification.Center);
+                Style miestilo = new Style()
+                        .setFontSize(Style.FontSize._2, Style.FontSize._1)
+                        .setJustification(EscPosConst.Justification.Center);
+                String categ = "SELECT d.nombre, d.comentario, pl.categoria FROM pedidos p INNER JOIN detalle_pedidos d ON p.id = d.id_pedido INNER JOIN platos pl ON d.nombre = pl.nombre WHERE p.id = ? && d.impreso = ? ORDER BY (pl.categoria && d.nombre)";
+                escpos.writeLF(title,"Goa Restaurant");
+                escpos.writeLF("N_Mesa: " + num_mesa );
+                escpos.writeLF("N_Sala: " + sala);
+                int IBebidas = 0;
+                        try{
+                        ps = con.prepareStatement(categ);
+                        ps.setInt(1, id_pedido);
+                        ps.setBoolean(2, impreso);
+                        rs = ps.executeQuery();
+                        while (rs.next()){
+
+                            if("Bebidas".equals(rs.getString("categoria")))
+                            {
+                              escpos.writeLF(miestilo,rs.getString("nombre"));
+                              escpos.feed(1);
+                              System.out.println(rs.getString("nombre"));
+                              IBebidas++;  
+                            }
+                        }
+                        }catch (SQLException e)  {
+                            System.out.println(e.toString());
+                        }
+                        escpos.writeLF(subtitle,"No. de Bebidas" + " " + IBebidas);
+                        escpos.feed(5);
+                        escpos.cut(EscPos.CutMode.FULL);
+                        escpos.close();
+            }catch(IOException e){
+                System.out.println(e.toString());
             }
         }
     }
     
     public void ticketCocina(int id_pedido, String printerName, boolean impreso){
-        String num_mesa = null, sala = null;
-        PrintService printService = PrinterOutputStream.getPrintServiceByName(printerName);
-        EscPos escpos;
+        String cuantas = "SELECT d.nombre, d.comentario, pl.categoria FROM pedidos p INNER JOIN detalle_pedidos d ON p.id = d.id_pedido INNER JOIN platos pl ON d.nombre = pl.nombre WHERE p.id = ? && d.impreso = ? ORDER BY (pl.categoria && d.nombre)";
+        int IoBebidas = 0;
         try{
-            escpos = new EscPos(new PrinterOutputStream(printService));
-            Style title = new Style()
-                    .setFontSize(Style.FontSize._3, Style.FontSize._2)
-                    .setJustification(EscPosConst.Justification.Center);
-            String informacion = "SELECT p.*, s.nombre FROM pedidos p INNER JOIN salas s ON p.id_sala = s.id WHERE p.id = ?";
-            try {
-                
-                ps = con.prepareStatement(informacion);
-                ps.setInt(1, id_pedido);
-                rs = ps.executeQuery();
-                
-                if (rs.next()) {
-                    num_mesa = rs.getString("num_mesa");
-                    sala = rs.getString("nombre");
-                }
-            } catch (SQLException e) {
-                System.out.println(e.toString());
-            }        
-            Style subtitle = new Style(escpos.getStyle())
-                    
-                    .setJustification(EscPosConst.Justification.Center);
-            Style miestilo = new Style()
-                    .setFontSize(Style.FontSize._2, Style.FontSize._1)
-                    .setJustification(EscPosConst.Justification.Center);
-            String categ = "SELECT d.nombre, d.comentario, pl.categoria FROM pedidos p INNER JOIN detalle_pedidos d ON p.id = d.id_pedido INNER JOIN platos pl ON d.nombre = pl.nombre WHERE p.id = ? && d.impreso = ? ORDER BY (pl.categoria && d.nombre)";
-            escpos.writeLF(title,"Goa Restaurant");
-            escpos.writeLF("N_Mesa: " + num_mesa );
-            escpos.writeLF("N_Sala: " + sala);
-            int IBebidas = 0;
-                    try{
-                    ps = con.prepareStatement(categ);
-                    ps.setInt(1, id_pedido);
-                    ps.setBoolean(2, impreso);
-                    rs = ps.executeQuery();
-                    while (rs.next()){
-                        
-                        if(!"Bebidas".equals(rs.getString("categoria")))
-                        {
-                          escpos.writeLF(miestilo,rs.getString("nombre"));
-                          
-                          if(!"".equals(rs.getString("comentario")))
-                            {
-                               escpos.writeLF(subtitle,rs.getString("comentario"));
-                            }
-                          escpos.feed(1);
-                          System.out.println(rs.getString("nombre"));
-                          IBebidas++;  
-                        }
-                    }
-                    }catch (SQLException e)  {
-                        System.out.println(e.toString());
-                    }
-                    escpos.writeLF(subtitle,"No. de Platillos" + " " + IBebidas);
-                    escpos.feed(5);
-                    escpos.cut(EscPos.CutMode.FULL);
-                    escpos.close();
-        }catch(IOException e){
-            System.out.println(e.toString());
-        }finally {
-            try {
-                con.close();
-            } catch (SQLException ex) {
-                System.out.println(ex.toString());
+        ps = con.prepareStatement(cuantas);
+        ps.setInt(1, id_pedido);
+        ps.setBoolean(2, impreso);
+        rs = ps.executeQuery();
+        while (rs.next()){
+
+            if(!"Bebidas".equals(rs.getString("categoria")))
+            {
+              System.out.println(rs.getString("nombre"));
+              IoBebidas++;  
             }
-        }  
+        }
+        }catch (SQLException e)  {
+            System.out.println(e.toString());
+        }
+        if(IoBebidas > 0){
+            String num_mesa = null, sala = null;
+            PrintService printService = PrinterOutputStream.getPrintServiceByName(printerName);
+            EscPos escpos;
+            try{
+                escpos = new EscPos(new PrinterOutputStream(printService));
+                Style title = new Style()
+                        .setFontSize(Style.FontSize._3, Style.FontSize._2)
+                        .setJustification(EscPosConst.Justification.Center);
+                String informacion = "SELECT p.*, s.nombre FROM pedidos p INNER JOIN salas s ON p.id_sala = s.id WHERE p.id = ?";
+                try {
+
+                    ps = con.prepareStatement(informacion);
+                    ps.setInt(1, id_pedido);
+                    rs = ps.executeQuery();
+
+                    if (rs.next()) {
+                        num_mesa = rs.getString("num_mesa");
+                        sala = rs.getString("nombre");
+                    }
+                } catch (SQLException e) {
+                    System.out.println(e.toString());
+                }        
+                Style subtitle = new Style(escpos.getStyle())
+
+                        .setJustification(EscPosConst.Justification.Center);
+                Style miestilo = new Style()
+                        .setFontSize(Style.FontSize._2, Style.FontSize._1)
+                        .setJustification(EscPosConst.Justification.Center);
+                String categ = "SELECT d.nombre, d.comentario, pl.categoria FROM pedidos p INNER JOIN detalle_pedidos d ON p.id = d.id_pedido INNER JOIN platos pl ON d.nombre = pl.nombre WHERE p.id = ? && d.impreso = ? ORDER BY (pl.categoria && d.nombre)";
+                escpos.writeLF(title,"Goa Restaurant");
+                escpos.writeLF("N_Mesa: " + num_mesa );
+                escpos.writeLF("N_Sala: " + sala);
+                int IBebidas = 0;
+                        try{
+                        ps = con.prepareStatement(categ);
+                        ps.setInt(1, id_pedido);
+                        ps.setBoolean(2, impreso);
+                        rs = ps.executeQuery();
+                        while (rs.next()){
+
+                            if(!"Bebidas".equals(rs.getString("categoria")))
+                            {
+                              escpos.writeLF(miestilo,rs.getString("nombre"));
+
+                              if(!"".equals(rs.getString("comentario")))
+                                {
+                                   escpos.writeLF(subtitle,rs.getString("comentario"));
+                                }
+                              escpos.feed(1);
+                              System.out.println(rs.getString("nombre"));
+                              IBebidas++;  
+                            }
+                        }
+                        }catch (SQLException e)  {
+                            System.out.println(e.toString());
+                        }
+                        escpos.writeLF(subtitle,"No. de Platillos" + " " + IBebidas);
+                        escpos.feed(5);
+                        escpos.cut(EscPos.CutMode.FULL);
+                        escpos.close();
+            }catch(IOException e){
+                System.out.println(e.toString());
+            } 
+        }
     }
     
     public void ticketusuario(int id_pedido, String printerName){
@@ -782,13 +770,7 @@ public class PedidosDao {
             escpos.close(); 
         } catch (IOException e) {
             System.out.println(e.toString());
-        }finally{
-            try {
-                con.close();
-            } catch (SQLException e) {
-                System.out.println(e.toString());
-            }
-        }  
+        } 
     }
     public String calFilaTicket(String plato, double precio, double total){
         
@@ -815,12 +797,6 @@ public class PedidosDao {
         } catch (SQLException e) {
             System.out.println(e.toString());
             return false;
-        }finally {
-            try {
-                con.close();
-            } catch (SQLException ex) {
-                System.out.println(ex.toString());
-            }
         }
     }
     
@@ -836,12 +812,6 @@ public class PedidosDao {
         } catch (SQLException e) {
             System.out.println(e.toString());
             return false;
-        }finally {
-            try {
-                con.close();
-            } catch (SQLException ex) {
-                System.out.println(ex.toString());
-            }
         }
     }
     public void actualizarImpresoPlat(int id_pedido){
@@ -856,12 +826,6 @@ public class PedidosDao {
         } catch (SQLException e) {
             System.out.println(e.toString());
             
-        }finally {
-            try {
-                con.close();
-            } catch (SQLException ex) {
-                System.out.println(ex.toString());
-            }
         }
     }
     
@@ -915,13 +879,13 @@ public class PedidosDao {
            }
        } catch (SQLException e) {
            System.out.println(e.toString());
-       }finally {
+       }/*finally {
             try {
                 con.close();
             } catch (SQLException ex) {
                 System.out.println(ex.toString());
             }
-        }
+        }*/
        return Lista;
    }
 
