@@ -566,6 +566,10 @@ public class PedidosDao {
                             if("Bebidas".equals(rs.getString("categoria")))
                             {
                               escpos.writeLF(miestilo,rs.getString("nombre"));
+                              if(!"".equals(rs.getString("comentario")))
+                                {
+                                   escpos.writeLF(subtitle,rs.getString("comentario"));
+                                }
                               escpos.feed(1);
                               System.out.println(rs.getString("nombre"));
                               IBebidas++;  
@@ -646,16 +650,17 @@ public class PedidosDao {
 
                             if(!"Bebidas".equals(rs.getString("categoria")))
                             {
-                              escpos.writeLF(miestilo,rs.getString("nombre"));
+                                escpos.writeLF(miestilo,rs.getString("nombre"));
 
-                              if(!"".equals(rs.getString("comentario")))
-                                {
-                                   escpos.writeLF(subtitle,rs.getString("comentario"));
-                                }
-                              escpos.feed(1);
-                              System.out.println(rs.getString("nombre"));
-                              IBebidas++;  
+                                if(!"".equals(rs.getString("comentario")))
+                                  {
+                                     escpos.writeLF(subtitle,rs.getString("comentario"));
+                                  }
+                                escpos.feed(1);
+                                System.out.println(rs.getString("nombre"));
+                                IBebidas++;  
                             }
+                            
                         }
                         }catch (SQLException e)  {
                             System.out.println(e.toString());
@@ -717,6 +722,10 @@ public class PedidosDao {
             escpos.write(imageWrapper, escposImage);
  
             escpos.writeLF(title,"Goa Restaurant");
+            escpos.writeLF("Sucursal Lopez Cotilla 1520");
+            escpos.writeLF("Col. Americana");
+            escpos.writeLF("C.P. 44160. Gdl, Jal");
+            escpos.writeLF("TEL (33) 3615 6173");
             escpos.writeLF("N_Mesa: " + num_mesa + "          " + "Fecha: " + fechaPedido );
             escpos.writeLF("N_Sala: " + sala);
             escpos.writeLF("N_ticket: " + id_pedido);

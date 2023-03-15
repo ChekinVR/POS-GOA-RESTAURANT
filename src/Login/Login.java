@@ -112,7 +112,7 @@ public class Login extends javax.swing.JFrame {
         txtCorreo.setBackground(new java.awt.Color(161, 48, 50));
         txtCorreo.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         txtCorreo.setForeground(new java.awt.Color(204, 204, 204));
-        txtCorreo.setText("Ingrese el nombre de usuario");
+        txtCorreo.setText("mesero");
         txtCorreo.setBorder(null);
         txtCorreo.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -142,7 +142,6 @@ public class Login extends javax.swing.JFrame {
         txtPass.setBackground(new java.awt.Color(161, 48, 50));
         txtPass.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtPass.setForeground(new java.awt.Color(204, 204, 204));
-        txtPass.setText("*********");
         txtPass.setBorder(null);
         txtPass.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -302,7 +301,7 @@ public class Login extends javax.swing.JFrame {
     private void txtCorreoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCorreoMousePressed
         if (txtCorreo.getText().equals("Ingrese el nombre de usuario"))
         {
-            txtCorreo.setText("");
+            txtCorreo.setText("mesero");
         }
         if (String.valueOf(txtPass.getPassword()).isEmpty())
         {
