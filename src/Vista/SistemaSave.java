@@ -2094,10 +2094,16 @@ public final class SistemaSave extends javax.swing.JFrame {
             btnEliminarPedido.setVisible(false);
             btnPedidosHoy.setVisible(false);
             btnTodosPedidos.setVisible(false);
+            btnJuntarMesa.setVisible(false);
+            btnCambiarMesa.setVisible(false);
+            btnCambiarSala.setVisible(false);
         } else{
             btnEliminarPedido.setVisible(true);
             btnPedidosHoy.setVisible(false);
             btnTodosPedidos.setVisible(true);
+            btnJuntarMesa.setVisible(true);
+            btnCambiarMesa.setVisible(true);
+            btnCambiarSala.setVisible(true);
         }
         LimpiarTable();
         ListarPedidos();
@@ -3256,7 +3262,7 @@ public final class SistemaSave extends javax.swing.JFrame {
         Object[] ob = new Object[7];
         for (int i = 0; i < Listar.size(); i++) {
             ob[0] = Listar.get(i).getId();
-            ob[1] = Listar.get(i).getSala();
+            ob[1] = Listar.get(i).getSala() + " ID ()" + Listar.get(i).getId_sala();
             ob[2] = Listar.get(i).getUsuario();
             ob[3] = Listar.get(i).getNum_mesa();
             ob[4] = Listar.get(i).getFecha();
@@ -3275,7 +3281,7 @@ public final class SistemaSave extends javax.swing.JFrame {
         Object[] ob = new Object[7];
         for (int i = 0; i < Listar.size(); i++) {
             ob[0] = Listar.get(i).getId();
-            ob[1] = Listar.get(i).getSala();
+            ob[1] = Listar.get(i).getSala() + " ID ()" + Listar.get(i).getId_sala();
             ob[2] = Listar.get(i).getUsuario();
             ob[3] = Listar.get(i).getNum_mesa();
             ob[4] = Listar.get(i).getFecha();

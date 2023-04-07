@@ -879,6 +879,7 @@ public class PedidosDao {
            while (rs.next()) {               
                Pedidos ped = new Pedidos();
                ped.setId(rs.getInt("id"));
+               ped.setId_sala(rs.getInt("id_sala"));
                ped.setSala(rs.getString("nombre"));
                ped.setNum_mesa(rs.getInt("num_mesa"));
                ped.setFecha(rs.getString("fecha"));
