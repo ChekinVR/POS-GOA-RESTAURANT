@@ -139,6 +139,37 @@ public class PedidosDao {
         }
         return r;
     }
+    
+    public boolean CambiarMesa(int id_pedido, int mesa){
+        String sql = "UPDATE pedidos SET num_mesa = ? WHERE id = ?";
+        try {
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, Integer.toString(mesa));
+            ps.setInt(2, id_pedido);
+            ps.execute();
+            return true;
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+            return false;
+        }
+    }
+    
+    public boolean CambiarSala(int id_pedido, int sala){
+        String sql = "UPDATE pedidos SET id_sala = ? WHERE id = ?";
+        try {
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, Integer.toString(sala));
+            ps.setInt(2, id_pedido);
+            ps.execute();
+            return true;
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+            return false;
+        }
+    }
+    
     public boolean Eliminar(int id) {
         String sql = "DELETE FROM pedidos WHERE id = ?";
         try {

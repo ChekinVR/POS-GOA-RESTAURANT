@@ -213,6 +213,9 @@ public final class SistemaSave extends javax.swing.JFrame {
         btnTodosPedidos = new javax.swing.JButton();
         btnPedidosHoy = new javax.swing.JButton();
         btnCorteDia = new javax.swing.JButton();
+        btnJuntarMesa = new javax.swing.JButton();
+        btnCambiarMesa = new javax.swing.JButton();
+        btnCambiarSala = new javax.swing.JButton();
         txtCorte = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jLabel32 = new javax.swing.JLabel();
@@ -987,21 +990,53 @@ public final class SistemaSave extends javax.swing.JFrame {
             }
         });
 
+        btnJuntarMesa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/sala.png"))); // NOI18N
+        btnJuntarMesa.setText("JUNTAR MESA");
+        btnJuntarMesa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnJuntarMesa(evt);
+            }
+        });
+
+        btnCambiarMesa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/sala.png"))); // NOI18N
+        btnCambiarMesa.setText("CAMBIAR MESA");
+        btnCambiarMesa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCambiarMesa(evt);
+            }
+        });
+
+        btnCambiarSala.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/sala.png"))); // NOI18N
+        btnCambiarSala.setText("CAMBIAR SALA");
+        btnCambiarSala.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCambiarSala(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addContainerGap(104, Short.MAX_VALUE)
-                .addComponent(btnCorteDia, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnPedidosHoy, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnTodosPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnEliminarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnVerPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(btnJuntarMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnCambiarMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnCambiarSala, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(btnCorteDia, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnPedidosHoy, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnTodosPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnEliminarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnVerPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -1014,7 +1049,12 @@ public final class SistemaSave extends javax.swing.JFrame {
                     .addComponent(btnVerPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnPedidosHoy, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCorteDia, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnJuntarMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCambiarMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCambiarSala, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         txtCorte.setEnabled(false);
@@ -1047,16 +1087,17 @@ public final class SistemaSave extends javax.swing.JFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addComponent(jLabel16)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGap(29, 29, 29)
                         .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(10, 10, 10)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                         .addGap(527, 527, 527)
                         .addComponent(txtCorte)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(93, 93, 93)
                         .addComponent(txtHId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(38, 38, 38))))
         );
@@ -2213,6 +2254,17 @@ public final class SistemaSave extends javax.swing.JFrame {
                     double total = 1 * precio;
                     item = item + 1;
                     tmp = (DefaultTableModel) tableMenu.getModel();
+                    for (int i = 0; i < tableMenu.getRowCount(); i++) {
+                        if (tableMenu.getValueAt(i, 0).equals(id)) {
+                            int cantActual = Integer.parseInt(tableMenu.getValueAt(i, 2).toString());
+                            int nuevoCantidad = cantActual + 1;
+                            double nuevoSub = precio * nuevoCantidad;
+                            tmp.setValueAt(nuevoCantidad, i, 2);
+                            tmp.setValueAt(nuevoSub, i, 4);
+                            TotalPagar(tableMenu, totalMenu);
+                            return;
+                        }
+                    }
                     ArrayList lista = new ArrayList();
                     lista.add(item);
                     lista.add(id);
@@ -2887,6 +2939,93 @@ public final class SistemaSave extends javax.swing.JFrame {
         btnVinos.setVisible(false);
     }//GEN-LAST:event_btnVinosActionPerformed
 
+    private void btnJuntarMesa(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJuntarMesa
+        int mesaA = 0;
+        int mesaB = 0;
+        int salaA = 0;
+        int salaB = 0;
+        mesaA = Integer.parseInt(JOptionPane.showInputDialog("Indique la MESA A:"));
+        salaA = Integer.parseInt(JOptionPane.showInputDialog("Indique la sala de la MESA A:"));
+        mesaB = Integer.parseInt(JOptionPane.showInputDialog("Indique la MESA B:"));
+        salaB = Integer.parseInt(JOptionPane.showInputDialog("Indique la sala de la MESA B:"));
+        int rolcheck = RolCheck();
+        if (rolcheck == 1){
+            btnElimPlati.setVisible(false);
+        } else{
+            btnElimPlati.setVisible(true);
+        }
+        int id_pedido = pedDao.verificarStado(mesaA,salaA);
+        LimpiarTable();
+        verPedido(id_pedido);
+        verPedidoDetalle(id_pedido);
+        jTabbedPane1.setSelectedIndex(3);
+        btnFinalizar.setEnabled(false);
+        txtIdHistorialPedido.setText(""+id_pedido);
+        txtIdPedido.setText(""+id_pedido);
+        txtdFinalizarP.setText(""+id_pedido);
+        id_pedido = pedDao.verificarStado(mesaB,salaB);
+        verPedido(id_pedido);
+        verPedidoDetalle(id_pedido);
+        jTabbedPane1.setSelectedIndex(3);
+        btnFinalizar.setEnabled(false);
+        txtIdHistorialPedido.setText(""+id_pedido);
+        txtIdPedido.setText(""+id_pedido);
+        txtdFinalizarP.setText(""+id_pedido);
+        TotalPagar(tableFinalizar, totalFinalizar);
+    }//GEN-LAST:event_btnJuntarMesa
+
+    private void btnCambiarMesa(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiarMesa
+        // TODO add your handling code here:
+        // TODO add your handling code here:
+        int rolcheck = RolCheck();
+        if (rolcheck == 1){
+            btnElimPlati.setVisible(false);
+        } else{
+            btnElimPlati.setVisible(true);
+        }
+        if (!"".equals(txtIdPedido.getText())) {
+            int mesa = Integer.parseInt(JOptionPane.showInputDialog("Indique a que MESA se cambiara:"));
+            if(mesa <0)
+            {
+                mesa = Integer.parseInt(JOptionPane.showInputDialog("Favor de ingresar un numero valido"));
+            }
+            int fila = Integer.parseInt(txtHId.getText());
+            int id_pedido = Integer.parseInt(TablePedidos.getValueAt(fila, 0).toString());
+            pedDao.CambiarMesa(id_pedido,mesa);
+            LimpiarTable();
+            ListarTodosPedidos();
+            
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecciona un pedido");
+        }
+        
+    }//GEN-LAST:event_btnCambiarMesa
+
+    private void btnCambiarSala(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiarSala
+        // TODO add your handling code here:
+        int rolcheck = RolCheck();
+        if (rolcheck == 1){
+            btnElimPlati.setVisible(false);
+        } else{
+            btnElimPlati.setVisible(true);
+        }
+        if (!"".equals(txtIdPedido.getText())) {
+            int sala = Integer.parseInt(JOptionPane.showInputDialog("Indique a que SALA se cambiara:"));
+            if(sala <0)
+            {
+                sala = Integer.parseInt(JOptionPane.showInputDialog("Favor de ingresar un numero valido"));
+            }
+            int fila = Integer.parseInt(txtHId.getText());
+            int id_pedido = Integer.parseInt(TablePedidos.getValueAt(fila, 0).toString());
+            pedDao.CambiarSala(id_pedido,sala);
+            LimpiarTable();
+            ListarTodosPedidos();
+            
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecciona un pedido");
+        }
+    }//GEN-LAST:event_btnCambiarSala
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LabelConection;
@@ -2904,6 +3043,8 @@ public final class SistemaSave extends javax.swing.JFrame {
     private javax.swing.JButton btnAnterior;
     private javax.swing.JButton btnBarraImp;
     private javax.swing.JButton btnBebidas;
+    private javax.swing.JButton btnCambiarMesa;
+    private javax.swing.JButton btnCambiarSala;
     private javax.swing.JButton btnClientImp;
     private javax.swing.JButton btnCociImp;
     private javax.swing.JButton btnConfig;
@@ -2927,6 +3068,7 @@ public final class SistemaSave extends javax.swing.JFrame {
     private javax.swing.JButton btnGuardarPlato;
     private javax.swing.JButton btnImprimir;
     private javax.swing.JButton btnIniciar;
+    private javax.swing.JButton btnJuntarMesa;
     private javax.swing.JButton btnNuevoPlato;
     private javax.swing.JButton btnNuevoSala;
     private javax.swing.JButton btnPdfPedido;
@@ -3072,7 +3214,7 @@ public final class SistemaSave extends javax.swing.JFrame {
         Totalpagar = 0.00;
         int numFila = tabla.getRowCount();
         for (int i = 0; i < numFila; i++) {
-            double cal = Double.parseDouble(String.valueOf(tabla.getModel().getValueAt(i, 3)));
+            double cal = Double.parseDouble(String.valueOf(tabla.getModel().getValueAt(i, 4)));
             Totalpagar += cal;
         }
         label.setText(String.format("%.2f", Totalpagar));
@@ -3435,13 +3577,13 @@ public final class SistemaSave extends javax.swing.JFrame {
                 ob[2] = "1";
             }else{
                 //ob[2] = "%" + (Listar.get(i).getCantidad() * 100);
-                ob[2] = "1";
+                ob[2] = Listar.get(i).getCantidad();
             }
             ob[3] = Listar.get(i).getPrecio();
             if(Listar.get(i).getCantidad()== 1.0){
                 ob[4] = Listar.get(i).getPrecio();
             }else{
-                ob[4] = (Listar.get(i).getPrecio()) - (Listar.get(i).getCantidad() * Listar.get(i).getPrecio());
+                ob[4] = (Listar.get(i).getCantidad() * Listar.get(i).getPrecio());
             }
             ob[5] = Listar.get(i).getComentario();
             modelo.addRow(ob);
