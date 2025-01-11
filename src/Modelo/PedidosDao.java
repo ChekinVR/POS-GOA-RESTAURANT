@@ -43,7 +43,6 @@ import javax.swing.filechooser.FileSystemView;
 
 public class PedidosDao {
     Connection con;
-    Conexion cn = new Conexion();
     PreparedStatement ps, ps2;
     ResultSet rs;
     int r;
@@ -60,7 +59,7 @@ public class PedidosDao {
         int id = 0;
         String sql = "SELECT MAX(id) FROM pedidos";
         try {
-            con = cn.getConnection();
+            con = Conexion.getConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             if (rs.next()) {
@@ -82,7 +81,7 @@ public class PedidosDao {
         int id_pedido = 0;
         String sql = "SELECT id FROM pedidos WHERE num_mesa=? AND id_sala=?";
         try {
-            con = cn.getConnection();
+            con = Conexion.getConnection();
             ps = con.prepareStatement(sql);
             ps.setInt(1, mesa);
             ps.setInt(2, id_sala);
@@ -107,7 +106,7 @@ public class PedidosDao {
         int id_pedido = 0;
         String sql = "SELECT id FROM pedidos WHERE num_mesa=? AND id_sala=? AND estado = ?";
         try {
-            con = cn.getConnection();
+            con = Conexion.getConnection();
             ps = con.prepareStatement(sql);
             ps.setInt(1, mesa);
             ps.setInt(2, id_sala);
@@ -125,7 +124,7 @@ public class PedidosDao {
         String sql2 = "ALTER TABLE pedidos AUTO_INCREMENT = 0";
         String sql = "INSERT INTO pedidos (id_sala, num_mesa, total, usuario) VALUES (?,?,?,?)";
         try {
-            con = cn.getConnection();
+            con = Conexion.getConnection();
             ps2 = con.prepareStatement(sql2);
             ps2.execute();
             ps = con.prepareStatement(sql);
@@ -181,7 +180,7 @@ public class PedidosDao {
         String sql2 = "ALTER TABLE detalle_pedidos AUTO_INCREMENT = 0";
        String sql = "INSERT INTO detalle_pedidos (nombre, precio, cantidad, comentario, id_pedido) VALUES (?,?,?,?,?)";
         try {
-            con = cn.getConnection();
+            con = Conexion.getConnection();
             ps2 = con.prepareStatement(sql2);
             ps2.execute();
             ps = con.prepareStatement(sql);
@@ -200,7 +199,7 @@ public class PedidosDao {
     public int EditarTotalPedido(double antprec, int mesa, int id_sala, int id_pedido){
         String sql = "UPDATE  pedidos SET total = ? WHERE num_mesa=? AND id_sala=? AND id = ?";
         try {
-            con = cn.getConnection();
+            con = Conexion.getConnection();
             ps = con.prepareStatement(sql);
             ps.setDouble(1, antprec);
             ps.setInt(2, mesa);
@@ -216,7 +215,7 @@ public class PedidosDao {
     public int EditarCantidad(double cantidad, int id){
         String sql = "UPDATE  detalle_pedidos SET cantidad = ? WHERE id=? ";
         try {
-            con = cn.getConnection();
+            con = Conexion.getConnection();
             ps = con.prepareStatement(sql);
             ps.setDouble(1, cantidad);
             ps.setInt(2, id);
@@ -231,7 +230,7 @@ public class PedidosDao {
         double total = 0;
         String sql = "SELECT total FROM pedidos WHERE num_mesa=? AND id_sala=? AND id = ?";
         try {
-            con = cn.getConnection();
+            con = Conexion.getConnection();
             ps = con.prepareStatement(sql);
             ps.setInt(1, mesa);
             ps.setInt(2, id_sala);
@@ -251,7 +250,7 @@ public class PedidosDao {
        List<DetallePedido> Lista = new ArrayList();
        String sql = "SELECT d.* FROM pedidos p INNER JOIN detalle_pedidos d ON p.id = d.id_pedido WHERE p.id = ?";
        try {
-           con = cn.getConnection();
+           con = Conexion.getConnection();
            ps = con.prepareStatement(sql);
            ps.setInt(1, id_pedido);
            rs = ps.executeQuery();
@@ -274,7 +273,7 @@ public class PedidosDao {
         Pedidos ped = new Pedidos();
        String sql = "SELECT p.*, s.nombre FROM pedidos p INNER JOIN salas s ON p.id_sala = s.id WHERE p.id = ?";
        try {
-           con = cn.getConnection();
+           con = Conexion.getConnection();
            ps = con.prepareStatement(sql);
            ps.setInt(1, id_pedido);
            rs = ps.executeQuery();
@@ -296,7 +295,7 @@ public class PedidosDao {
        List<DetallePedido> Lista = new ArrayList();
        String sql = "SELECT d.* FROM pedidos p INNER JOIN detalle_pedidos d ON p.id = d.id_pedido WHERE p.id = ?";
        try {
-           con = cn.getConnection();
+           con = Conexion.getConnection();
            ps = con.prepareStatement(sql);
            ps.setInt(1, id_pedido);
            rs = ps.executeQuery();
@@ -363,7 +362,7 @@ public class PedidosDao {
             String config = "SELECT * FROM config";
             String mensaje = "";
             try {
-                con = cn.getConnection();
+                con = Conexion.getConnection();
                 ps = con.prepareStatement(config);
                 rs = ps.executeQuery();
                 if (rs.next()) {
@@ -788,7 +787,7 @@ public class PedidosDao {
     public boolean actualizarEstado (int id_pedido){
         String sql = "UPDATE pedidos SET estado = ? WHERE id = ?";
         try {
-            con = cn.getConnection();
+            con = Conexion.getConnection();
             ps = con.prepareStatement(sql);
             ps.setString(1, "FINALIZADO");
             ps.setInt(2, id_pedido);
@@ -803,7 +802,7 @@ public class PedidosDao {
     public boolean actualizarImpreso (int id_pedido, String impreso){
         String sql = "UPDATE pedidos SET impreso = ? WHERE id = ?";
         try {
-            con = cn.getConnection();
+            con = Conexion.getConnection();
             ps = con.prepareStatement(sql);
             ps.setString(1, impreso);
             ps.setInt(2, id_pedido);
@@ -817,7 +816,7 @@ public class PedidosDao {
     public void actualizarImpresoPlat(int id_pedido){
         String sql = "UPDATE detalle_pedidos SET impreso = ? WHERE id_pedido = ?";
         try {
-            con = cn.getConnection();
+            con = Conexion.getConnection();
             ps = con.prepareStatement(sql);
             ps.setBoolean(1, true);
             ps.setInt(2, id_pedido);
@@ -833,7 +832,7 @@ public class PedidosDao {
        List<Pedidos> Lista = new ArrayList();
        String sql = "SELECT p.*, s.nombre FROM pedidos p INNER JOIN salas s ON p.id_sala = s.id ORDER BY p.fecha DESC;";
        try {
-           con = cn.getConnection();
+           con = Conexion.getConnection();
            ps = con.prepareStatement(sql);
            rs = ps.executeQuery();
            while (rs.next()) {               
@@ -863,7 +862,7 @@ public class PedidosDao {
        List<Pedidos> Lista = new ArrayList();
        String sql = "SELECT p.*, s.nombre FROM pedidos p INNER JOIN salas s ON p.id_sala = s.id WHERE p.fecha > CURRENT_DATE ORDER BY p.fecha DESC;";
        try {
-           con = cn.getConnection();
+           con = Conexion.getConnection();
            ps = con.prepareStatement(sql);
            rs = ps.executeQuery();
            while (rs.next()) {               
