@@ -10,7 +10,7 @@ import java.util.List;
 
 public class SalasDao {
     Connection con;
-    Conexion cn = new Conexion();
+    Conexion cn;
     PreparedStatement ps, ps2;
     ResultSet rs;
     

@@ -4,14 +4,25 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class Conexion {
+public final class Conexion {
 
-    Connection con;
-    // Hola
-    public Connection getConnection(){
+    
+    private static Conexion instance;
+
+    private static final String URL = "jdbc:mysql://localhost:3306/restaurant_goa";
+    private static final String USER = "root";
+    private static final String PASSWORD = "";
+    
+    private static Connection con;
+    
+    // Constructor privado para evitar la creación de instancias fuera de esta clase
+    private Conexion(){};
+    
+    public static Connection getConnection(){
+        if (instance == null) instance = new Conexion();
         try {
-            String myBD = "jdbc:mysql://localhost:3306/restaurant_goa";
-            con = DriverManager.getConnection(myBD, "root", "");
+            
+            con = DriverManager.getConnection(URL, USER, PASSWORD);
             return con;
         } catch (SQLException e) {
             System.out.println(e.toString());

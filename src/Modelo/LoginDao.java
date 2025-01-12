@@ -12,13 +12,12 @@ public class LoginDao {
     Connection con;
     PreparedStatement ps,ps2;
     ResultSet rs;
-    Conexion cn = new Conexion();
     
     public login log(String correo, String pass){
         login l = new login();
         String sql = "SELECT * FROM usuarios WHERE correo = ? AND pass = ?";
         try {
-            con = cn.getConnection();
+            con = Conexion.getConnection();
             ps = con.prepareStatement(sql);
             ps.setString(1, correo);
             ps.setString(2, pass);
@@ -41,7 +40,7 @@ public class LoginDao {
         String sql = "INSERT INTO usuarios (nombre, correo, pass, rol) VALUES (?,?,?,?)";
         String sql2 = "ALTER TABLE usuarios AUTO_INCREMENT = 0";
         try {
-            con = cn.getConnection();
+            con = Conexion.getConnection();
             ps2 = con.prepareStatement(sql2);
             ps2.execute();
             ps = con.prepareStatement(sql);
@@ -60,7 +59,7 @@ public class LoginDao {
     public boolean Update(login reg, int id){
         String sql = "UPDATE usuarios u SET u.nombre = ?, u.correo = ?, u.pass = ?, u.rol = ? WHERE u.id = ?";
         try {
-            con = cn.getConnection();
+            con = Conexion.getConnection();
             ps = con.prepareStatement(sql);
             ps.setString(1, reg.getNombre());
             ps.setString(2, reg.getCorreo());
@@ -78,7 +77,7 @@ public class LoginDao {
     public boolean Eliminar(int id){
         String sql = "DELETE FROM usuarios WHERE usuarios.id = ?";
         try {
-            con = cn.getConnection();
+            con = Conexion.getConnection();
             ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             ps.execute();
@@ -93,7 +92,7 @@ public class LoginDao {
        List<login> Lista = new ArrayList();
        String sql = "SELECT * FROM usuarios";
        try {
-           con = cn.getConnection();
+           con = Conexion.getConnection();
            ps = con.prepareStatement(sql);
            rs = ps.executeQuery();
            while (rs.next()) {               
@@ -140,7 +139,7 @@ public class LoginDao {
         Config conf = new Config();
         String sql = "SELECT * FROM config";
         try {
-            con = cn.getConnection();
+            con = Conexion.getConnection();
             ps = con.prepareStatement(sql);
             rs= ps.executeQuery();
             if (rs.next()) {

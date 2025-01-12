@@ -11,7 +11,7 @@ import java.util.Set;
 public class PlatosDao {
 
     Connection con;
-    Conexion cn = new Conexion();
+    Conexion cn;
     PreparedStatement ps,ps2;
     ResultSet rs;
 
