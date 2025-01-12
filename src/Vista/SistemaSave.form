@@ -790,11 +790,11 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/Img/money.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Total a Pagar"/>
+                <Property name="text" type="java.lang.String" value="% Descuento"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="1220" y="480" width="-1" height="-1"/>
+                  <AbsoluteConstraints x="1060" y="480" width="-1" height="-1"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -816,7 +816,7 @@
                       <Table columnCount="6" rowCount="0">
                         <Column editable="false" title="" type="java.lang.Object"/>
                         <Column editable="false" title="Plato" type="java.lang.Object"/>
-                        <Column editable="false" title="Desc." type="java.lang.Object"/>
+                        <Column editable="false" title="Cant" type="java.lang.Object"/>
                         <Column editable="false" title="Precio" type="java.lang.Object"/>
                         <Column editable="false" title="SubTotal" type="java.lang.Object"/>
                         <Column editable="false" title="Comentario" type="java.lang.Object"/>
@@ -1150,6 +1150,36 @@
                 </Constraint>
               </Constraints>
             </Component>
+            <Component class="javax.swing.JLabel" name="jLabel20">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="18" style="0"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Img/money.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Total a Pagar"/>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                  <AbsoluteConstraints x="1220" y="480" width="-1" height="-1"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+            <Component class="javax.swing.JLabel" name="txtDescuento">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="18" style="0"/>
+                </Property>
+                <Property name="horizontalAlignment" type="int" value="4"/>
+                <Property name="text" type="java.lang.String" value="% 00.00"/>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                  <AbsoluteConstraints x="1070" y="530" width="120" height="-1"/>
+                </Constraint>
+              </Constraints>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="jPanel6">
@@ -1200,17 +1230,18 @@
                   <Group type="102" attributes="0">
                       <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
                       <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <EmptySpace min="29" pref="29" max="-2" attributes="0"/>
                               <Component id="jScrollPane5" min="-2" pref="480" max="-2" attributes="0"/>
-                              <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                               <Component id="jPanel5" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace min="-2" pref="527" max="-2" attributes="0"/>
                               <Component id="txtCorte" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
                               <Component id="txtHId" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                           </Group>
@@ -1323,15 +1354,26 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace pref="104" max="32767" attributes="0"/>
-                          <Component id="btnCorteDia" min="-2" pref="180" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="btnPedidosHoy" min="-2" pref="192" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btnTodosPedidos" min="-2" pref="192" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="btnEliminarPedido" min="-2" pref="180" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="btnVerPedido" min="-2" pref="180" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Component id="btnJuntarMesa" min="-2" pref="180" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="btnCambiarMesa" min="-2" pref="180" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="btnCambiarSala" min="-2" pref="180" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <Component id="btnCorteDia" min="-2" pref="180" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="btnPedidosHoy" min="-2" pref="192" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="btnTodosPedidos" min="-2" pref="192" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="btnEliminarPedido" min="-2" pref="180" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="btnVerPedido" min="-2" pref="180" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -1347,7 +1389,13 @@
                               <Component id="btnPedidosHoy" alignment="3" min="-2" pref="70" max="-2" attributes="0"/>
                               <Component id="btnCorteDia" alignment="3" min="-2" pref="70" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="25" max="32767" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="btnJuntarMesa" alignment="3" min="-2" pref="70" max="-2" attributes="0"/>
+                              <Component id="btnCambiarMesa" alignment="3" min="-2" pref="70" max="-2" attributes="0"/>
+                              <Component id="btnCambiarSala" alignment="3" min="-2" pref="70" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace pref="35" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1400,6 +1448,39 @@
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCorteDiabtnElimPedDao"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JButton" name="btnJuntarMesa">
+                  <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/Img/sala.png"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="JUNTAR MESA"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnJuntarMesa"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JButton" name="btnCambiarMesa">
+                  <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/Img/sala.png"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="CAMBIAR MESA"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCambiarMesa"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JButton" name="btnCambiarSala">
+                  <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/Img/sala.png"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="CAMBIAR SALA"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCambiarSala"/>
                   </Events>
                 </Component>
               </SubComponents>
@@ -2546,16 +2627,17 @@
                 <Component class="javax.swing.JComboBox" name="cbxCategoria">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="9">
-                        <StringItem index="0" value="  "/>
-                        <StringItem index="1" value="Entradas"/>
-                        <StringItem index="2" value="Ensaladas Frias"/>
-                        <StringItem index="3" value="Especialidades"/>
-                        <StringItem index="4" value="Extras"/>
-                        <StringItem index="5" value="Postres"/>
-                        <StringItem index="6" value="Bebidas"/>
-                        <StringItem index="7" value=" "/>
+                      <StringArray count="10">
+                        <StringItem index="0" value="Entradas"/>
+                        <StringItem index="1" value="Ensaladas Frias"/>
+                        <StringItem index="2" value="Especialidades"/>
+                        <StringItem index="3" value="Extras"/>
+                        <StringItem index="4" value="Postres"/>
+                        <StringItem index="5" value="Bebidas"/>
+                        <StringItem index="6" value="Vinos"/>
+                        <StringItem index="7" value="-----------"/>
                         <StringItem index="8" value=" "/>
+                        <StringItem index="9" value=" "/>
                       </StringArray>
                     </Property>
                   </Properties>
@@ -2575,13 +2657,16 @@
                 <Component class="javax.swing.JComboBox" name="cbxSubCategoria">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="6">
-                        <StringItem index="0" value="  "/>
-                        <StringItem index="1" value="Cordero"/>
-                        <StringItem index="2" value="Pescado y Camarones"/>
-                        <StringItem index="3" value="Vegetariano"/>
-                        <StringItem index="4" value="Biryani"/>
-                        <StringItem index="5" value="Arroz Especial"/>
+                      <StringArray count="9">
+                        <StringItem index="0" value="Cordero"/>
+                        <StringItem index="1" value="Res"/>
+                        <StringItem index="2" value="Pollo"/>
+                        <StringItem index="3" value="Pescado y Camarones"/>
+                        <StringItem index="4" value="Vegetariano"/>
+                        <StringItem index="5" value="Biryani"/>
+                        <StringItem index="6" value="-----------"/>
+                        <StringItem index="7" value=" "/>
+                        <StringItem index="8" value=" "/>
                       </StringArray>
                     </Property>
                     <Property name="toolTipText" type="java.lang.String" value=""/>
@@ -3054,7 +3139,11 @@
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace pref="87" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="btnRegresar" min="-2" pref="160" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Component id="btnVinos" min="-2" pref="160" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="btnRegresar" min="-2" pref="160" max="-2" attributes="0"/>
+                              </Group>
                               <Group type="102" attributes="0">
                                   <Component id="btnPostres" min="-2" pref="160" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -3095,7 +3184,10 @@
                               <Component id="btnBebidas" alignment="3" min="-2" pref="70" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="btnRegresar" min="-2" pref="70" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="btnRegresar" alignment="3" min="-2" pref="70" max="-2" attributes="0"/>
+                              <Component id="btnVinos" alignment="3" min="-2" pref="70" max="-2" attributes="0"/>
+                          </Group>
                           <EmptySpace pref="19" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -3156,6 +3248,14 @@
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBebidasActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JButton" name="btnVinos">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="VINOS"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVinosActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>
