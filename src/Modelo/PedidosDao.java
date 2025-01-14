@@ -34,26 +34,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.print.PrintService;
 import javax.swing.filechooser.FileSystemView;
 
 public class PedidosDao {
 
-    Connection con;
+    Connection con = null;
     PreparedStatement ps, ps2;
     ResultSet rs;
     int r;
-
-    public void closeConnection() {
-        try {
-            con.close();
-        } catch (SQLException e) {
-            System.out.println(e.toString());
-        }
-    }
 
     public int IdPedido() {
         int id = 0;
@@ -67,12 +57,6 @@ public class PedidosDao {
             }
         } catch (SQLException e) {
             System.out.println(e.toString());
-        } finally {
-            try {
-                con.close();
-            } catch (SQLException ex) {
-                System.out.println(ex.toString());
-            }
         }
         return id;
     }
@@ -91,12 +75,6 @@ public class PedidosDao {
             }
         } catch (SQLException e) {
             System.out.println(e.toString());
-        } finally {
-            try {
-                con.close();
-            } catch (SQLException ex) {
-                System.out.println(ex.toString());
-            }
         }
         return id_pedido;
     }
@@ -172,6 +150,7 @@ public class PedidosDao {
     public boolean Eliminar(int id) {
         String sql = "DELETE FROM pedidos WHERE id = ?";
         try {
+            con = Conexion.getConnection();
             ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             ps.execute();
@@ -179,18 +158,13 @@ public class PedidosDao {
         } catch (SQLException e) {
             System.out.println(e.toString());
             return false;
-        } finally {
-            try {
-                con.close();
-            } catch (SQLException ex) {
-                System.out.println(ex.toString());
-            }
         }
     }
 
     public boolean EliminarPlatoPed(int id) {
         String sql = "DELETE FROM detalle_pedidos WHERE id = ?";
         try {
+            con = Conexion.getConnection();
             ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             ps.execute();
@@ -198,12 +172,6 @@ public class PedidosDao {
         } catch (SQLException e) {
             System.out.println(e.toString());
             return false;
-        } finally {
-            try {
-                con.close();
-            } catch (SQLException ex) {
-                System.out.println(ex.toString());
-            }
         }
     }
 
@@ -341,12 +309,6 @@ public class PedidosDao {
             }
         } catch (SQLException e) {
             System.out.println(e.toString());
-        } finally {
-            try {
-                con.close();
-            } catch (SQLException ex) {
-                System.out.println(ex.toString());
-            }
         }
         return Lista;
     }
@@ -366,6 +328,7 @@ public class PedidosDao {
             //Fecha
             String informacion = "SELECT p.*, s.nombre FROM pedidos p INNER JOIN salas s ON p.id_sala = s.id WHERE p.id = ?";
             try {
+                con = Conexion.getConnection();
                 ps = con.prepareStatement(informacion);
                 ps.setInt(1, id_pedido);
                 rs = ps.executeQuery();
@@ -444,6 +407,7 @@ public class PedidosDao {
             tabla.addCell(c4);
             String product = "SELECT d.* FROM pedidos p INNER JOIN detalle_pedidos d ON p.id = d.id_pedido WHERE p.id = ?";
             try {
+                con = Conexion.getConnection();
                 ps = con.prepareStatement(product);
                 ps.setInt(1, id_pedido);
                 rs = ps.executeQuery();
@@ -481,12 +445,6 @@ public class PedidosDao {
             Desktop.getDesktop().open(salida);
         } catch (DocumentException | IOException e) {
             System.out.println(e.toString());
-        } finally {
-            try {
-                con.close();
-            } catch (SQLException e) {
-                System.out.println(e.toString());
-            }
         }
     }
 
@@ -494,7 +452,7 @@ public class PedidosDao {
         String informacion = "SELECT c.*, c.ImpresoraC, c.ImpresoraB FROM config c WHERE c.id = ?";
         String[] printerName = new String[2];
         try {
-
+            con = Conexion.getConnection();
             ps = con.prepareStatement(informacion);
             ps.setInt(1, 1);
             rs = ps.executeQuery();
@@ -534,6 +492,7 @@ public class PedidosDao {
         Ticket ticket = new Ticket();
 
         try {
+            con = Conexion.getConnection();
             ps = con.prepareStatement(cuantas);
             ps.setInt(1, id_pedido);
             ps.setBoolean(2, impreso);
@@ -952,12 +911,6 @@ public class PedidosDao {
             }
         } catch (SQLException e) {
             System.out.println(e.toString());
-        } finally {
-            try {
-                con.close();
-            } catch (SQLException ex) {
-                System.out.println(ex.toString());
-            }
         }
         return Lista;
     }
@@ -982,13 +935,7 @@ public class PedidosDao {
             }
         } catch (SQLException e) {
             System.out.println(e.toString());
-        }/*finally {
-            try {
-                con.close();
-            } catch (SQLException ex) {
-                System.out.println(ex.toString());
-            }
-        }*/
+        }
         return Lista;
     }
 
