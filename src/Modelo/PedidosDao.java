@@ -34,26 +34,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.print.PrintService;
 import javax.swing.filechooser.FileSystemView;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class PedidosDao {
-
-    Connection con;
+    
+    private static final Logger logger = LoggerFactory.getLogger(PedidosDao.class);
+    Connection con = null;
     PreparedStatement ps, ps2;
     ResultSet rs;
     int r;
-
-    public void closeConnection() {
-        try {
-            con.close();
-        } catch (SQLException e) {
-            System.out.println(e.toString());
-        }
-    }
 
     public int IdPedido() {
         int id = 0;
@@ -66,13 +59,7 @@ public class PedidosDao {
                 id = rs.getInt(1);
             }
         } catch (SQLException e) {
-            System.out.println(e.toString());
-        } finally {
-            try {
-                con.close();
-            } catch (SQLException ex) {
-                System.out.println(ex.toString());
-            }
+            logger.error("Op error "+ e.toString());
         }
         return id;
     }
@@ -90,13 +77,7 @@ public class PedidosDao {
                 id_pedido = rs.getInt("id");
             }
         } catch (SQLException e) {
-            System.out.println(e.toString());
-        } finally {
-            try {
-                con.close();
-            } catch (SQLException ex) {
-                System.out.println(ex.toString());
-            }
+            logger.error("Op error "+ e.toString());
         }
         return id_pedido;
     }
@@ -115,7 +96,7 @@ public class PedidosDao {
                 id_pedido = rs.getInt("id");
             }
         } catch (SQLException e) {
-            System.out.println(e.toString());
+            logger.error("Op error "+ e.toString());
         }
         return id_pedido;
     }
@@ -134,7 +115,7 @@ public class PedidosDao {
             ps.setString(4, ped.getUsuario());
             ps.execute();
         } catch (SQLException e) {
-            System.out.println(e.toString());
+            logger.error("Op error "+ e.toString());
         }
         return r;
     }
@@ -149,7 +130,7 @@ public class PedidosDao {
             ps.execute();
             return true;
         } catch (SQLException e) {
-            System.out.println(e.toString());
+            logger.error("Op error "+ e.toString());
             return false;
         }
     }
@@ -164,7 +145,7 @@ public class PedidosDao {
             ps.execute();
             return true;
         } catch (SQLException e) {
-            System.out.println(e.toString());
+            logger.error("Op error "+ e.toString());
             return false;
         }
     }
@@ -172,38 +153,28 @@ public class PedidosDao {
     public boolean Eliminar(int id) {
         String sql = "DELETE FROM pedidos WHERE id = ?";
         try {
+            con = Conexion.getConnection();
             ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             ps.execute();
             return true;
         } catch (SQLException e) {
-            System.out.println(e.toString());
+            logger.error("Op error "+ e.toString());
             return false;
-        } finally {
-            try {
-                con.close();
-            } catch (SQLException ex) {
-                System.out.println(ex.toString());
-            }
         }
     }
 
     public boolean EliminarPlatoPed(int id) {
         String sql = "DELETE FROM detalle_pedidos WHERE id = ?";
         try {
+            con = Conexion.getConnection();
             ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             ps.execute();
             return true;
         } catch (SQLException e) {
-            System.out.println(e.toString());
+            logger.error("Op error "+ e.toString());
             return false;
-        } finally {
-            try {
-                con.close();
-            } catch (SQLException ex) {
-                System.out.println(ex.toString());
-            }
         }
     }
 
@@ -222,7 +193,7 @@ public class PedidosDao {
             ps.setInt(5, det.getId_pedido());
             ps.execute();
         } catch (SQLException e) {
-            System.out.println(e.toString());
+            logger.error("Op error "+ e.toString());
         }
         return r;
     }
@@ -238,7 +209,7 @@ public class PedidosDao {
             ps.setInt(4, id_pedido);
             ps.execute();
         } catch (SQLException e) {
-            System.out.println(e.toString());
+            logger.error("Op error "+ e.toString());
         }
         return r;
     }
@@ -252,7 +223,7 @@ public class PedidosDao {
             ps.setInt(2, id);
             ps.execute();
         } catch (SQLException e) {
-            System.out.println(e.toString());
+            logger.error("Op error "+ e.toString());
         }
         return r;
     }
@@ -271,7 +242,7 @@ public class PedidosDao {
                 total = rs.getInt("total");
             }
         } catch (SQLException e) {
-            System.out.println(e.toString());
+            logger.error("Op error "+ e.toString());
         }
         return total;
 
@@ -295,7 +266,7 @@ public class PedidosDao {
                 Lista.add(det);
             }
         } catch (SQLException e) {
-            System.out.println(e.toString());
+            logger.error("Op error "+ e.toString());
         }
         return Lista;
     }
@@ -317,7 +288,7 @@ public class PedidosDao {
                 ped.setTotal(rs.getDouble("total"));
             }
         } catch (SQLException e) {
-            System.out.println(e.toString());
+            logger.error("Op error "+ e.toString());
         }
         return ped;
     }
@@ -340,13 +311,7 @@ public class PedidosDao {
                 Lista.add(det);
             }
         } catch (SQLException e) {
-            System.out.println(e.toString());
-        } finally {
-            try {
-                con.close();
-            } catch (SQLException ex) {
-                System.out.println(ex.toString());
-            }
+            logger.error("Op error "+ e.toString());
         }
         return Lista;
     }
@@ -365,20 +330,17 @@ public class PedidosDao {
             Image img = Image.getInstance(getClass().getResource("/Img/logo.png"));
             //Fecha
             String informacion = "SELECT p.*, s.nombre FROM pedidos p INNER JOIN salas s ON p.id_sala = s.id WHERE p.id = ?";
-            try {
-                ps = con.prepareStatement(informacion);
-                ps.setInt(1, id_pedido);
-                rs = ps.executeQuery();
-                if (rs.next()) {
-                    num_mesa = rs.getString("num_mesa");
-                    sala = rs.getString("nombre");
-                    fechaPedido = rs.getString("fecha");
-                    usuario = rs.getString("usuario");
-                    total = rs.getString("total");
-                }
-
-            } catch (SQLException e) {
-                System.out.println(e.toString());
+            
+            con = Conexion.getConnection();
+            ps = con.prepareStatement(informacion);
+            ps.setInt(1, id_pedido);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                num_mesa = rs.getString("num_mesa");
+                sala = rs.getString("nombre");
+                fechaPedido = rs.getString("fecha");
+                usuario = rs.getString("usuario");
+                total = rs.getString("total");
             }
 
             PdfPTable Encabezado = new PdfPTable(4);
@@ -392,22 +354,19 @@ public class PedidosDao {
             //info empresa
             String config = "SELECT * FROM config";
             String mensaje = "";
-            try {
-                con = Conexion.getConnection();
-                ps = con.prepareStatement(config);
-                rs = ps.executeQuery();
-                if (rs.next()) {
-                    mensaje = rs.getString("mensaje");
-                    Encabezado.addCell("RFC:    " + rs.getString("ruc")
-                            + "\nNombre: " + rs.getString("nombre")
-                            + "\nTeléfono: " + rs.getString("telefono")
-                            + "\nDirección: " + rs.getString("direccion")
-                    );
-                }
-            } catch (SQLException e) {
-                System.out.println(e.toString());
+            
+            con = Conexion.getConnection();
+            ps = con.prepareStatement(config);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                mensaje = rs.getString("mensaje");
+                Encabezado.addCell("RFC:    " + rs.getString("ruc")
+                        + "\nNombre: " + rs.getString("nombre")
+                        + "\nTeléfono: " + rs.getString("telefono")
+                        + "\nDirección: " + rs.getString("direccion")
+                );
             }
-            //
+            
             Paragraph info = new Paragraph();
             Font negrita = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.BOLD, BaseColor.BLUE);
             info.add("Atendido: " + usuario
@@ -443,20 +402,17 @@ public class PedidosDao {
             tabla.addCell(c3);
             tabla.addCell(c4);
             String product = "SELECT d.* FROM pedidos p INNER JOIN detalle_pedidos d ON p.id = d.id_pedido WHERE p.id = ?";
-            try {
-                ps = con.prepareStatement(product);
-                ps.setInt(1, id_pedido);
-                rs = ps.executeQuery();
-                while (rs.next()) {
-                    double subTotal = rs.getInt("cantidad") * rs.getDouble("precio");
-                    tabla.addCell(rs.getString("cantidad"));
-                    tabla.addCell(rs.getString("nombre"));
-                    tabla.addCell(rs.getString("precio"));
-                    tabla.addCell(String.valueOf(subTotal));
-                }
-
-            } catch (SQLException e) {
-                System.out.println(e.toString());
+            
+            con = Conexion.getConnection();
+            ps = con.prepareStatement(product);
+            ps.setInt(1, id_pedido);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                double subTotal = rs.getInt("cantidad") * rs.getDouble("precio");
+                tabla.addCell(rs.getString("cantidad"));
+                tabla.addCell(rs.getString("nombre"));
+                tabla.addCell(rs.getString("precio"));
+                tabla.addCell(String.valueOf(subTotal));
             }
             doc.add(tabla);
             Paragraph agra = new Paragraph();
@@ -480,13 +436,9 @@ public class PedidosDao {
             archivo.close();
             Desktop.getDesktop().open(salida);
         } catch (DocumentException | IOException e) {
-            System.out.println(e.toString());
-        } finally {
-            try {
-                con.close();
-            } catch (SQLException e) {
-                System.out.println(e.toString());
-            }
+            logger.error("PDF error "+ e.toString());
+        } catch (SQLException e) {
+                logger.error("Op error "+ e.toString());
         }
     }
 
@@ -494,7 +446,7 @@ public class PedidosDao {
         String informacion = "SELECT c.*, c.ImpresoraC, c.ImpresoraB FROM config c WHERE c.id = ?";
         String[] printerName = new String[2];
         try {
-
+            con = Conexion.getConnection();
             ps = con.prepareStatement(informacion);
             ps.setInt(1, 1);
             rs = ps.executeQuery();
@@ -506,7 +458,7 @@ public class PedidosDao {
                 System.out.println(printerName[1]);
             }
         } catch (SQLException e) {
-            System.out.println(e.toString());
+            logger.error("Op error "+ e.toString());
         }
         //String[ ] printerName = {"XP-80C2", "XP-80C"}; 
         if ("BARR/COCI".equals(lugarTicket)) {
@@ -534,6 +486,7 @@ public class PedidosDao {
         Ticket ticket = new Ticket();
 
         try {
+            con = Conexion.getConnection();
             ps = con.prepareStatement(cuantas);
             ps.setInt(1, id_pedido);
             ps.setBoolean(2, impreso);
@@ -550,7 +503,7 @@ public class PedidosDao {
                 }
             }
         } catch (SQLException e) {
-            System.out.println(e.toString());
+            logger.error("Op error "+ e.toString());
         }
 
         if (ticket.Entries.isEmpty()) {
@@ -566,46 +519,24 @@ public class PedidosDao {
                     .setFontSize(Style.FontSize._3, Style.FontSize._2)
                     .setJustification(EscPosConst.Justification.Center);
             String informacion = "SELECT p.*, s.nombre FROM pedidos p INNER JOIN salas s ON p.id_sala = s.id WHERE p.id = ?";
-            try {
-                ps = con.prepareStatement(informacion);
-                ps.setInt(1, id_pedido);
-                rs = ps.executeQuery();
+            
+            ps = con.prepareStatement(informacion);
+            ps.setInt(1, id_pedido);
+            rs = ps.executeQuery();
 
-                if (rs.next()) {
-                    num_mesa = rs.getString("num_mesa");
-                    sala = rs.getString("nombre");
-                }
-            } catch (SQLException e2) {
-                System.out.println(e2.toString());
+            if (rs.next()) {
+                num_mesa = rs.getString("num_mesa");
+                sala = rs.getString("nombre");
             }
+            
             Style subtitle = new Style(escpos.getStyle())
                     .setJustification(EscPosConst.Justification.Center);
             Style miestilo = new Style()
                     .setFontSize(Style.FontSize._2, Style.FontSize._1)
                     .setJustification(EscPosConst.Justification.Left_Default);
-//            String categ = "SELECT d.nombre, d.comentario, pl.categoria FROM pedidos p INNER JOIN detalle_pedidos d ON p.id = d.id_pedido INNER JOIN platos pl ON d.nombre = pl.nombre WHERE p.id = ? && d.impreso = ? ORDER BY (pl.categoria && d.nombre)";
             escpos.writeLF(title, "Goa Restaurant");
             escpos.writeLF("N_Mesa: " + num_mesa);
             escpos.writeLF("N_Sala: " + sala);
-//            try {
-//                ps = con.prepareStatement(categ);
-//                ps.setInt(1, id_pedido);
-//                ps.setBoolean(2, impreso);
-//                rs = ps.executeQuery();
-//                while (rs.next()) {
-//
-//                    if ("Bebidas".equals(rs.getString("categoria"))) {
-//                        escpos.writeLF(miestilo, rs.getString("nombre"));
-//                        if (!"".equals(rs.getString("comentario"))) {
-//                            escpos.writeLF(subtitle, rs.getString("comentario"));
-//                        }
-//                        escpos.feed(1);
-//                        System.out.println(rs.getString("nombre"));
-//                    }
-//                }
-//            } catch (SQLException e) {
-//                System.out.println(e.toString());
-//            }
             for (TicketEntry entry : ticket.Entries) {
                 String row = entry.Number + " " + entry.Name;
                 escpos.writeLF(miestilo, row);
@@ -626,7 +557,9 @@ public class PedidosDao {
             escpos.cut(EscPos.CutMode.FULL);
             escpos.close();
         } catch (IOException e) {
-            System.out.println(e.toString());
+            logger.error("Op error "+ e.toString());
+        } catch (SQLException e) {
+            logger.error("Op error "+ e.toString());
         }
 
     }
@@ -653,7 +586,7 @@ public class PedidosDao {
                 }
             }
         } catch (SQLException e) {
-            System.out.println(e.toString());
+            logger.error("Op error "+ e.toString());
         }
 
         if (ticket.Entries.isEmpty()) {
@@ -670,19 +603,15 @@ public class PedidosDao {
                     .setFontSize(Style.FontSize._3, Style.FontSize._2)
                     .setJustification(EscPosConst.Justification.Center);
             String informacion = "SELECT p.*, s.nombre FROM pedidos p INNER JOIN salas s ON p.id_sala = s.id WHERE p.id = ?";
-            try {
+           
+            ps = con.prepareStatement(informacion);
+            ps.setInt(1, id_pedido);
+            rs = ps.executeQuery();
 
-                ps = con.prepareStatement(informacion);
-                ps.setInt(1, id_pedido);
-                rs = ps.executeQuery();
-
-                if (rs.next()) {
-                    num_mesa = rs.getString("num_mesa");
-                    sala = rs.getString("nombre");
-                }
-            } catch (SQLException e) {
-                System.out.println(e.toString());
-            }
+            if (rs.next()) {
+                num_mesa = rs.getString("num_mesa");
+                sala = rs.getString("nombre");
+            }  
 
             Style subtitle = new Style(escpos.getStyle())
                     .setJustification(EscPosConst.Justification.Center);
@@ -693,31 +622,6 @@ public class PedidosDao {
             escpos.writeLF(title, "Goa Restaurant");
             escpos.writeLF("N_Mesa: " + num_mesa);
             escpos.writeLF("N_Sala: " + sala);
-//            int IBebidas = 0;
-//            try {
-//                ps = con.prepareStatement(categ);
-//                ps.setInt(1, id_pedido);
-//                ps.setBoolean(2, impreso);
-//                rs = ps.executeQuery();
-//                while (rs.next()) {
-//
-//                    if (!"Bebidas".equals(rs.getString("categoria"))) {
-//                        escpos.writeLF(miestilo, rs.getString("nombre"));
-//
-//                        if (!"".equals(rs.getString("comentario"))) {
-//                            escpos.writeLF(subtitle, rs.getString("comentario"));
-//                        }
-//                        escpos.feed(1);
-//                        System.out.println(rs.getString("nombre"));
-//                        IBebidas++;
-//                    }
-//
-//                }
-//            } catch (SQLException e) {
-//                System.out.println(e.toString());
-//            }
-
-//            escpos.writeLF(subtitle, "No. de Platillos" + " " + IBebidas);
             for (TicketEntry entry : ticket.Entries) {
                 String row = entry.Number + " " + entry.Name;
                 escpos.writeLF(miestilo, row);
@@ -739,7 +643,9 @@ public class PedidosDao {
             escpos.cut(EscPos.CutMode.FULL);
             escpos.close();
         } catch (IOException e) {
-            System.out.println(e.toString());
+            logger.error("Op error "+ e.toString());
+        } catch (SQLException e) {
+            logger.error("Op error "+ e.toString());
         }
     }
 
@@ -768,21 +674,18 @@ public class PedidosDao {
             Style bold = new Style(escpos.getStyle())
                     .setBold(true);
             String informacion = "SELECT p.*, s.nombre FROM pedidos p INNER JOIN salas s ON p.id_sala = s.id WHERE p.id = ?";
-            try {
+     
 
-                ps = con.prepareStatement(informacion);
-                ps.setInt(1, id_pedido);
-                rs = ps.executeQuery();
+            ps = con.prepareStatement(informacion);
+            ps.setInt(1, id_pedido);
+            rs = ps.executeQuery();
 
-                if (rs.next()) {
-                    num_mesa = rs.getString("num_mesa");
-                    sala = rs.getString("nombre");
-                    fechaPedido = rs.getString("fecha");
-                    total = rs.getString("total");
+            if (rs.next()) {
+                num_mesa = rs.getString("num_mesa");
+                sala = rs.getString("nombre");
+                fechaPedido = rs.getString("fecha");
+                total = rs.getString("total");
 
-                }
-            } catch (SQLException e) {
-                System.out.println(e.toString());
             }
 
             algorithm = new BitonalOrderedDither(3, 2, 150, 150);
@@ -804,38 +707,16 @@ public class PedidosDao {
                             "---------------------------------------------");
             String product = "SELECT d.* FROM pedidos p INNER JOIN detalle_pedidos d ON p.id = d.id_pedido WHERE p.id = ?";
             Ticket ticket = new Ticket();
-
-//            try {
-//                ps = con.prepareStatement(product);
-//                ps.setInt(1, id_pedido);
-//                rs = ps.executeQuery();
-//                while (rs.next()) {
-//
-//                    if (rs.getDouble("cantidad") >= 1) {
-//                        totalTicket = rs.getDouble("precio");
-//                    } else {
-//                        totalTicket = (rs.getDouble("precio") - ((rs.getDouble("cantidad") * rs.getDouble("precio"))));
-//                    }
-//
-//                    escpos.writeLF(subtitle, calFilaTicket(rs.getString("nombre"), rs.getDouble("precio"), totalTicket));
-//                    escpos.feed(1);
-//                }
-//            } catch (SQLException e) {
-//                System.out.println(e.toString());
-//            }
-            try {
-                ps = con.prepareStatement(product);
-                ps.setInt(1, id_pedido);
-                rs = ps.executeQuery();
-                while (rs.next()) {
-                    TicketEntry entry = new TicketEntry();
-                    entry.Name = rs.getString("nombre");
-                    entry.Number = (int) rs.getDouble("cantidad");
-                    entry.Cost = rs.getDouble("precio");
-                    ticket.addEntry(entry);
-                }
-            } catch (SQLException e) {
-                System.out.println(e.toString());
+            
+            ps = con.prepareStatement(product);
+            ps.setInt(1, id_pedido);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                TicketEntry entry = new TicketEntry();
+                entry.Name = rs.getString("nombre");
+                entry.Number = (int) rs.getDouble("cantidad");
+                entry.Cost = rs.getDouble("precio");
+                ticket.addEntry(entry);
             }
 
             for (TicketEntry entry : ticket.Entries) {
@@ -850,18 +731,15 @@ public class PedidosDao {
             escpos.writeLF(bold,
                     "                              Total S/: " + total);
             String mensaje = "SELECT c.* FROM config c WHERE id = ?";
-            try {
-                ps = con.prepareStatement(mensaje);
-                ps.setInt(1, 1);
-                rs = ps.executeQuery();
-                if (rs.next()) {
-                    escpos.feed(2);
-                    escpos.writeLF(subtitle, rs.getString("mensaje"));
-                    escpos.writeLF(subtitle, "Visitanos en goa.com.mx");
-                    escpos.writeLF(subtitle, "Gracias por su visita");
-                }
-            } catch (SQLException e) {
-                System.out.println(e.toString());
+            
+            ps = con.prepareStatement(mensaje);
+            ps.setInt(1, 1);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                escpos.feed(2);
+                escpos.writeLF(subtitle, rs.getString("mensaje"));
+                escpos.writeLF(subtitle, "Visitanos en goa.com.mx");
+                escpos.writeLF(subtitle, "Gracias por su visita");
             }
 
             escpos.feed(5);
@@ -869,7 +747,9 @@ public class PedidosDao {
 
             escpos.close();
         } catch (IOException e) {
-            System.out.println(e.toString());
+            logger.error("Op error "+ e.toString());
+        } catch (SQLException e) {
+            logger.error("Op error "+ e.toString());
         }
     }
 
@@ -896,7 +776,7 @@ public class PedidosDao {
             ps.execute();
             return true;
         } catch (SQLException e) {
-            System.out.println(e.toString());
+            logger.error("Op error "+ e.toString());
             return false;
         }
     }
@@ -911,7 +791,7 @@ public class PedidosDao {
             ps.execute();
             return true;
         } catch (SQLException e) {
-            System.out.println(e.toString());
+            logger.error("Op error "+ e.toString());
             return false;
         }
     }
@@ -926,7 +806,7 @@ public class PedidosDao {
             ps.execute();
 
         } catch (SQLException e) {
-            System.out.println(e.toString());
+            logger.error("Op error "+ e.toString());
 
         }
     }
@@ -951,13 +831,7 @@ public class PedidosDao {
                 Lista.add(ped);
             }
         } catch (SQLException e) {
-            System.out.println(e.toString());
-        } finally {
-            try {
-                con.close();
-            } catch (SQLException ex) {
-                System.out.println(ex.toString());
-            }
+            logger.error("Op error "+ e.toString());
         }
         return Lista;
     }
@@ -981,14 +855,8 @@ public class PedidosDao {
                 Lista.add(ped);
             }
         } catch (SQLException e) {
-            System.out.println(e.toString());
-        }/*finally {
-            try {
-                con.close();
-            } catch (SQLException ex) {
-                System.out.println(ex.toString());
-            }
-        }*/
+            logger.error("Op error "+ e.toString());
+        }
         return Lista;
     }
 

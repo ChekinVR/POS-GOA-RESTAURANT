@@ -7,21 +7,22 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class SalasDao {
+    
+    private static final Logger logger = LoggerFactory.getLogger(SalasDao.class);
+    
     Connection con;
-    Conexion cn;
     PreparedStatement ps, ps2;
     ResultSet rs;
-    
-    
-    
-    
+
     public boolean RegistrarSala(Salas sl){
         String sql = "INSERT INTO salas(nombre, mesas) VALUES (?,?)";
         String sql2 = "ALTER TABLE salas AUTO_INCREMENT = 0";
         try {
-           con = cn.getConnection();
+           con = Conexion.getConnection();
            ps2 = con.prepareStatement(sql2);
            ps2.execute();
            ps = con.prepareStatement(sql);
@@ -30,14 +31,8 @@ public class SalasDao {
            ps.execute();
            return true;
         } catch (SQLException e) {
-            System.out.println(e.toString());
+            logger.error("Op error "+ e.toString());
             return false;
-        }finally{
-            try {
-                con.close();
-            } catch (SQLException e) {
-                System.out.println(e.toString());
-            }
         }
     }
     
@@ -45,7 +40,7 @@ public class SalasDao {
         List<Salas> Lista = new ArrayList();
         String sql = "SELECT * FROM salas";
         try {
-            con = cn.getConnection();
+            con = Conexion.getConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {                
@@ -57,7 +52,7 @@ public class SalasDao {
             }
             
         } catch (SQLException e) {
-            System.out.println(e.toString());
+            logger.error("Op error "+ e.toString());
         }
         return Lista;
     }
@@ -65,27 +60,21 @@ public class SalasDao {
     public boolean Eliminar(int id){
         String sql = "DELETE FROM salas WHERE id = ? ";
         try {
-            con = cn.getConnection();
+            con = Conexion.getConnection();
             ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             ps.execute();
             return true;
         } catch (SQLException e) {
-            System.out.println(e.toString());
+            logger.error("Op error "+ e.toString());
             return false;
-        }finally{
-            try {
-                con.close();
-            } catch (SQLException e) {
-                System.out.println(e.toString());
-            }
         }
     }
     
     public boolean Modificar(Salas sl){
         String sql = "UPDATE salas SET nombre=?, mesas=? WHERE id=?";
         try {
-            con = cn.getConnection();
+            con = Conexion.getConnection();
             ps = con.prepareStatement(sql);
             ps.setString(1, sl.getNombre());
             ps.setInt(2, sl.getMesas());
@@ -93,14 +82,8 @@ public class SalasDao {
             ps.execute();
             return true;
         } catch (SQLException e) {
-            System.out.println(e.toString());
+            logger.error("Op error "+ e.toString());
             return false;
-        }finally{
-            try {
-                con.close();
-            } catch (SQLException e) {
-                System.out.println(e.toString());
-            }
         }
     }
 }

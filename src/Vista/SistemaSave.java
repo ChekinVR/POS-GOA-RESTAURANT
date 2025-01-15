@@ -2771,7 +2771,6 @@ public final class SistemaSave extends javax.swing.JFrame {
                 pedDao.actualizarImpreso(Integer.parseInt(txtIdPedido.getText()), "CLIENTE");
             }
         }
-        pedDao.closeConnection();
     }//GEN-LAST:event_btnFinalizarActionPerformed
 
     private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
