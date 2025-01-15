@@ -556,9 +556,7 @@ public class PedidosDao {
             escpos.feed(5);
             escpos.cut(EscPos.CutMode.FULL);
             escpos.close();
-        } catch (IOException e) {
-            logger.error("Op error "+ e.toString());
-        } catch (SQLException e) {
+        } catch (IOException | SQLException e) {
             logger.error("Op error "+ e.toString());
         }
 
@@ -642,9 +640,7 @@ public class PedidosDao {
             escpos.feed(5);
             escpos.cut(EscPos.CutMode.FULL);
             escpos.close();
-        } catch (IOException e) {
-            logger.error("Op error "+ e.toString());
-        } catch (SQLException e) {
+        } catch (IOException | SQLException e) {
             logger.error("Op error "+ e.toString());
         }
     }
@@ -746,9 +742,7 @@ public class PedidosDao {
             escpos.cut(EscPos.CutMode.FULL);
 
             escpos.close();
-        } catch (IOException e) {
-            logger.error("Op error "+ e.toString());
-        } catch (SQLException e) {
+        } catch (IOException | SQLException e) {
             logger.error("Op error "+ e.toString());
         }
     }
