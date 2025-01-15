@@ -7,8 +7,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class LoginDao {
+    private static final Logger logger = LoggerFactory.getLogger(LoginDao.class);
     Connection con;
     PreparedStatement ps,ps2;
     ResultSet rs;
@@ -31,7 +34,7 @@ public class LoginDao {
                 
             }
         } catch (SQLException e) {
-            System.out.println(e.toString());
+            logger.error("Op error "+ e.toString());
         }
         return l;
     }
@@ -51,7 +54,7 @@ public class LoginDao {
             ps.execute();
             return true;
         } catch (SQLException e) {
-            System.out.println(e.toString());
+            logger.error("Op error "+ e.toString());
             return false;
         }
     }
@@ -69,7 +72,7 @@ public class LoginDao {
             ps.execute();
             return true;
         } catch (SQLException e) {
-            System.out.println(e.toString());
+            logger.error(e.toString());
             return false;
         }
     }
@@ -83,7 +86,7 @@ public class LoginDao {
             ps.execute();
             return true;
         } catch (SQLException e) {
-            System.out.println(e.toString());
+            logger.error("Op error "+ e.toString());
             return false;
         }
     }
@@ -104,7 +107,7 @@ public class LoginDao {
                Lista.add(lg);
            }
        } catch (SQLException e) {
-           System.out.println(e.toString());
+           logger.error("Op error "+ e.toString());
        }
        return Lista;
    }
@@ -124,14 +127,8 @@ public class LoginDao {
             ps.execute();
             return true;
         } catch (SQLException e) {
-            System.out.println(e.toString());
+            logger.error("Op error "+ e.toString());
             return false;
-        } finally {
-            try {
-                con.close();
-            } catch (SQLException e) {
-                System.out.println(e.toString());
-            }
         }
     }
     
@@ -152,7 +149,7 @@ public class LoginDao {
                 
             }
         } catch (SQLException e) {
-            System.out.println(e.toString());
+            logger.error("Op error "+ e.toString());
         }
         return conf;
     }

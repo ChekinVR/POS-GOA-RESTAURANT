@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 
 public final class Conexion {
     
-    private static Logger logger = LoggerFactory.getLogger(Conexion.class);
+    private static final Logger logger = LoggerFactory.getLogger(Conexion.class);
     
     private static Conexion instance = null;
 
@@ -26,7 +26,7 @@ public final class Conexion {
             con = DriverManager.getConnection(URL, USER, PASSWORD);
             logger.info("Connection was successfully");
         } catch (SQLException e){
-            System.out.print(e);
+            logger.error("Error checking connection status " + e.getMessage());
         }
         
     };
@@ -36,4 +36,15 @@ public final class Conexion {
         
         return con;
     }
+    public static void closeConnection() {
+    if (con != null) {
+        try {
+            con.close();
+            logger.info("Database connection closed");
+        } catch (SQLException e) {
+            logger.error("Failed to close database connection", e);
+        }
+    }
+}
+
 }

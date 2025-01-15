@@ -6,12 +6,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class PlatosDao {
-
+    
+    private static final Logger logger = LoggerFactory.getLogger(PlatosDao.class);
     Connection con;
-    Conexion cn;
     PreparedStatement ps,ps2;
     ResultSet rs;
 
@@ -19,7 +20,7 @@ public class PlatosDao {
         String sql = "INSERT INTO platos (nombre, precio, fecha, categoria, sub_categoria) VALUES (?,?,?,?,?)";
         String sql2 = "ALTER TABLE platos AUTO_INCREMENT = 0";
         try {
-            con = cn.getConnection();
+            con = Conexion.getConnection();
             ps2 = con.prepareStatement(sql2);
             ps2.execute();
             ps = con.prepareStatement(sql);
@@ -31,14 +32,8 @@ public class PlatosDao {
             ps.execute();
             return true;
         } catch (SQLException e) {
-            System.out.println(e.toString());
+            logger.error("Op error "+ e.toString());
             return false;
-        }finally {
-            try {
-                con.close();
-            } catch (SQLException ex) {
-                System.out.println(ex.toString());
-            }
         }
     }
     public List ListarCateg(String valor, String fecha) {
@@ -46,7 +41,7 @@ public class PlatosDao {
         String sql = "SELECT * FROM platos";
         String consulta = "SELECT * FROM platos WHERE categoria LIKE '%"+valor+"%'";
         try {
-            con = cn.getConnection();
+            con = Conexion.getConnection();
             if(valor.equalsIgnoreCase("")){
                 ps = con.prepareStatement(sql);
             }else{
@@ -64,13 +59,7 @@ public class PlatosDao {
                 Lista.add(pl);
             }
         } catch (SQLException e) {
-            System.out.println(e.toString());
-        }finally {
-            try {
-                con.close();
-            } catch (SQLException ex) {
-                System.out.println(ex.toString());
-            }
+            logger.error("Op error "+ e.toString());
         }
         
         return Lista;
@@ -81,7 +70,7 @@ public class PlatosDao {
         String sql = "SELECT * FROM platos";
         String consulta = "SELECT * FROM platos WHERE nombre LIKE '%"+valor+"%'";
         try {
-            con = cn.getConnection();
+            con = Conexion.getConnection();
             if(valor.equalsIgnoreCase("")){
                 ps = con.prepareStatement(sql);
             }else{
@@ -99,13 +88,7 @@ public class PlatosDao {
                 Lista.add(pl);
             }
         } catch (SQLException e) {
-            System.out.println(e.toString());
-        }finally {
-            try {
-                con.close();
-            } catch (SQLException ex) {
-                System.out.println(ex.toString());
-            }
+            logger.error("Op error "+ e.toString());
         }
         return Lista;
     }
@@ -118,14 +101,8 @@ public class PlatosDao {
             ps.execute();
             return true;
         } catch (SQLException e) {
-            System.out.println(e.toString());
+            logger.error("Op error "+ e.toString());
             return false;
-        } finally {
-            try {
-                con.close();
-            } catch (SQLException ex) {
-                System.out.println(ex.toString());
-            }
         }
     }
 
@@ -133,7 +110,7 @@ public class PlatosDao {
         String sql = "UPDATE platos SET nombre=?, precio=?, categoria=?, sub_categoria=? WHERE id=?";
         String sql2 = "ALTER TABLE platos AUTO_INCREMENT = 0";
         try {
-            con = cn.getConnection();
+            con = Conexion.getConnection();
             ps2 = con.prepareStatement(sql2);
             ps2.execute();
             ps = con.prepareStatement(sql);
@@ -145,14 +122,8 @@ public class PlatosDao {
             ps.execute();
             return true;
         } catch (SQLException e) {
-            System.out.println(e.toString());
+            logger.error("Op error "+ e.toString());
             return false;
-        } finally {
-            try {
-                con.close();
-            } catch (SQLException e) {
-                System.out.println(e.toString());
-            }
         }
     }
 
